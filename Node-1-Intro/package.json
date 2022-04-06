@@ -1,0 +1,16 @@
+{
+  "name": "node-1-intro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index",
+    "cas": "node src/casual"
+  },
+  "author": "Iv",
+  "license": "ISC",
+  "dependencies": {
+    "casual": "^1.6.2",
+    "date-fns": "^2.28.0"
+  }
+}
