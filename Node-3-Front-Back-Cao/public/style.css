@@ -1,0 +1,17 @@
+.link-btn {
+  padding: 6px 10px;
+  margin: 10px 10px;
+  border-radius: 6px;
+  color: black;
+  background-color: #bce2e5;
+}
+
+.link-btn:hover {
+  background-color: #eefeff;
+}
+
+nav {
+  display: flex;
+  background-color: rgb(112, 149, 164);
+  border-radius: 6px;
+}
