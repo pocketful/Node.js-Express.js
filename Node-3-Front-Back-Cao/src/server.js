@@ -31,4 +31,8 @@ app.post('/', (req, res) => {
     console.log('fullnameObj ===', fullnameObj);
     // namesArr.push(newPostObj);
     // console.log('namesArr ===', namesArr);
+    res.status(201).json({
+        success: true,
+        message: 'New fullname added',
+    });
 });

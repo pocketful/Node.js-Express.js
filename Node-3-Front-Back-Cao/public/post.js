@@ -27,6 +27,19 @@ async function postData(name, surname) {
         // body: JSON.stringify([name]),
         body: JSON.stringify(newFullnameObj),
     });
-
+    const data = await response.json();
+    console.log('data ===', data);
+    if (data.success) {
+        formEl.reset();
+        showFeedback(data.message);
+    } else {
+        showFeedback('Error. Try again');
+    }
 };
 
+function showFeedback(message) {
+    const feedbackEl = document.getElementById('feedback');
+    feedbackEl.classList = 'feedback';
+    feedbackEl.innerHTML = '';
+    feedbackEl.innerHTML = message;
+}

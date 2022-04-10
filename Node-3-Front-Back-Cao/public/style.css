@@ -15,3 +15,11 @@ nav {
   background-color: rgb(112, 149, 164);
   border-radius: 6px;
 }
+
+.feedback {
+  margin: 20px 0;
+  background-color: #bce2e5;
+  border-radius: 4px;
+  padding: 8px 12px;
+  text-align: center;
+}
