@@ -17,7 +17,7 @@ var result = formatDistanceToNow(
 console.log('formatDistanceToNow ===', result); // almost 8 years ago
 
 
-// /* ------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------- */
 // https://date-fns.org/v2.28.0/docs/add
 // Add the specified years, months, weeks, days, hours, minutes and seconds to the given date.
 

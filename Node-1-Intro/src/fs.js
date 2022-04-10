@@ -1,3 +1,4 @@
+// https://www.w3schools.com/nodejs/nodejs_filesystem.asp
 // node js core module, no path needed
 const fs = require('fs');
 console.log('fs ===', fs);
