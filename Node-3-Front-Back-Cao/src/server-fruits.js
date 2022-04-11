@@ -20,17 +20,13 @@ const fruitsArr = ['apple', 'orange', 'pear'];
 
 app.get('/', (req, res) => {
     res.json(fruitsArr);
-    // console.log(carsArr);
 });
 
-app.post('/', (req, res) => {
-    const newPostObj = req.body[0];
+app.post('/api/post', (req, res) => {
+    const newPostObj = req.body;
     console.log('newPostObj ===', newPostObj);
-    fruitsArr.push(newPostObj);
+    console.log(newPostObj.fruit);
+    fruitsArr.push(newPostObj.fruit);
     console.log('fruitsArr ===', fruitsArr);
     res.send('OK');
-    // res.status(201).json({
-    //     success: true,
-    //     msg: 'New fruit added',
-    // })
 });

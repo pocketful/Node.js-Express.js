@@ -1,22 +1,15 @@
 GET http://localhost:3001/
 ###
-POST http://localhost:3001/
+POST http://localhost:3001/api/post
 Content-Type: application/json
 
-[
-    "grapes"
-]
+{
+    "fruit" : "grapes"
+}
 ###
-GET http://localhost:3000/
+GET http://localhost:3000/api/names
 ###
-POST http://localhost:3000/
-Content-Type: application/json
-
-[
-    "Ron"
-]
-###
-POST http://localhost:3000/
+POST http://localhost:3000/api/post
 Content-Type: application/json
 
 {

@@ -9,28 +9,22 @@ const PORT = 3000;
 
 // middlewares
 app.use(cors()); // prevent CORS error when trying to connect from FrontEnd
-app.use(express.json()); // BackEnd can decrypt and see JSON data. Convert JSON to JS
+app.use(express.json()); // backend can decrypt and see JSON data. Convert JSON to JS
 
 app.listen(PORT, () => console.log('Server is running on port', PORT));
 
-// const namesArr = ['Harry', 'Hermione'];
 const fullnameObj = [{name: 'Harry', surname: 'Potter'}, {name: 'Hermione', surname: 'Granger'}];
 
-app.get('/', (req, res) => {
-    // res.json(namesArr);
-    // console.log(namesArr);
+app.get('/api/names', (req, res) => {
     res.json(fullnameObj);
     console.log(fullnameObj);
 });
 
-app.post('/', (req, res) => {
-    // const newPostObj = req.body[0];
+app.post('/api/post', (req, res) => {
     const newPostObj = req.body;
     console.log('newPostObj ===', newPostObj);
     fullnameObj.push(newPostObj);
     console.log('fullnameObj ===', fullnameObj);
-    // namesArr.push(newPostObj);
-    // console.log('namesArr ===', namesArr);
     res.status(201).json({
         success: true,
         message: 'New fullname added',
