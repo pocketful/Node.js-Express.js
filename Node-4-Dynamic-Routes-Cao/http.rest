@@ -1,0 +1,10 @@
+GET http://localhost:3000/
+###
+GET http://localhost:3000/cars/Saturn
+###
+GET http://localhost:3000/byid/5
+###
+GET http://localhost:3000/emails
+###
+GET http://localhost:3000/females
+###
