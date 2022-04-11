@@ -2,11 +2,11 @@ const express = require('express');
 // CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
 // https://www.npmjs.com/package/cors
 const cors = require('cors');
-// create app
+// initializing Express as an app called 'app' (app will be an instance of express)
 const app = express();
 const PORT = 3000;
 
-// Middleware 
+// middleware 
 app.use(cors());
 
 const colors = ['red', 'green', 'blue'];
@@ -43,7 +43,7 @@ app.get('/api/colors', (request, response) => {
 
 // one color
 app.get('/api/colors/1', (request, response) => {
-        response.json(colors[0]);
+    response.json(colors[0]);
 });
 
 // 404 case
@@ -56,5 +56,5 @@ app.all('*', (request, response) => {
     });
 });
 
-// start app, listen to requests  
+// activates this server, listening on port for requests 
 app.listen(3000, () => console.log('Express is running on port', PORT));

@@ -1,0 +1,12 @@
+GET http://localhost:3000/api/posts/
+###
+GET http://localhost:3000/api/posts/3
+###
+POST http://localhost:3000/api/posts/
+Content-Type: application/json
+
+{
+    "title": "Post 9",
+    "body": "This is Post 9 body and it is all about Post 9"
+}
+###

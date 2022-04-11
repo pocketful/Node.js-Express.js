@@ -4,8 +4,8 @@ const COLOR_URL = 'http://localhost:3000/api/colors/1'; // one color
 // CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
 https://www.npmjs.com/package/cors
 
-document.getElementById('colors').onclick = getColors();
-// document.getElementById('colors').onclick = getColor();  // one color
+document.getElementById('colors').onclick = getColors;
+// document.getElementById('colors').onclick = getColor;  // one color
 
 async function getColors() {
     const response = await fetch(COLORS_URL);
