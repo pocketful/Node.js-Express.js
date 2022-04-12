@@ -23,43 +23,19 @@ const posts = [
   },
 ];
 
-function getPositiveNumbers() {
-    const positiveNumbersArr = numbers.filter(num => num > 0);
-    console.log('positiveNumbersArr ===', positiveNumbersArr);
-    return positiveNumbersArr;
-}
+// function getPositiveNumbers() {
+// }
 
-function getMaxNumber() {
-    const maxNum = numbers.reduce((total, num) => total > num ? total : num);
-    console.log('maxNum ===', maxNum);
-    return maxNum;
-}
+// function getMaxNumber() {
+// }
 
-function getNumbersGreaterThan(x) {
-    const numbersGreaterThan = numbers.filter(num => num > x);
-    console.log(`numbersGreaterThan ${x} === ${numbersGreaterThan}`);
-    return numbersGreaterThan;
-}
+// function getNumbersGreaterThan(x) {
+// }
 
-function getPostById(id) {
-    const postById = posts.find(el => el.id === id);
-    console.log(`postById ${id} === ${postById}`);
-    return postById;
-    // return postById ? postById : false;
-}
-
-function getPostByTitle(title) {
-    const postByTitle = posts.find(el => el.title === title);
-    console.log(`postByTitle ${title} === ${postByTitle}`);
-    return postByTitle ? postByTitle : false;
-}
+// function getPostById(id) {
+// }
 
 module.exports = {
-    numbers,
-    posts,
-    getPositiveNumbers,
-    getMaxNumber,
-    getNumbersGreaterThan,
-    getPostById
-    // getPostByTitle
-}
+  numbers,
+  posts,
+};

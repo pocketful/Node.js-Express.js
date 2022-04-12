@@ -13,8 +13,6 @@ GET http://localhost:3000/api/numbers/gt/10
 
 GET http://localhost:3000/api/posts
 ###
-GET http://localhost:3000/api/posts/gt/3
-###
 GET http://localhost:3000/api/posts/withCategory
 ###
 GET http://localhost:3000/api/posts/3
