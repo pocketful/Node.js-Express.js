@@ -1,14 +1,15 @@
+require('dotenv').config(); // import dotenv, immediately read and apply the environment variables
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 
 const app = express();
-const PORT = 3000;
+const PORT = +process.env.PORT || 5000;
+// console.log(process.env);
 
 // middleware
 app.use(morgan('tiny'));
-app.use(cors()); // prevent CORS error when trying to connect from frontend
-// app.use(express.json()); // backend can decrypt and see JSON data. Convert JSON to JS
+app.use(cors());
 
 // import routes
 const numbersRouter = require('./api/numbersRouter');
@@ -17,12 +18,12 @@ const postsRouter = require('./api/postsRouter');
 app.use('/api/numbers', numbersRouter);
 app.use('/api/posts', postsRouter);
 
+app.get('/', (req, res) => {
+  res.send(`<h1>hello express ${process.env.USER}</h1>`);
+});
+
 app.all('*', (req, res) => {
   res.status(404).json('Path not found');
 });
 
-app.listen(PORT, () => 'Server is live on', PORT);
-
-app.get('/', (req, res) => {
-  res.send('<h1>hello express</h1>');
-});
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
