@@ -1,4 +1,21 @@
-GET http://localhost:3000/posts
+GET http://localhost:3000/api/numbers
 ###
-POST http://localhost:3000/posts
+GET http://localhost:3000/api/numbers/positive
+###
+GET http://localhost:3000/api/numbers/max
+###
+GET http://localhost:3000/api/numbers/separate
+###
+GET http://localhost:3000/api/numbers/obj-values
+###
+GET http://localhost:3000/api/numbers/gt/10
+###
+
+GET http://localhost:3000/api/posts
+###
+GET http://localhost:3000/api/posts/gt/3
+###
+GET http://localhost:3000/api/posts/withCategory
+###
+GET http://localhost:3000/api/posts/3
 ###

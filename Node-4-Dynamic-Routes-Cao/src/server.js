@@ -24,7 +24,7 @@ app.listen(PORT, () => 'Server is live on', PORT);
 // Sukurkite bendrinį GET route, kuris paduos visus duomenis.
 // http://localhost:3000/
 app.get('/', (req, res) => {
-    console.log('data ===', data);
+    // console.log('data ===', data);
     res.json(data);
 });
 
@@ -55,22 +55,22 @@ app.get('/emails', (req, res) => {
 // http://localhost:3000/females
 
 // reduce way
-// app.get("/females", (req, res) => {
-//     const femaleFullnamesArr = data.reduce((array, obj) => {
-//         if (obj.gender === 'Female') {
-//             array.push(obj.first_name + ' ' + obj.last_name);
-//         }
-//         return array;
-//     }, []
-//     );
-//     res.json(femaleFullnamesArr);
-// })
+app.get("/females", (req, res) => {
+    const femaleFullnamesArr = data.reduce((array, obj) => {
+        if (obj.gender === 'Female') {
+            array.push(obj.first_name + ' ' + obj.last_name);
+        }
+        return array;
+    }, []
+    );
+    res.json(femaleFullnamesArr);
+})
 
 // filter, map 
-app.get("/females", (req, res) => {
-    const femaleFullnamesArr = data
-        .filter(obj => obj.gender === 'Female')
-        .map(obj => obj.first_name + ' ' + obj.last_name);
-     // .map(obj => [obj.first_name, obj.last_name].join(' '));
-    res.json(femaleFullnamesArr);
-});
+// app.get("/females", (req, res) => {
+//     const femaleFullnamesArr = data
+//         .filter(obj => obj.gender === 'Female')
+//         .map(obj => obj.first_name + ' ' + obj.last_name);
+//      // .map(obj => [obj.first_name, obj.last_name].join(' '));
+//     res.json(femaleFullnamesArr);
+// });
