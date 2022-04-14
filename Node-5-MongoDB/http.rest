@@ -18,3 +18,9 @@ GET http://localhost:3000/api/users/males
 ###
 GET http://localhost:3000/api/users/females
 ###
+GET http://localhost:3000/api/users/age/gt/20
+###
+GET http://localhost:3000/api/users/email/test6@test.com,test3@test.com
+###
+GET http://localhost:3000/api/users/email/test6@test.com
+###
