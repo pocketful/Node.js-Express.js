@@ -1,0 +1,26 @@
+[
+    {
+      "email":"test1@test.com",
+      "age":25,
+      "gender":"female",
+      "hasCar":true
+    },
+    {
+      "email":"test2@test.com",
+      "ahe":32,
+      "gender":"male",
+      "hasCar":false
+    },
+    {
+      "email":"test3@test.com",
+      "age":15,
+      "gender":"female",
+      "hasCar":true
+    },
+    {
+      "email":"test4@test.com",
+      "age":10,
+      "gender":"female",
+      "hasCar":true
+    }
+  ]
