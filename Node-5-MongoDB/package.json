@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/server.js",
-    "lint": "eslint src/",
-    "lintfix": "eslint src/ --fix"
+    "lint": "eslint ../Node-5-MongoDB",
+    "lintfix": "eslint ../Node-5-MongoDB --fix"
   },
   "keywords": [],
   "author": "",
