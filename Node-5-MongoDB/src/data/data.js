@@ -29,3 +29,6 @@ const users = [
 // insert many
 // db.users.insertMany([{email: 'test5@test.com', gender: 'female', hasCar: true, city: 'LA'},{email: 'test6@test.com', gender: 'female', hasCar: true}])
 // db.users.insertMany([{email:"test@test.com",age:20,gender:"female",hasCar:true},{email:"test@test.com",age:30,gender:"male",hasCar:false},{email:"test@test.com",age:10,gender:"female",hasCar:true},{email:"test@test.com",age:40,gender:"female",hasCar:true}])
+
+users.map((userObj) => console.log(userObj.name)); // destructuring example
+users.map(({ email, age }) => console.log(email, age)); // destructuring example

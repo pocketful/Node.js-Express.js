@@ -28,6 +28,7 @@ usersRouter.get('/users', async (req, res) => {
 // post
 usersRouter.post('/users', async (req, res) => {
   try {
+    // const { email, gender, hasCar, age } = req.body; // destructuring example
     await dbClient.connect();
     console.log('connection opened');
     const newUser = {
@@ -36,6 +37,7 @@ usersRouter.post('/users', async (req, res) => {
       hasCar: true,
     };
     const resource = dbClient.db(dbName).collection(collName);
+    // const insertResult = await resource.insertOne({email, gender, hasCar, age}); // destructuring example
     const insertResult = await resource.insertOne(newUser);
     console.log('insertResult ===', insertResult);
     res.json(insertResult);
