@@ -24,10 +24,14 @@ usersRouter.get('/users', async (req, res) => {
   }
 });
 
-usersRouter.get('/users/sort-age', async (req, res) => {
+// GET /sort-age/ASC
+usersRouter.get('/users/sort-age/:sortOrder', async (req, res) => {
   try {
+    const { sortOrder } = req.params;
+    let order = 1;
+    order = sortOrder === 'DESC' ? -1 : 1;
     const options = {
-      sort: { age: 1 },
+      sort: { age: order },
     };
     await dbClient.connect();
     console.log('connection opened');
@@ -44,8 +48,5 @@ usersRouter.get('/users/sort-age', async (req, res) => {
     console.log('connection closed');
   }
 });
-
-
-
 
 module.exports = usersRouter;

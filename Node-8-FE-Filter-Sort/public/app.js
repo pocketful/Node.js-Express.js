@@ -2,6 +2,10 @@ const URL = 'http://localhost:3000/api';
 const outputEl = document.getElementById('output');
 const sortAgeBtn = document.getElementById('sortAge');
 
+let sortOrder = 'DESC';
+const orderDisplayEl = sortAgeBtn.querySelector('span');
+orderDisplayEl.textContent = sortOrder;
+
 function renderToHtml(array) {
   outputEl.innerHTML = '';
   const ulEl = document.createElement('ul');
@@ -23,9 +27,11 @@ async function getData(urlEnd) {
     console.log('error');
   }
 }
-getData('users');
+getData('users/sort-age/ASC');
 
 sortAgeBtn.addEventListener('click', () => {
-  getData('users/sort-age');
-//   console.log('sorting');
+  getData(`users/sort-age/${sortOrder}`);
+  sortOrder = sortOrder === 'DESC' ? 'ASC' : 'DESC';
+  orderDisplayEl.textContent = sortOrder;
+  console.log('sorting');
 });
