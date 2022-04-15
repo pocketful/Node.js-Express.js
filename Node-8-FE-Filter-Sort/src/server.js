@@ -11,6 +11,8 @@ app.use(morgan('tiny'));
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => res.json('OK'));
+
 // Routes
 app.use('/api/', usersRouter);
 
