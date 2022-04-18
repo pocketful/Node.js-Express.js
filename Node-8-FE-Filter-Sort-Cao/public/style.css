@@ -1,0 +1,38 @@
+body {
+  background-color: #212b36;
+  color: #FFF;
+}
+
+h1 {
+  color: #FFF;
+}
+
+nav {
+  display: flex;
+  background-color: rgb(112, 149, 164);
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.link-btn {
+  padding: 6px 10px;
+  margin: 10px 10px;
+  border-radius: 6px;
+  color: black;
+  background-color: #bce2e5;
+}
+
+.link-btn:hover {
+  background-color: #eefeff;
+}
+
+.btn {
+  padding: 8px 24px;
+  border-radius: 6px;
+  color: black;
+  background-color: #c2eebe;
+}
+
+.btn:hover {
+  background-color: #e7fddf;
+}
