@@ -6,6 +6,7 @@ const dbName = 'caDB';
 const collName = 'users';
 
 // Routes
+// GET
 usersRouter.get('/users', async (req, res) => {
   try {
     await dbClient.connect();
@@ -13,7 +14,7 @@ usersRouter.get('/users', async (req, res) => {
     // get all users in json format []
     const resource = dbClient.db(dbName).collection(collName);
     const usersArr = await resource.find().toArray();
-    console.log(usersArr);
+    // console.log(usersArr);
     res.json(usersArr);
   } catch (error) {
     console.error('error in get users', error);
@@ -38,7 +39,7 @@ usersRouter.get('/users/sort-age/:sortOrder', async (req, res) => {
     // get all users in json format []
     const resource = dbClient.db(dbName).collection(collName);
     const usersArr = await resource.find({}, options).toArray();
-    console.log(usersArr);
+    // console.log(usersArr);
     res.json(usersArr);
   } catch (error) {
     console.error('error in get users', error);
@@ -58,7 +59,7 @@ usersRouter.get('/users/students', async (req, res) => {
     // get all users in json format []
     const resource = dbClient.db(dbName).collection(collName);
     const studentsArr = await resource.find(query).toArray();
-    console.log(studentsArr);
+    // console.log(studentsArr);
     res.json(studentsArr);
   } catch (error) {
     console.error('error in getstudents', error);
@@ -80,10 +81,31 @@ usersRouter.get('/users/city/:city', async (req, res) => {
     // get all users in json format []
     const resource = dbClient.db(dbName).collection(collName);
     const usersfromArr = await resource.find(query).toArray();
-    console.log(usersfromArr);
+    // console.log(usersfromArr);
     res.json(usersfromArr);
   } catch (error) {
     console.error('error in get users from a city', error);
+    res.status(500).json('something went wrong');
+  } finally {
+    await dbClient.close();
+    console.log('connection closed');
+  }
+});
+
+// POST
+usersRouter.post('/users', async (req, res) => {
+  try {
+    // const { name, age, isStudent, gender, city } = req.body; // destructuring example
+    await dbClient.connect();
+    console.log('connection opened');
+    const newPostObj = req.body;
+    const resource = dbClient.db(dbName).collection(collName);
+    // const insertResult = await resource.insertOne({name, age, isStudent, gender, city}); // destructuring example
+    const insertResult = await resource.insertOne(newPostObj);
+    console.log('insertResult ===', insertResult);
+    res.json(insertResult);
+  } catch (error) {
+    console.log(error.message);
     res.status(500).json('something went wrong');
   } finally {
     await dbClient.close();

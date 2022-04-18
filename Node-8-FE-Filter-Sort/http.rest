@@ -10,3 +10,14 @@ GET http://localhost:3000/api/users/students
 ###
 GET http://localhost:3000/api/users/city/Kaunas
 ###
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+"name": "Ron",
+"age": 80,
+"isStudent": false,
+"gender": "male",
+"city": "Kaunas"
+}
+###

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <title>Users DB</title>
+    <script src="./post.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <h1>Users POST</h1>
+    <nav>
+        <a class="link-btn" href="./index.html">All users</a>
+        <a class="link-btn" href="./post.html">Create new user</a>
+    </nav>
+    <form>
+        <input type="text" id="name" placeholder="Name" value="Clare">
+        <input type="number" id="age" placeholder="Age" value="50">
+        <input type="text" id="gender" placeholder="Gender" value="female">
+        <input type="text" id="city" placeholder="City" value="Klaipeda">
+        <div>
+            <input type="checkbox" id="isStudent">
+            <label for="isStudent">Is student</label>
+        </div>
+        <button type="submit">New user</button>
+    </form>
+    <!-- feedback -->
+    <div id="feedback">
+    </div>
+</body>
+
+</html>
