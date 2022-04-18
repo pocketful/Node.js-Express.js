@@ -1,2 +1,12 @@
-GET http://localhost:3000/
+GET http://localhost:3000/api/users
+###
+GET http://localhost:3000/api/users/sort-age
+###
+GET http://localhost:3000/api/users/sort-age/ASC
+###
+GET http://localhost:3000/api/users/sort-age/DESC
+###
+GET http://localhost:3000/api/users/students
+###
+GET http://localhost:3000/api/users/city/Kaunas
 ###
