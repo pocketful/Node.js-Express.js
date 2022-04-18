@@ -24,6 +24,28 @@ petsRouter.get('/pets', async (req, res) => {
   }
 });
 
+// GET sort by oldest, DESC
+petsRouter.get('/pets/byoldest', async (req, res) => {
+  try {
+    await dbClient.connect();
+    const options = {
+      sort: { age: -1 },
+    };
+    console.log('connection opened');
+    const resource = dbClient.db(dbName).collection(collName);
+    const petsByTypeArr = await resource.find({}, options).sort({ age: -1 }).toArray();
+    // const petsByTypeArr = await resource.find().sort({ age: -1 }).toArray();
+    console.log(petsByTypeArr);
+    res.json(petsByTypeArr);
+  } catch (error) {
+    console.error('error in get pets', error);
+    res.status(500).json('something went wrong');
+  } finally {
+    await dbClient.close();
+    console.log('connection closed');
+  }
+});
+
 // GET by type
 petsRouter.get('/pets/:type', async (req, res) => {
   try {
