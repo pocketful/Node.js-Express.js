@@ -1,6 +1,7 @@
 body {
   background-color: #212b36;
   color: #FFF;
+  font-size: 20px;
 }
 
 h1 {
@@ -37,6 +38,16 @@ nav {
   background-color: #e7fddf;
 }
 
+/* input, select {
+  color: #FFF;
+  background-color: #0c1014;
+} */
+
+tr:nth-child(even) {
+  background-color: #0c1014 !important;
+}
+
+/* POST */
 button[type="submit"] {
   color: #FFF;
   margin-top: 10px;

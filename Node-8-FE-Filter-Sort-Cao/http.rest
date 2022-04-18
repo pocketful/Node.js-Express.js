@@ -2,14 +2,16 @@ GET http://localhost:3000/api/pets
 ###
 GET http://localhost:3000/api/pets/cat
 ###
-GET http://localhost:3000/api/pets/byoldest
+GET http://localhost:3000/api/pets/sort-age/asc
+###
+GET http://localhost:3000/api/pets/sort-age/desc
 ###
 POST http://localhost:3000/api/pets
 Content-Type: application/json
 
 {
-"name": "Binksas",
+"name": "Felix",
 "type": "cat",
-"age": 16
+"age": 12
 }
 ###

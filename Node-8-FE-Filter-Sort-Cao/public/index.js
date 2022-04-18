@@ -1,15 +1,26 @@
 const URL = 'http://localhost:3000/api';
-const outputEl = document.getElementById('output');
 const filterTypeBtns = document.querySelectorAll('.filter-type');
+const ageSortEl = document.getElementById('age-th');
+
+let sortOrder = 'Asc';
+const orderDisplayEl = ageSortEl.querySelector('span');
+orderDisplayEl.textContent = sortOrder;
 
 function renderPets(petsArr) {
-  outputEl.innerHTML = '';
-  const ulEl = document.createElement('ul');
-  outputEl.append(ulEl);
+  const tbody = document.querySelector('tbody');
+  tbody.innerHTML = '';
   petsArr.forEach((petObj) => {
-    const liEl = document.createElement('li');
-    liEl.textContent = `${petObj.name} | ${petObj.type} | ${petObj.age}`;
-    ulEl.append(liEl);
+    const trEl = document.createElement('tr');
+    tbody.append(trEl);
+    const tdEl1 = document.createElement('td');
+    tdEl1.textContent = petObj.name;
+    trEl.append(tdEl1);
+    const tdEl2 = document.createElement('td');
+    tdEl2.textContent = petObj.type;
+    trEl.append(tdEl2);
+    const tdEl3 = document.createElement('td');
+    tdEl3.textContent = petObj.age;
+    trEl.append(tdEl3);
   });
 }
 
@@ -23,12 +34,17 @@ async function getPets(urlEnd) {
     console.log('error');
   }
 }
-getPets('pets');
+getPets('pets/sort-age/asc');
+
+ageSortEl.addEventListener('click', () => {
+  sortOrder = sortOrder === 'Asc' ? 'Desc' : 'Asc';
+  getPets(`pets/sort-age/${sortOrder}`);
+  orderDisplayEl.textContent = sortOrder;
+});
 
 filterTypeBtns.forEach((button) => {
   button.addEventListener('click', () => {
     const type = button.id;
     getPets(`pets/${type}`);
-    // console.log(`display ${type}`);
   });
 });
