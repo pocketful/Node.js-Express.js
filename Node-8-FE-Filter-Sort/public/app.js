@@ -1,6 +1,8 @@
 const URL = 'http://localhost:3000/api';
 const outputEl = document.getElementById('output');
 const sortAgeBtn = document.getElementById('sort-age');
+const filterStuBtn = document.getElementById('filter-stud');
+const filterCityBtns = document.querySelectorAll('.filter-city');
 
 let sortOrder = 'DESC';
 const orderDisplayEl = sortAgeBtn.querySelector('span');
@@ -13,7 +15,9 @@ function renderUsers(usersArr) {
   usersArr.forEach((userObj) => {
     const liEl = document.createElement('li');
     liEl.textContent = `${userObj.name} is ${userObj.age} years old 
-    ${userObj.gender}${userObj.isStudent ? ' student' : ''}.`;
+    ${userObj.gender}${userObj.isStudent ? ' student' : ''} 
+    from ${userObj.city ? userObj.city : 'somewhere'}.
+    `;
     ulEl.append(liEl);
   });
 }
@@ -34,7 +38,7 @@ sortAgeBtn.addEventListener('click', () => {
   getUsers(`users/sort-age/${sortOrder}`);
   sortOrder = sortOrder === 'DESC' ? 'ASC' : 'DESC';
   orderDisplayEl.textContent = sortOrder;
-  console.log('sorting');
+  // console.log('sorting');
 });
 
 // /* <ol id="list"></ol>
@@ -52,3 +56,16 @@ sortAgeBtn.addEventListener('click', () => {
 //     .join('');
 //   listEl.innerHTML = listString;
 // }
+
+filterStuBtn.addEventListener('click', () => {
+  getUsers('users/students/');
+  // console.log('display students');
+});
+
+filterCityBtns.forEach((button) => {
+  button.addEventListener('click', () => {
+    const cityName = button.textContent;
+    getUsers(`users/city/${cityName}`);
+    // console.log(`display students from ${cityName}`);
+  });
+});
