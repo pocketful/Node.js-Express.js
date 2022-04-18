@@ -1,5 +1,7 @@
 GET http://localhost:3000/api/pets
 ###
+GET http://localhost:3000/api/pets/cat
+###
 POST http://localhost:3000/api/pets
 Content-Type: application/json
 

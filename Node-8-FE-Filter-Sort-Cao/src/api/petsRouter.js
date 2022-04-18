@@ -5,7 +5,8 @@ const petsRouter = express.Router();
 const dbName = 'caDB';
 const collName = 'pets';
 
-// Routes
+// Routes ------------
+// GET
 petsRouter.get('/pets', async (req, res) => {
   try {
     await dbClient.connect();
@@ -14,6 +15,26 @@ petsRouter.get('/pets', async (req, res) => {
     const petsArr = await resource.find().toArray();
     console.log(petsArr);
     res.json(petsArr);
+  } catch (error) {
+    console.error('error in get pets', error);
+    res.status(500).json('something went wrong');
+  } finally {
+    await dbClient.close();
+    console.log('connection closed');
+  }
+});
+
+// GET by type
+petsRouter.get('/pets/:type', async (req, res) => {
+  try {
+    await dbClient.connect();
+    const { type } = req.params;
+    const query = { type };
+    console.log('connection opened');
+    const resource = dbClient.db(dbName).collection(collName);
+    const petsByTypeArr = await resource.find(query).toArray();
+    console.log(petsByTypeArr);
+    res.json(petsByTypeArr);
   } catch (error) {
     console.error('error in get pets', error);
     res.status(500).json('something went wrong');
@@ -42,6 +63,7 @@ petsRouter.post('/pets', async (req, res) => {
   }
 });
 
+// ----------
 module.exports = {
   petsRouter,
 };
