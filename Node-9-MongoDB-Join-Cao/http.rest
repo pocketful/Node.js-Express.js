@@ -1,0 +1,13 @@
+GET http://localhost:3000/api/categories
+###
+GET http://localhost:3000/api/products/
+###
+POST http://localhost:3000/api/products/
+Content-Type: application/json
+
+{
+"title": "Sony Bravia XR",
+"price": 2200.00,
+"category": "tv"
+}
+###
