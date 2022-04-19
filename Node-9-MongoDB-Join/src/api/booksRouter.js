@@ -25,6 +25,34 @@ booksRouter.get('/books', async (req, res) => {
   }
 });
 
+// GET books-authors
+booksRouter.get('/books-authors', async (req, res) => {
+  try {
+    await dbClient.connect();
+    console.log('connection opened');
+    const agg = [
+      {
+        $lookup: {
+          from: 'authors',
+          localField: '_id',
+          foreignField: 'bookId',
+          as: 'authorsArr',
+        },
+      },
+    ];
+    const resource = dbClient.db(dbName).collection(collName);
+    const booksArr = await resource.aggregate(agg).toArray();
+    console.log(booksArr);
+    res.json(booksArr);
+  } catch (error) {
+    console.error('error in get books-authors', error);
+    res.status(500).json('something went wrong');
+  } finally {
+    await dbClient.close();
+    console.log('connection closed');
+  }
+});
+
 // GET /api/books/:bookId
 booksRouter.get('/books/:bookId', async (req, res) => {
   try {
