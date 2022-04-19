@@ -13,13 +13,14 @@ GET http://localhost:3000/api/books/625e631a66ce279f277a5c73
 ###
 GET http://localhost:3000/api/authors
 ###
-GET http://localhost:3000/api/authors/625e6ea84472c8d61f914291
-###
 POST http://localhost:3000/api/authors
 Content-Type: application/json
 
 {
-"name": "J. K. Rowling",
+"name": "William Golding",
 "country": "United Kingdom",
-"bookId": "625e5aefec4c0b1aa9863359"
+"bookId": "625e639966ce279f277a5c75"
 }
+###
+GET http://localhost:3000/api/authors/625e71cca7b47314af517d16
+###

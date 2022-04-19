@@ -25,8 +25,7 @@ booksRouter.get('/books', async (req, res) => {
   }
 });
 
-// GET http://localhost:3000/api/books/625e631a66ce279f277a5c73
-// GET /api/books/:bookId - grazina knyga su id lygiu bookId
+// GET /api/books/:bookId
 booksRouter.get('/books/:bookId', async (req, res) => {
   try {
     const id = req.params.bookId;

@@ -25,8 +25,7 @@ authorsRouter.get('/authors', async (req, res) => {
   }
 });
 
-// GET /api/authors/:authorId - gauti konkretu autoriu
-// GET http://localhost:3000/api/authors/625e6ea84472c8d61f914291
+// GET /api/authors/:authorId
 authorsRouter.get('/authors/:authorId', async (req, res) => {
   try {
     const id = req.params.authorId;
@@ -53,6 +52,7 @@ authorsRouter.post('/authors', async (req, res) => {
     await dbClient.connect();
     console.log('connection opened');
     const newPostObj = req.body;
+    newPostObj.bookId = ObjectId(newPostObj.bookId); // we get string id, but we need ObjectId
     const resource = dbClient.db(dbName).collection(collName);
     const insertResult = await resource.insertOne(newPostObj);
     console.log('insertResult ===', insertResult);
