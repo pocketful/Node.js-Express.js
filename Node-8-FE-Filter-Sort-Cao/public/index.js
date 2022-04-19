@@ -1,5 +1,5 @@
 const URL = 'http://localhost:3000/api';
-const filterTypeBtns = document.querySelectorAll('.filter-type');
+const filterTypeBtns = document.querySelectorAll('.control button');
 const ageSortEl = document.getElementById('age-th');
 
 let sortOrder = 'Asc';
@@ -28,7 +28,7 @@ async function getPets(urlEnd) {
   const response = await fetch(`${URL}/${urlEnd}`);
   if (response.ok) {
     const data = await response.json();
-    // console.log('data', data);
+    console.log('data', data);
     renderPets(data);
   } else {
     console.log('error');
@@ -42,9 +42,33 @@ ageSortEl.addEventListener('click', () => {
   orderDisplayEl.textContent = sortOrder;
 });
 
+/*
+užsikrovus puslapiui, visi mygtukai būtų pažymėti (rekomenduoju susikurti klasę, kuri paryškins mygtuko spalvą). Paspaudus - mygtuklai atsižymi (t.y. klasę nuimi). Priklausomai nuo to, kurie mygtukai pažymėti - tokį vaizdą ir rodo
+*/
+const activeTypes = ['cat', 'bunny', 'bird'];
+// console.log('activeTypes before ===', activeTypes);
+
 filterTypeBtns.forEach((button) => {
   button.addEventListener('click', () => {
-    const type = button.id;
-    getPets(`pets/${type}`);
+    if (button.classList.contains('active')) {
+      const index = activeTypes.findIndex((type) => type === button.id);
+      // console.log('index ===', index);
+      activeTypes.splice(index, 1);
+      // console.log('if ===');
+    } else {
+      activeTypes.push(button.id);
+      // console.log('else ===');
+    }
+    console.log('activeTypes ===', activeTypes);
+
+    // // this was only for single type
+    // const type = button.id;
+    // getPets(`pets/${type}`);
+
+    const activeTypesString = activeTypes.toString();
+    console.log('activeTypesString ===', activeTypesString);
+    getPets(`pets/${activeTypesString}`);
+    // getPets(`pets/${activeTypes}`);
+    button.classList.toggle('active');
   });
 });

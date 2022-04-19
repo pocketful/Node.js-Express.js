@@ -2,6 +2,8 @@ GET http://localhost:3000/api/pets
 ###
 GET http://localhost:3000/api/pets/cat
 ###
+GET http://localhost:3000/api/pets/cat,bird
+###
 GET http://localhost:3000/api/pets/sort-age/asc
 ###
 GET http://localhost:3000/api/pets/sort-age/desc
