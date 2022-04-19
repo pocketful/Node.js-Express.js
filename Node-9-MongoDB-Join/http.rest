@@ -9,5 +9,17 @@ Content-Type: application/json
 "rating": 1
 }
 ###
+GET http://localhost:3000/api/books/625e631a66ce279f277a5c73
+###
 GET http://localhost:3000/api/authors
 ###
+GET http://localhost:3000/api/authors/625e6ea84472c8d61f914291
+###
+POST http://localhost:3000/api/authors
+Content-Type: application/json
+
+{
+"name": "J. K. Rowling",
+"country": "United Kingdom",
+"bookId": "625e5aefec4c0b1aa9863359"
+}
