@@ -12,7 +12,7 @@
   from: 'authors',
   localField: '_id',
   foreignField: 'bookId',
-  as: 'authorsArr'
+  as: 'authorArr'
 }
 
 /* ----------------------------------------------------------------- */
@@ -30,7 +30,7 @@ const agg = [
       'from': 'authors', 
       'localField': '_id', 
       'foreignField': 'bookId', 
-      'as': 'authorsArr'
+      'as': 'authorArr'
     }
   }
 ];

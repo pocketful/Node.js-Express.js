@@ -36,7 +36,7 @@ booksRouter.get('/books-authors', async (req, res) => {
           from: 'authors',
           localField: '_id',
           foreignField: 'bookId',
-          as: 'authorsArr',
+          as: 'authorArr',
         },
       },
     ];

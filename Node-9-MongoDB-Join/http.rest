@@ -26,3 +26,5 @@ GET http://localhost:3000/api/authors/625e71cca7b47314af517d16
 ###
 GET http://localhost:3000/api/books-authors
 ###
+GET http://localhost:3000/api/authors-books
+###
