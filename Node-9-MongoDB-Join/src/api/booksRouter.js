@@ -43,7 +43,17 @@ booksRouter.get('/books-authors', async (req, res) => {
     const resource = dbClient.db(dbName).collection(collName);
     const booksArr = await resource.aggregate(agg).toArray();
     console.log(booksArr);
-    res.json(booksArr);
+    const booksAuthorsArr = booksArr.map((bookObj) => ({
+      // _id: ObjectId(bookObj._id),
+      author: bookObj.authorArr[0].name,
+      title: bookObj.title,
+      year: bookObj.year,
+      country: bookObj.authorArr[0].country,
+      rating: bookObj.rating,
+    }));
+    console.log('booksAuthorsArr ===', booksAuthorsArr);
+    // res.json(booksArr);
+    res.json(booksAuthorsArr);
   } catch (error) {
     console.error('error in get books-authors', error);
     res.status(500).json('something went wrong');
