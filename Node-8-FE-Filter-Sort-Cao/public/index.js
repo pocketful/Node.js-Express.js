@@ -36,12 +36,6 @@ async function getPets(urlEnd) {
 }
 getPets('pets/sort-age/asc');
 
-ageSortEl.addEventListener('click', () => {
-  sortOrder = sortOrder === 'Asc' ? 'Desc' : 'Asc';
-  getPets(`pets/sort-age/${sortOrder}`);
-  orderDisplayEl.textContent = sortOrder;
-});
-
 /*
 užsikrovus puslapiui, visi mygtukai būtų pažymėti (rekomenduoju susikurti klasę, kuri paryškins mygtuko spalvą). Paspaudus - mygtuklai atsižymi (t.y. klasę nuimi). Priklausomai nuo to, kurie mygtukai pažymėti - tokį vaizdą ir rodo
 */
@@ -65,10 +59,17 @@ filterTypeBtns.forEach((button) => {
     // const type = button.id;
     // getPets(`pets/${type}`);
 
-    const activeTypesString = activeTypes.toString();
-    console.log('activeTypesString ===', activeTypesString);
-    getPets(`pets/${activeTypesString}`);
-    // getPets(`pets/${activeTypes}`);
+    // const activeTypesString = activeTypes.toString();
+    // console.log('activeTypesString ===', activeTypesString);
+    // getPets(`pets/${activeTypesString}/asc`);
+
+    getPets(`pets/${activeTypes}/${sortOrder}`);
     button.classList.toggle('active');
   });
+});
+
+ageSortEl.addEventListener('click', () => {
+  sortOrder = sortOrder === 'Asc' ? 'Desc' : 'Asc';
+  getPets(`pets/${activeTypes}/${sortOrder}`);
+  orderDisplayEl.textContent = sortOrder;
 });

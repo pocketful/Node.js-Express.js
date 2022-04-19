@@ -67,16 +67,21 @@ petsRouter.get('/pets/sort-age/:sortOrder', async (req, res) => {
 //   }
 // });
 
-// GET by types
-petsRouter.get('/pets/:types', async (req, res) => {
+// GET by types, sort
+petsRouter.get('/pets/:types/:sortOrder', async (req, res) => {
   try {
+    const sortOrder = req.params.sortOrder.toLowerCase();
+    const order = sortOrder === 'asc' ? 1 : -1;
+    const options = {
+      sort: { age: order },
+    };
     await dbClient.connect();
     const typesArr = req.params.types.split(',');
     console.log('typesArr ===', typesArr);
     const query = { type: { $in: typesArr } }; // {type: {$in: ["cat", "bird"]} }
     console.log('connection opened');
     const resource = dbClient.db(dbName).collection(collName);
-    const petsByTypeArr = await resource.find(query).toArray();
+    const petsByTypeArr = await resource.find(query, options).toArray();
     console.log(petsByTypeArr);
     res.json(petsByTypeArr);
   } catch (error) {
