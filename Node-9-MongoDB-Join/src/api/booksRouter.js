@@ -1,4 +1,5 @@
 const express = require('express');
+const { ObjectId } = require('mongodb');
 const { dbClient } = require('../config');
 
 const booksRouter = express.Router();
@@ -17,6 +18,29 @@ booksRouter.get('/books', async (req, res) => {
     res.json(booksArr);
   } catch (error) {
     console.error('error in get books', error);
+    res.status(500).json('something went wrong');
+  } finally {
+    await dbClient.close();
+    console.log('connection closed');
+  }
+});
+
+// GET http://localhost:3000/api/books/625e631a66ce279f277a5c73
+// GET /api/books/:bookId - grazina knyga su id lygiu bookId
+booksRouter.get('/books/:bookId', async (req, res) => {
+  try {
+    const id = req.params.bookId;
+    console.log('connection opened');
+    console.log('id', id);
+    const query = { _id: ObjectId(id) };
+    await dbClient.connect();
+    console.log('connection opened');
+    const resource = dbClient.db(dbName).collection(collName);
+    const bookById = await resource.findOne(query);
+    console.log(bookById);
+    res.json(bookById);
+  } catch (error) {
+    console.error('error in get a book by id', error);
     res.status(500).json('something went wrong');
   } finally {
     await dbClient.close();
