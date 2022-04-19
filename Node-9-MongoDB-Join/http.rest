@@ -1,0 +1,13 @@
+GET http://localhost:3000/api/books
+###
+POST http://localhost:3000/api/books
+Content-Type: application/json
+
+{
+"title": "Half-Blood Prince",
+"year": 2005,
+"rating": 1
+}
+###
+GET http://localhost:3000/api/authors
+###
