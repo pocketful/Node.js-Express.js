@@ -1,8 +1,8 @@
 GET http://localhost:3000/api/categories
 ###
-GET http://localhost:3000/api/products/
+GET http://localhost:3000/api/products
 ###
-POST http://localhost:3000/api/products/
+POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
@@ -10,4 +10,26 @@ Content-Type: application/json
 "price": 2200.00,
 "category": "tv"
 }
+###
+POST http://localhost:3000/api/test
+Content-Type: application/json
+
+{
+"name": "J. K. Rowling",
+"country": "United Kingdom",
+"bookId": "625e5aefec4c0b1aa9863359",
+"bookArr": [
+    {
+    "title": "Chamber of Secrets",
+    "year": 1998,
+    "rating": 5
+    }
+]
+}
+###
+GET http://localhost:3000/api/test
+###
+POST http://localhost:3000/api/test
+###
+GET http://localhost:3000/api/categoryvalue
 ###
