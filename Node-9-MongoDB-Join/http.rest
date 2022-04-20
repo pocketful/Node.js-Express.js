@@ -1,18 +1,45 @@
 GET http://localhost:3000/api/books
 ###
+
 POST http://localhost:3000/api/books
 Content-Type: application/json
 
 {
 "title": "Half-Blood Prince",
+"year": 2000,
+"rating": 1
+}
+###
+
+DELETE http://localhost:3000/api/books/625fcd37d4c2ebfb24efdfeb
+###
+
+PATCH http://localhost:3000/api/books/625fbbec121b072293dc3b79
+Content-Type: application/json
+
+{
+"rating": 3
+}
+###
+
+PUT http://localhost:3000/api/books/625fbbec121b072293dc3b79
+Content-Type: application/json
+
+{
 "year": 2005,
 "rating": 1
 }
 ###
+
 GET http://localhost:3000/api/books/625e631a66ce279f277a5c73
 ###
+
+
+
+
 GET http://localhost:3000/api/authors
 ###
+
 POST http://localhost:3000/api/authors
 Content-Type: application/json
 
@@ -22,9 +49,38 @@ Content-Type: application/json
 "bookId": "625e639966ce279f277a5c75"
 }
 ###
+
+PATCH http://localhost:3000/api/authors/625e71ffa7b47314af517d17
+Content-Type: application/json
+
+{
+"country": "United Kingdom"
+}
+###
+
+PATCH http://localhost:3000/api/authors/625e71a0a7b47314af517d13
+Content-Type: application/json
+
+{
+"newName": "Test new name"
+}
+###
+PATCH http://localhost:3000/api/authors/add-book/625fde72434639c128441d01
+Content-Type: application/json
+
+{
+"bookId": "625fddc2434639c128441d00"
+}
+###
 GET http://localhost:3000/api/authors/625e71cca7b47314af517d16
 ###
+
+
+
+
 GET http://localhost:3000/api/books-authors
+###
+GET http://localhost:3000/api/books-authors-agg
 ###
 GET http://localhost:3000/api/authors-books
 ###
