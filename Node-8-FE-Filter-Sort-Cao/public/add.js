@@ -1,11 +1,11 @@
 const URL = 'http://localhost:3000/api/pets';
 const formEl = document.forms[0];
 
-function showFeedback(id) {
+function showFeedback(msg) {
   const feedbackEl = document.getElementById('feedback');
   feedbackEl.classList = 'feedback';
   feedbackEl.textContent = '';
-  feedbackEl.textContent = `New pet was successfully added with id: ${id} `;
+  feedbackEl.textContent = msg;
 }
 
 async function postPet(name, type, age) {
@@ -26,9 +26,9 @@ async function postPet(name, type, age) {
   console.log('data ===', data);
   if (data.acknowledged) {
     formEl.reset();
-    showFeedback(data.insertedId);
+    showFeedback(`New pet was successfully added with id: ${data.insertedId}`);
   } else {
-    showFeedback('Error. Try again');
+    showFeedback(data.err);
   }
 }
 

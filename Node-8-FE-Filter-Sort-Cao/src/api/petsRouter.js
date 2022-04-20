@@ -67,6 +67,11 @@ petsRouter.get('/pets/sort-age/:sortOrder', async (req, res) => {
 //   }
 // });
 
+/* Cao:
+petsRouter.get('/pets/:types/:sortOrder?' // ? - optional parameter
+sort({ age: req.params.sortOrder?.toLowerCase() === 'dsc' ? -1 : 1 }).toArray();
+find({ type: { $in: req.params.types?.split(',') } });
+*/
 // GET by types, sort
 petsRouter.get('/pets/:types/:sortOrder', async (req, res) => {
   try {
@@ -95,6 +100,9 @@ petsRouter.get('/pets/:types/:sortOrder', async (req, res) => {
 
 // POST
 petsRouter.post('/pets', async (req, res) => {
+  if (!req.body.name || !req.body.type || !req.body.age) {
+    return res.status(400).send({ err: 'Incorrect data passed' });
+  }
   try {
     await dbClient.connect();
     console.log('connection opened');
@@ -102,10 +110,10 @@ petsRouter.post('/pets', async (req, res) => {
     const resource = dbClient.db(dbName).collection(collName);
     const insertResult = await resource.insertOne(newPostObj);
     console.log('insertResult ===', insertResult);
-    res.json(insertResult);
+    return res.json(insertResult);
   } catch (error) {
     console.log(error.message);
-    res.status(500).json('something went wrong');
+    return res.status(500).json('something went wrong');
   } finally {
     await dbClient.close();
     console.log('connection closed');
