@@ -25,6 +25,53 @@ authorsRouter.get('/authors', async (req, res) => {
   }
 });
 
+authorsRouter.patch('/authors/:authorId', async (req, res) => {
+  try {
+    const { authorId } = req.params;
+    const idQuery = { _id: ObjectId(authorId) };
+    const { newName } = req.body;
+    const updateObjQuery = { $set: { name: newName } };
+    // const updateObjQuery = { $set: { age: 20 } }; // prideti age
+    // const updateObjQuery = { $inc: { age: 1 } }; // padidint 1
+    // const updateObjQuery = { $set: { bookId: [ObjectId('625e5aefec4c0b1aa9863359')] } }; // i masyva sita pakeisti
+    // const updateObjQuery = { $push: { bookId: ObjectId('625fd92111682ce768a0d35c') } }; // nauja knyga prideti autoriui
+    await dbClient.connect();
+    console.log('connection opened');
+    const resource = dbClient.db(dbName).collection(collName);
+    const updateResult = await resource.updateOne(idQuery, updateObjQuery);
+    console.log(updateResult);
+    res.json(updateResult);
+  } catch (error) {
+    console.error('error in get books', error);
+    res.status(500).json('something went wrong');
+  } finally {
+    await dbClient.close();
+    console.log('connection closed');
+  }
+});
+
+// PATCH /api/authors/add-book/:authorId - prideda viena knyga i autoriaus kurio id === authorId bookId masyva
+authorsRouter.patch('/authors/add-book/:authorId', async (req, res) => {
+  try {
+    const { authorId } = req.params;
+    const idQuery = { _id: ObjectId(authorId) };
+    const { bookId } = req.body;
+    const addNewBookQuery = { $push: { bookId: ObjectId(bookId) } };
+    await dbClient.connect();
+    console.log('connection opened');
+    const resource = dbClient.db(dbName).collection(collName);
+    const updateResult = await resource.updateOne(idQuery, addNewBookQuery);
+    console.log(updateResult);
+    res.json(updateResult);
+  } catch (error) {
+    console.error('error in get books', error);
+    res.status(500).json('something went wrong');
+  } finally {
+    await dbClient.close();
+    console.log('connection closed');
+  }
+});
+
 // GET authors-books
 authorsRouter.get('/authors-books', async (req, res) => {
   try {
