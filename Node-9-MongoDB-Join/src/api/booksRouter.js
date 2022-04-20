@@ -25,6 +25,78 @@ booksRouter.get('/books', async (req, res) => {
   }
 });
 
+// DELETE
+booksRouter.delete('/books/:bookId', async (req, res) => {
+  try {
+    const id = req.params.bookId;
+    console.log('connection opened');
+    console.log('id', id);
+    const query = { _id: ObjectId(id) };
+    await dbClient.connect();
+    console.log('connection opened');
+    const resource = dbClient.db(dbName).collection(collName);
+    const booksArr = await resource.deleteOne(query); // deleteMany()
+    // console.log(booksArr);
+    res.json(booksArr);
+  } catch (error) {
+    console.error('error in get books', error);
+    res.status(500).json('something went wrong');
+  } finally {
+    await dbClient.close();
+    console.log('connection closed');
+  }
+});
+
+// PATCH (update one)
+booksRouter.patch('/books/:bookId', async (req, res) => {
+  try {
+    const id = req.params.bookId;
+    const idQuery = { _id: ObjectId(id) };
+    const updateObj = req.body;
+    // const { newRating } = req.body; // galima ir pervadint
+    // { $set: { rating: newRating } }
+    // { $inc: { rating: 1 } } // padidins vienetu
+    // { $set: { bookId: [ObjectId('625e5aefec4c0b1aa9863359')] } } // i masyva padare
+    // { $push: { bookId: [ObjectId('625e5aefec4c0b1aa9863359')] } } // i masyva nupushinam dar viena
+    // console.log('newUpdateObj', newUpdateObj);
+    const updateObjQuery = { $set: updateObj };
+    await dbClient.connect();
+    console.log('connection opened');
+    const resource = dbClient.db(dbName).collection(collName);
+    const updateResult = await resource.updateOne(idQuery, updateObjQuery);
+    // console.log(updateResult);
+    res.json(updateResult);
+  } catch (error) {
+    console.error('error in get books', error);
+    res.status(500).json('something went wrong');
+  } finally {
+    await dbClient.close();
+    console.log('connection closed');
+  }
+});
+
+// PUT (update all)
+booksRouter.put('/books/:bookId', async (req, res) => {
+  try {
+    const id = req.params.bookId;
+    const idQuery = { _id: ObjectId(id) };
+    const updateObj = req.body;
+    const updateObjQuery = { $set: updateObj };
+    await dbClient.connect();
+    console.log('connection opened');
+    const resource = dbClient.db(dbName).collection(collName);
+    const updateResult = await resource.updateOne(idQuery, updateObjQuery);
+    // console.log(updateResult);
+    res.json(updateResult);
+  } catch (error) {
+    console.error('error in get books', error);
+    res.status(500).json('something went wrong');
+  } finally {
+    await dbClient.close();
+    console.log('connection closed');
+  }
+});
+
 // GET books-authors
 booksRouter.get('/books-authors', async (req, res) => {
   try {
