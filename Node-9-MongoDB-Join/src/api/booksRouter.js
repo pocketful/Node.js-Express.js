@@ -63,6 +63,56 @@ booksRouter.get('/books-authors', async (req, res) => {
   }
 });
 
+// GET books-authors
+booksRouter.get('/books-authors-agg', async (req, res) => {
+  try {
+    await dbClient.connect();
+    console.log('connection opened');
+    const agg = [
+      {
+        $lookup: {
+          from: 'authors',
+          localField: '_id',
+          foreignField: 'bookId',
+          as: 'authorArr',
+        },
+      },
+      {
+        $sort: {
+          rating: -1,
+        },
+      },
+      {
+        $replaceRoot: {
+          newRoot: {
+            $mergeObjects: [
+              {
+                $arrayElemAt: ['$authorArr', 0],
+              },
+              '$$ROOT',
+            ],
+          },
+        },
+      },
+      {
+        $project: {
+          authorArr: 0,
+        },
+      },
+    ];
+    const resource = dbClient.db(dbName).collection(collName);
+    const booksArr = await resource.aggregate(agg).toArray();
+    console.log(booksArr);
+    res.json(booksArr);
+  } catch (error) {
+    console.error('error in get books-authors', error);
+    res.status(500).json('something went wrong');
+  } finally {
+    await dbClient.close();
+    console.log('connection closed');
+  }
+});
+
 // GET /api/books/:bookId
 booksRouter.get('/books/:bookId', async (req, res) => {
   try {
@@ -73,7 +123,7 @@ booksRouter.get('/books/:bookId', async (req, res) => {
     await dbClient.connect();
     console.log('connection opened');
     const resource = dbClient.db(dbName).collection(collName);
-    const bookById = await resource.findOne(query);
+    const bookById = await resource.findOne(query); // findOne(ObjectId(id))
     console.log(bookById);
     res.json(bookById);
   } catch (error) {
