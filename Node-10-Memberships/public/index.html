@@ -5,19 +5,39 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Services</title>
+    <title>Memberships</title>
     <link rel="stylesheet" href="./css/style.css" />
     <script src="js/services.js" defer></script>
 </head>
 
 <body>
-    <div class="container">
+    <header>
         <nav>
-            <a class="link-btn" href="./index.html">Memberships</a>
+            <a class="link-btn active" href="./index.html">Memberships</a>
             <a class="link-btn" href="./users.html">Users</a>
         </nav>
-    </div>
+    </header>
 
+    <main class="container">
+        <section class="intro-section">
+            <div class="intro__text">
+                <h2 class="text__title">Membership Management</h2>
+                <p class="text__subtitle">Here you can manage your membership packages. Note: Make sure you are not
+                    deleting or deactivating packages assigned to active users.</p>
+            </div>
+            <a class="btn" href="./add-service.html"><span class="btn-plus"> +</span>New Membership</a>
+            <!-- <a class="btn" href="./add-service.html"><p>+&nbsp;&nbsp;&nbsp;&nbsp; New Membership</a> -->
+        </section>
+
+        <section class="cards-section">
+            <!-- Generate cards -->
+        </section>
+
+    </main>
+
+    <footer class="container">
+        <p>Copyright &copy;2021 Membership Manager</p>
+    </footer>
 </body>
 
 </html>

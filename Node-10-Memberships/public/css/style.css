@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
+@import "reset.css";
+@import "common.css";
+@import "variables.css";
+@import "button.css";
+
+body {
+    color: var(--dark1);
+    background-color: var(--light2);
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    min-height: 100vh;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 8%;
+    padding: 20px 0;
+    color: var(--dark2);
+    font-size: 1.1rem;
+    font-weight: 700;    
+}
+
+header {
+    background-color: var(--light1);
+}
+
+.intro-section {
+    padding-top: 4%;
+    padding-bottom: 4%;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;  
+}
+
+/* h2 */
+.text__title {
+    color: var(--dark1);
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 0.3em;
+}
+
+.text__subtitle {
+    margin-bottom: 0.3em;
+    font-size: 0.9rem;
+}
+
+footer {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+    .intro-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

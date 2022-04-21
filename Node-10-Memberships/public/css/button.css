@@ -1,0 +1,28 @@
+.active {
+  color: var(--accent1);
+}
+
+.link-btn:hover {
+  color: var(--accent1d);
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 6px;
+  color: var(--light1);
+  background-color: var(--accent1);
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  align-self: center;
+  white-space: nowrap;
+}
+
+.btn-plus {
+ padding-right: 16px;
+}
+
+.btn:hover {
+  background-color: var(--accent1d);
+}
