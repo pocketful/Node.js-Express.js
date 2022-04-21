@@ -18,10 +18,12 @@ app.get('/', (req, res) => res.json('OK'));
 app.use('/api', servicesRouter);
 app.use('/api', usersRouter);
 
+// When no route works, do this route, it's the last one
 // 404 route
 // app.use((req, res) => {
-//   res.status(404).json({ err: 'route nor found' });
+//   res.status(404).json({ err: 'route not found' });
 // });
+// better one
 app.all('*', (req, res) => {
   res.status(404).json({ err: 'route not found' });
 });
