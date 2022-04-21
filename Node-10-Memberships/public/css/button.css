@@ -3,7 +3,11 @@
 }
 
 .link-btn:hover {
-  color: var(--accent1d);
+  color: var(--dark1);
+}
+
+.link-btn:active {
+  color: var(--light2);
 }
 
 .btn {
@@ -17,12 +21,43 @@
   border: none;
   align-self: center;
   white-space: nowrap;
-}
-
-.btn-plus {
- padding-right: 16px;
+  box-shadow: 1px 1px 2px var(--accent1d); 
 }
 
 .btn:hover {
+  color: var(--light1);
   background-color: var(--accent1d);
+}
+
+.btn:active {
+  background-color: var(--accent1);
+  color: var(--light1);
+}
+
+.btn-plus {
+  padding-right: 16px;
+ }
+
+.btn-del {
+    font-size: 1.1rem;
+    color: var(--accent2);
+    background-color: var(--accent3);
+    border: none;
+    border-radius: 4px;
+    width: 2.5rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px var(--accent3d); 
+}
+
+.btn-del:hover {
+  color: var(--accent2d);
+  background-color: var(--accent3d);
+}
+
+.btn-del:active {
+  background-color: var(--accent3);
+  color: var(--accent2);
 }
