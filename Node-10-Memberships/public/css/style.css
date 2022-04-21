@@ -3,7 +3,7 @@
 @import "reset.css";
 @import "common.css";
 @import "variables.css";
-@import "button.css";
+@import "buttons.css";
 
 body {
     color: var(--dark1);
