@@ -18,4 +18,12 @@ app.get('/', (req, res) => res.json('OK'));
 app.use('/api', servicesRouter);
 app.use('/api', usersRouter);
 
+// 404 route
+// app.use((req, res) => {
+//   res.status(404).json({ err: 'route nor found' });
+// });
+app.all('*', (req, res) => {
+  res.status(404).json({ err: 'route not found' });
+});
+
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
