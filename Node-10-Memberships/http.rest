@@ -1,0 +1,31 @@
+### SERVICES -------------------------------------------
+GET http://localhost:3000/api/services
+
+###
+POST http://localhost:3000/api/services
+Content-Type: application/json
+
+{
+"name": "Platinum",
+"price": 149.99,
+"description": "Platinum Yearly Subscription"
+}
+###
+
+DELETE http://localhost:3000/api/services/6261096b19cd311074c67d20
+
+### USERS ----------------------------------------------
+GET http://localhost:3000/api/users
+
+###
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+"name": "Roze",
+"surname": "Diaz",
+"email": "rdiaza@zdnet.com",
+"service_id": "6260fe1cf03cafbe975eeed3"
+}
+
+### JOINED ----------------------------------------------
