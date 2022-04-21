@@ -8,12 +8,34 @@ const collName = 'users';
 
 // Routes
 // GET
-usersRouter.get('/users', async (req, res) => {
+usersRouter.get('/users/', async (req, res) => {
   try {
     const servicesArr = await getArrayDb('users');
     res.json(servicesArr);
   } catch (error) {
     res.status(500).json('something went wrong');
+  }
+});
+
+// GET, SORT
+usersRouter.get('/users/:order?', async (req, res) => {
+  try {
+    const order = req.params.order?.toLowerCase() === 'asc' ? 1 : -1;
+    const options = {
+      sort: { name: order },
+    };
+    await dbClient.connect();
+    console.log('connection opened');
+    const resource = dbClient.db(dbName).collection(collName);
+    const arrFromDb = await resource.find({}, options).toArray();
+    // console.log(arrFromDb);
+    res.json(arrFromDb);
+  } catch (error) {
+    console.error('error in get arrFromDb', error);
+    res.status(500).json('something went wrong');
+  } finally {
+    await dbClient.close();
+    console.log('connection closed');
   }
 });
 

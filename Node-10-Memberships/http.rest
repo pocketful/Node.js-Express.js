@@ -18,14 +18,20 @@ DELETE http://localhost:3000/api/services/6261096b19cd311074c67d20
 GET http://localhost:3000/api/users
 
 ###
+GET http://localhost:3000/api/users/asc
+
+###
+GET http://localhost:3000/api/users/desc
+
+###
 POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-"name": "Roze",
-"surname": "Diaz",
-"email": "rdiaza@zdnet.com",
-"service_id": "6260fe1cf03cafbe975eeed3"
+"name": "Ralph",
+"surname": "Cunningham",
+"email": "rcunninghamg@amazon.co.jp",
+"service_id": "6261022ee72b2935ba29c683"
 }
 
 ### JOINED ----------------------------------------------

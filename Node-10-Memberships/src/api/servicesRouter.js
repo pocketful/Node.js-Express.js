@@ -9,7 +9,7 @@ const collName = 'services';
 
 // Routes
 // GET
-servicesRouter.get('/services', async (req, res) => {
+servicesRouter.get('/servicesHelper', async (req, res) => {
   try {
     const servicesArr = await getArrayDb('services');
     res.json(servicesArr);
@@ -19,7 +19,7 @@ servicesRouter.get('/services', async (req, res) => {
 });
 
 // without helper
-servicesRouter.get('/services1Version', async (req, res) => {
+servicesRouter.get('/services', async (req, res) => {
   try {
     await dbClient.connect();
     console.log('connection opened');
