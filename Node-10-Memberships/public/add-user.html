@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memberships</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <script src="js/addService.js" defer></script>
+</head>
+
+<body>
+  <div class="page-container">
+    <header>
+      <nav>
+        <a class="btn-nav" href="./index.html">Memberships</a>
+        <a class="btn-nav active" href="./users.html">Users</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="intro-section">
+        <div class="intro__text">
+          <h2 class="text__title">Create User</h2>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <form id="formUser" autocomplete="off">
+
+          <div class="fUser__fname fUser">
+            <label for="fname">First Name<span class="req-star"> *</span></label>
+            <input type="text" id="fname" name="fname" placeholder="First Name" value="">
+          </div>
+
+          <div class="fUser__lname fUser">
+            <label for="lname">Last Name<span class="req-star"> *</span></label>
+            <input type="text" id="lname" name="lname" placeholder="Last Name" value="">
+          </div>
+
+          <div class="fUser__email fUser">
+            <label for="email">Email Address<span class="req-star"> *</span></label>
+            <input type="text" id="email" name="email" placeholder="Email Address" value="">
+          </div>
+
+          <div class="fUser__select fUser">
+            <label for="serviceSelect">Change membership</label>
+            <select id="serviceSelect" name="serviceSelect">
+              <option value="platinum">Platinum</option>
+              <option value="silver">Silver</option>
+              <option value="trial">Trial</option>
+              <option value="gold">Gold</option>
+              <option value="bronze">Bronze</option>
+            </select>
+          </div>
+
+          <div class="fUser__btns">
+            <a class="btn-cancel" href="./user.html">Cancel</a>
+            <button class="btn btn-add" type="submit">New User</button>
+          </div>
+
+        </form>
+
+      </section>
+    </main>
+    <footer>
+      <p>Copyright &copy;2021 Membership Manager</p>
+    </footer>
+  </div>
+</body>
+
+</html>

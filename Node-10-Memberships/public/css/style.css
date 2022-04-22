@@ -100,14 +100,23 @@ nav {
 }
 
 /* forms ---------------------------------------------------------- */
+.form-section {
+  background-color: var(--light1);
+  box-shadow: 2px 2px 14px var(--light3);
+  border-radius: 4px;
+  padding: 2.5rem;
+}
+
 label {
   font-weight: 700;
   font-size: 1.1rem;
 }
 
 input,
-textarea {
-  padding: 10px;
+textarea,
+/* #service-div > #serviceSelect { */
+#serviceSelect {
+  padding: 16px;
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -129,13 +138,6 @@ textarea:focus {
 }
 
 /* form add service --------------------- */
-.form-section {
-  background-color: var(--light1);
-  box-shadow: 2px 2px 14px var(--light3);
-  border-radius: 4px;
-  padding: 2.5rem;
-}
-
 #formSer {
   max-width: 800px;
   margin: 0 auto;
@@ -155,22 +157,22 @@ textarea:focus {
   grid-column: 2 / 3;
 }
 
-.price-div > input[id='price'] {
+.price__input_wrapper > input[id='price'] {
   padding-left: 70px;
   width: 100%;
   /* background: url(pic.png) no-repeat scroll 7px 7px; */
 }
 
-#formSer > .price-div {
+#formSer > .price__input_wrapper {
   grid-column: 2 / 3;
 }
 
-.price-div > .icon-dol {
+.price__input_wrapper > .icon-dol {
   position: absolute;
   padding: 12px 18px;
 }
 
-.form-foot {
+.btns__form_wrapper {
   grid-column: 2 / 3;
   justify-self: center;
   display: flex;
@@ -183,14 +185,54 @@ textarea:focus {
 } */
 
 /* form add user --------------------- */
+.fUser__fname {
+  grid-area: fname;
+}
+
+.fUser__lname {
+  grid-area: lname;
+}
+
+.fUser__email {
+  grid-area: email;
+}
+
+.fUser__select {
+  grid-area: select;
+}
+
+.fUser__btns {
+  grid-area: btns;
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15%;
+}
 
 #formUser {
-  /* max-width: 800px; */
-  /* margin: 0 auto; */
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas:
+    'fname  fname  lname  lname'
+    'email  email  .      .'
+    'select .      .      .'
+    '.      btns   btns   .';
   grid-gap: 40px;
-  /* align-items: center; */
+}
+
+.fUser > * {
+  width: 100%;
+}
+
+.fUser > label {
+  display: block;
+  padding-bottom: 0.5em;
+}
+
+.req-star {
+  color: var(--accent4);
+  font-size: 1.5rem;
 }
 
 /* footer ---------------------------------------------------------- */
@@ -207,6 +249,19 @@ footer {
 
 /* ----------------------------------------------------------------- */
 /* media queries --------------------------------------------------- */
+@media screen and (max-width: 1000px) {
+    #formUser {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          'fname'
+          'lname'
+          'email'
+          'select'
+          'btns';
+          grid-gap: 20px;    
+      }
+}
+
 @media screen and (max-width: 800px) {
   .intro-section {
     display: flex;
@@ -235,24 +290,21 @@ footer {
     grid-gap: 0px;
   }
 
-  label {
-    margin-bottom: 0.2rem;
-  }
-
   #formSer > label {
     grid-column: 1;
     text-align: initial;
+    margin-bottom: 0.2rem;
   }
 
   #formSer > input,
-  .price-div > input[id='price'],
+  .price__input_wrapper > input[id='price'],
   #formSer > textarea {
     grid-column: 1;
     margin-bottom: 1.5rem;
   }
 
-  #formSer > .price-div,
-  .form-foot {
+  #formSer > .price__input_wrapper,
+  .btns__form_wrapper {
     grid-column: 1;
   }
 }
