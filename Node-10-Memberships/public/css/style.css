@@ -4,6 +4,8 @@
 @import 'common.css';
 @import 'variables.css';
 @import 'buttons.css';
+@import 'cards.css';
+@import 'forms.css';
 
 body {
   color: var(--dark1);
@@ -59,183 +61,8 @@ nav {
   margin-bottom: 0.5em;
 }
 
-/* cards ----------------------------------------------------------- */
-.cards-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 40px;
-  margin-bottom: 60px;
-}
-
-.card {
-  background-color: var(--light1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 2px 2px 14px var(--light3);
-  border-radius: 4px;
-}
-
-.card__title {
-  font-size: 1.4rem;
-  margin-top: 2.2rem;
-}
-
-.card__subtitle {
-  font-size: 0.8rem;
-  margin-top: 1rem;
-}
-
-.card__line {
-  background-color: var(--light2);
-  height: 2px;
-  align-self: stretch;
-  /* width: 100%; */
-  margin-top: 2rem;
-}
-
-.card__btn {
-  align-self: flex-end;
-  margin: 25px;
-}
-
-/* forms ---------------------------------------------------------- */
-.form-section {
-  background-color: var(--light1);
-  box-shadow: 2px 2px 14px var(--light3);
-  border-radius: 4px;
-  padding: 2.5rem;
-}
-
-label {
-  font-weight: 700;
-  font-size: 1.1rem;
-}
-
-input,
-textarea,
-/* #service-div > #serviceSelect { */
-#serviceSelect {
-  padding: 16px;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-family: inherit;
-  box-shadow: 1px 1px 3px 1px var(--light3);
-  /* box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.5); */
-}
-
-input:focus,
-textarea:focus {
-  outline: 2px solid var(--accent1);
-}
-
-::placeholder {
-  font-weight: 500;
-  color: var(--dark2);
-  opacity: 0.5;
-  font-size: 1rem;
-}
-
-/* form add service --------------------- */
-#formSer {
-  max-width: 800px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  grid-gap: 40px;
-  align-items: center;
-}
-
-#formSer > label {
-  text-align: right;
-  grid-column: 1 / 2;
-}
-
-#formSer > input,
-#formSer > textarea {
-  grid-column: 2 / 3;
-}
-
-.price__input_wrapper > input[id='price'] {
-  padding-left: 70px;
-  width: 100%;
-  /* background: url(pic.png) no-repeat scroll 7px 7px; */
-}
-
-#formSer > .price__input_wrapper {
-  grid-column: 2 / 3;
-}
-
-.price__input_wrapper > .icon-dol {
-  position: absolute;
-  padding: 12px 18px;
-}
-
-.btns__form_wrapper {
-  grid-column: 2 / 3;
-  justify-self: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15%;
-}
-
-/* button[type=submit] {
-} */
-
-/* form add user --------------------- */
-.fUser__fname {
-  grid-area: fname;
-}
-
-.fUser__lname {
-  grid-area: lname;
-}
-
-.fUser__email {
-  grid-area: email;
-}
-
-.fUser__select {
-  grid-area: select;
-}
-
-.fUser__btns {
-  grid-area: btns;
-  justify-self: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15%;
-}
-
-#formUser {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-areas:
-    'fname  fname  lname  lname'
-    'email  email  .      .'
-    'select .      .      .'
-    '.      btns   btns   .';
-  grid-gap: 40px;
-}
-
-.fUser > * {
-  width: 100%;
-}
-
-.fUser > label {
-  display: block;
-  padding-bottom: 0.5em;
-}
-
-.req-star {
-  color: var(--accent4);
-  font-size: 1.5rem;
-}
-
 /* footer ---------------------------------------------------------- */
+
 footer {
   height: 50px;
   position: absolute;
@@ -247,20 +74,7 @@ footer {
   text-align: center;
 }
 
-/* ----------------------------------------------------------------- */
 /* media queries --------------------------------------------------- */
-@media screen and (max-width: 1000px) {
-    #formUser {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-          'fname'
-          'lname'
-          'email'
-          'select'
-          'btns';
-          grid-gap: 20px;    
-      }
-}
 
 @media screen and (max-width: 800px) {
   .intro-section {
@@ -268,43 +82,5 @@ footer {
     flex-wrap: wrap;
     justify-content: center;
     text-align: center;
-  }
-
-  .cards-section {
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .cards-section {
-    grid-template-columns: 1fr;
-  }
-
-  .form-section {
-    padding: 4%;
-  }
-
-  #formSer {
-    grid-template-columns: initial;
-    grid-gap: 0px;
-  }
-
-  #formSer > label {
-    grid-column: 1;
-    text-align: initial;
-    margin-bottom: 0.2rem;
-  }
-
-  #formSer > input,
-  .price__input_wrapper > input[id='price'],
-  #formSer > textarea {
-    grid-column: 1;
-    margin-bottom: 1.5rem;
-  }
-
-  #formSer > .price__input_wrapper,
-  .btns__form_wrapper {
-    grid-column: 1;
   }
 }

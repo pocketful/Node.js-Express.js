@@ -1,0 +1,87 @@
+.cards-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.card {
+  background-color: var(--light1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 2px 14px var(--light3);
+  border-radius: 4px;
+  padding: 20px;
+}
+
+/* services cards ----------------------------------------------------------- */
+.cardSer {
+  align-items: center;
+}
+
+.card__title {
+  font-size: 1.4rem;
+  margin-top: 0.8rem;
+}
+
+.card__subtitle {
+  font-size: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.card__line {
+  background-color: var(--light2);
+  height: 2px;
+  align-self: stretch;
+  /* width: 100%; */
+  margin-top: 2rem;
+}
+
+.card__btn {
+  align-self: flex-end;
+  margin-top: 20px;
+}
+
+/* users cards ------------------------------------------------------------ */
+
+.accent1 {
+  font-size: 1rem;
+  color: var(--accent1);
+}
+
+.cards-sort {
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 1.5em;
+}
+
+.cards-sort > .cards-sort_span {
+  cursor: pointer;
+  padding: 40px 40px 20px 40px;
+}
+
+.cardUs__fullname {
+  font-weight: 700;
+  color: var(--dark2);
+  padding-bottom: 1.2em;
+}
+
+.cardUs {
+  align-items: left;
+  gap: 1.2em;
+}
+
+/* media queries --------------------------------------------------- */
+
+@media screen and (max-width: 800px) {
+  .cards-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cards-section {
+    grid-template-columns: 1fr;
+  }
+}

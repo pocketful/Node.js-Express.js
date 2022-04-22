@@ -1,0 +1,185 @@
+.form-section {
+  background-color: var(--light1);
+  box-shadow: 2px 2px 14px var(--light3);
+  border-radius: 4px;
+  padding: 2.5rem;
+}
+
+label {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+select {
+  background-color: var(--light1);
+  /* appearance: none; */
+}
+
+input,
+  textarea,
+  /* #service-div > #serviceSelect { */
+  #serviceSelect {
+  padding: 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  box-shadow: 1px 1px 3px 1px var(--light3);
+  /* box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.5); */
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--accent1);
+}
+
+::placeholder {
+  font-weight: 500;
+  color: var(--dark2);
+  opacity: 0.5;
+  font-size: 1rem;
+}
+
+/* add service form -------------------------------------------- */
+
+#formSer {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-gap: 40px;
+  align-items: center;
+}
+
+#formSer > label {
+  text-align: right;
+  grid-column: 1 / 2;
+}
+
+#formSer > input,
+#formSer > textarea {
+  grid-column: 2 / 3;
+}
+
+.price__input_wrapper > input[id='price'] {
+  padding-left: 70px;
+  width: 100%;
+  /* background: url(pic.png) no-repeat scroll 7px 7px; */
+}
+
+#formSer > .price__input_wrapper {
+  grid-column: 2 / 3;
+}
+
+.price__input_wrapper > .icon-dol {
+  position: absolute;
+  padding: 12px 18px;
+}
+
+.btns__form_wrapper {
+  grid-column: 2 / 3;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15%;
+}
+
+/* button[type=submit] {
+  } */
+
+/* add user form -------------------------------------------- */
+
+.fUser__fname {
+  grid-area: fname;
+}
+
+.fUser__lname {
+  grid-area: lname;
+}
+
+.fUser__email {
+  grid-area: email;
+}
+
+.fUser__select {
+  grid-area: select;
+}
+
+.fUser__btns {
+  grid-area: btns;
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15%;
+}
+
+#formUser {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas:
+    'fname  fname  lname  lname'
+    'email  email  .      .'
+    'select .      .      .'
+    '.      btns   btns   .';
+  grid-gap: 40px;
+}
+
+.fUser > * {
+  width: 100%;
+}
+
+.fUser > label {
+  display: block;
+  padding-bottom: 0.5em;
+}
+
+.req-star {
+  color: var(--accent4);
+  font-size: 1.5rem;
+}
+
+/* media queries --------------------------------------------------- */
+
+@media screen and (max-width: 1000px) {
+  #formUser {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'fname'
+      'lname'
+      'email'
+      'select'
+      'btns';
+    grid-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .form-section {
+    padding: 4%;
+  }
+
+  #formSer {
+    grid-template-columns: initial;
+    grid-gap: 0px;
+  }
+
+  #formSer > label {
+    grid-column: 1;
+    text-align: initial;
+    margin-bottom: 0.2rem;
+  }
+
+  #formSer > input,
+  .price__input_wrapper > input[id='price'],
+  #formSer > textarea {
+    grid-column: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  #formSer > .price__input_wrapper,
+  .btns__form_wrapper {
+    grid-column: 1;
+  }
+}
