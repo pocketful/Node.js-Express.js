@@ -1,12 +1,12 @@
-.active {
+.btn-nav.active {
   color: var(--accent1);
 }
 
-.link-btn:hover {
+.btn-nav:hover {
   color: var(--dark1);
 }
 
-.link-btn:active {
+.btn-nav:active {
   color: var(--light2);
 }
 
@@ -15,13 +15,13 @@
   border-radius: 6px;
   color: var(--light1);
   background-color: var(--accent1);
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
   border: none;
   align-self: center;
   white-space: nowrap;
-  box-shadow: 1px 1px 2px var(--accent1d); 
+  box-shadow: 1px 1px 2px var(--accent1d);
 }
 
 .btn:hover {
@@ -36,20 +36,20 @@
 
 .btn-plus {
   padding-right: 16px;
- }
+}
 
 .btn-del {
-    font-size: 1.1rem;
-    color: var(--accent2);
-    background-color: var(--accent3);
-    border: none;
-    border-radius: 4px;
-    width: 2.5rem;
-    height: 2.5rem;
-    line-height: 2.5rem;
-    text-align: center;
-    cursor: pointer;
-    box-shadow: 1px 1px 2px var(--accent3d); 
+  font-size: 1.1rem;
+  color: var(--accent2);
+  background-color: var(--accent3);
+  border: none;
+  border-radius: 4px;
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 1px 1px 2px var(--accent3d);
 }
 
 .btn-del:hover {
@@ -60,4 +60,22 @@
 .btn-del:active {
   background-color: var(--accent3);
   color: var(--accent2);
+}
+
+.btn-cancel {
+  color: var(--dark1);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.btn-cancel:hover {
+  color: var(--dark2);
+}
+
+.btn-cancel:active {
+  color: var(--light2);
+}
+
+.btn-add {
+  cursor: pointer;
 }
