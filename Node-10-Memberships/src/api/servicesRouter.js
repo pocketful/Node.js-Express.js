@@ -25,7 +25,7 @@ servicesRouter.get('/services', async (req, res) => {
     console.log('connection opened');
     const resource = dbClient.db(dbName).collection(collName);
     const arrFromDb = await resource.find().toArray();
-    console.log(arrFromDb);
+    // console.log(arrFromDb);
     res.json(arrFromDb);
     // res.json('all services route');
   } catch (error) {
@@ -59,16 +59,33 @@ servicesRouter.post('/services', async (req, res) => {
 // DELETE
 servicesRouter.delete('/services/:id', async (req, res) => {
   try {
+    // const stringId = req.params.id;
+    // const mongoObjId = new ObjectId(stringId);
+    // await dbClient.connect();
+    // const resource = dbClient.db(dbName).collection(collName);
+    // const deleteResult = await resource.deleteOne({ _id: mongoObjId });
     const { id } = req.params;
     const query = { _id: ObjectId(id) };
     await dbClient.connect();
     console.log('connection opened');
     const resource = dbClient.db(dbName).collection(collName);
     const deleteResult = await resource.deleteOne(query);
-    // console.log(deleteResult);
+    console.log('deleteResult ===', deleteResult);
+    // if (deleteResult.deletedCount === 1) {
+    //   console.log('del 1');
+    //   res.status(200).res.json({ success: true }); // res.status(200) auto
+    //   return;
+    // }
+    // if (deleteResult.deletedCount === 0) {
+    //   console.log('del 0');
+    //   res.status(400).json({ err: 'nothing was deleted' });
+    //   return;
+    // }
+    // res.status(500).json('something went wrong');
     res.json(deleteResult);
   } catch (error) {
-    console.error('error in delete', error);
+    console.log('del catch');
+    console.error('error in delete a service', error);
     res.status(500).json('something went wrong');
   } finally {
     await dbClient.close();

@@ -74,6 +74,19 @@ footer {
   text-align: center;
 }
 
+/* feedback ---------------------------------------------------------- */
+
+.feedback {
+  font-weight: 500;
+  margin: 20px 0;
+  color: var(--accent1);
+  background-color: var(--light1);
+  border-radius: 4px;
+  padding: 8px 12px;
+  text-align: center;
+  border: 2px solid var(--accent1);
+}
+
 /* media queries --------------------------------------------------- */
 
 @media screen and (max-width: 800px) {
