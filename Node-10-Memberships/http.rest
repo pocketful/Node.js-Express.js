@@ -13,6 +13,9 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:3000/api/services/6261096b19cd311074c67d20
+###
+
+GET http://localhost:3000/api/services/6261096b19cd311074c67d20
 
 ### USERS ----------------------------------------------
 GET http://localhost:3000/api/users
@@ -35,3 +38,10 @@ Content-Type: application/json
 }
 
 ### JOINED ----------------------------------------------
+GET http://localhost:3000/api/usersMemberships/
+
+###
+GET http://localhost:3000/api/usersMemberships/asc
+
+###
+GET http://localhost:3000/api/usersMemberships/desc

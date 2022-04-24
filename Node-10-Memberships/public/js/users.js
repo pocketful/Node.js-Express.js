@@ -31,7 +31,8 @@ function displayUsers(arr) {
 
     const serviceSpanEl = document.createElement('span');
     serviceSpanEl.classList.add('cardUs__service_span', 'accent1');
-    serviceSpanEl.textContent = userObj.service_id;
+    // serviceSpanEl.textContent = userObj.service_id; // users router
+    serviceSpanEl.textContent = userObj.servicesArr[0].name; // usersMembershipsRouter
     serviceEl.append(serviceSpanEl);
 
     const ipEl = document.createElement('p');
@@ -42,9 +43,10 @@ function displayUsers(arr) {
 }
 
 // GET
-async function getUsers() {
+async function getUsers(order) {
   try {
-    const resp = await fetch(`${BASE_URL}/users`);
+    // const resp = await fetch(`${BASE_URL}/users`);
+    const resp = await fetch(`${BASE_URL}/usersMemberships/${order}`);
     console.log(resp);
     // fetch does not pass the code to catch block if status is error
     if (!resp.ok) throw new Error('Something is wrong');
@@ -57,3 +59,22 @@ async function getUsers() {
   }
 }
 getUsers();
+
+// SORT
+let sortOrder = 'ASC';
+const sortTextEl = document.querySelector('.cards-sort-text');
+const sortIconEl = document.querySelector('.cards-sort_span');
+
+sortIconEl.addEventListener('click', () => {
+  const text = sortTextEl.textContent;
+  if (text.includes('ASC')) {
+    sortTextEl.textContent = text.replace('ASC', 'DESC');
+    sortOrder = 'DESC';
+    sortIconEl.innerHTML = '<i class="fa fa-sort-desc icon-sort accent1" aria-hidden="true"></i>';
+  } else {
+    sortTextEl.textContent = text.replace('DESC', 'ASC');
+    sortOrder = 'ASC';
+    sortIconEl.innerHTML = '<i class="fa fa-sort-asc icon-sort accent1" aria-hidden="true"></i>';
+  }
+  getUsers(sortOrder);
+});

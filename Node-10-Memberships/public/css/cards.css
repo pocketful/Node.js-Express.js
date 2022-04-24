@@ -51,13 +51,15 @@
 
 .cards-sort {
   font-weight: 900;
-  text-align: center;
-  margin-bottom: 1.5em;
+  /* margin-bottom: 1.5em; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cards-sort > .cards-sort_span {
   cursor: pointer;
-  padding: 40px 40px 20px 40px;
+  padding: 40px;
 }
 
 .cardUs__fullname {
