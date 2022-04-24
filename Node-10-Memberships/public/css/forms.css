@@ -90,12 +90,12 @@ textarea:focus {
 
 /* add user form -------------------------------------------- */
 
-.fUser__fname {
-  grid-area: fname;
+.fUser__name {
+  grid-area: name;
 }
 
-.fUser__lname {
-  grid-area: lname;
+.fUser__surname {
+  grid-area: surname;
 }
 
 .fUser__email {
@@ -119,7 +119,7 @@ textarea:focus {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-areas:
-    'fname  fname  lname  lname'
+    'name  name  surname  surname'
     'email  email  .      .'
     'select .      .      .'
     '.      btns   btns   .';
@@ -146,8 +146,8 @@ textarea:focus {
   #formUser {
     grid-template-columns: 1fr;
     grid-template-areas:
-      'fname'
-      'lname'
+      'name'
+      'surname'
       'email'
       'select'
       'btns';

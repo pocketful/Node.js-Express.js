@@ -2,7 +2,7 @@ const URL = 'http://localhost:3000/api/services';
 const formEl = document.forms.formSer;
 
 function showFeedback(result) {
-  const feedbackEl = document.getElementById('feedback');
+  const feedbackEl = document.getElementById('feedback-ser');
   feedbackEl.innerHTML = '';
   const pEl = document.createElement('p');
   pEl.classList = 'feedback';
@@ -12,9 +12,9 @@ function showFeedback(result) {
     pEl.textContent = 'Error trying to add new service.';
   }
   feedbackEl.append(pEl);
-  setTimeout(() => {
-    pEl.remove();
-  }, 3000);
+  // setTimeout(() => {
+  //   pEl.remove();
+  // }, 3000);
 }
 
 async function addService(name, price, description) {
@@ -39,7 +39,7 @@ async function addService(name, price, description) {
       formEl.reset();
       console.log('suc');
       showFeedback('success');
-      // setTimeout(() => window.location.href = 'index.html', 3000);
+      setTimeout(() => window.location.href = 'index.html', 3000);
     } else {
       showFeedback('error');
     }
