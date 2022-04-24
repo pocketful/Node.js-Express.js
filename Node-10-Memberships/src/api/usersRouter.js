@@ -1,6 +1,7 @@
 const express = require('express');
+const { ObjectId } = require('mongodb');
 const { dbClient } = require('../config');
-const { getArrayDb } = require('../helper');
+// const { getArrayDb } = require('../helper');
 
 const usersRouter = express.Router();
 const dbName = 'memberships';
@@ -8,14 +9,14 @@ const collName = 'users';
 
 // Routes
 // GET
-usersRouter.get('/users/', async (req, res) => {
-  try {
-    const servicesArr = await getArrayDb('users');
-    res.json(servicesArr);
-  } catch (error) {
-    res.status(500).json('something went wrong');
-  }
-});
+// usersRouter.get('/users/', async (req, res) => {
+//   try {
+//     const servicesArr = await getArrayDb('users');
+//     res.json(servicesArr);
+//   } catch (error) {
+//     res.status(500).json('something went wrong');
+//   }
+// });
 
 // GET, SORT
 usersRouter.get('/users/:order?', async (req, res) => {
@@ -44,7 +45,14 @@ usersRouter.post('/users', async (req, res) => {
   try {
     await dbClient.connect();
     console.log('connection opened');
-    const newPostObj = req.body;
+    const newPostObj = {
+      name: req.body.name,
+      surname: req.body.surname,
+      email: req.body.email,
+      service_id: ObjectId(req.body.serviceIdStr),
+      // service_id: new ObjectId(req.body.serviceIdStr),
+    };
+    console.log('newPostObj ===', newPostObj);
     const resource = dbClient.db(dbName).collection(collName);
     const insertResult = await resource.insertOne(newPostObj);
     console.log('insertResult ===', insertResult);

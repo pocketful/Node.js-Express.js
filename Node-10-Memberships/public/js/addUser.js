@@ -40,7 +40,7 @@ async function addUser(name, surname, email, serviceIdStr) {
       formEl.reset();
       console.log('suc');
       showFeedback('success');
-      //   setTimeout(() => window.location.href = 'users.html', 3000);
+      setTimeout(() => (window.location.href = 'users.html'), 3000);
     } else {
       showFeedback('error');
     }
