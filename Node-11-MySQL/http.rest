@@ -2,3 +2,12 @@
 GET http://localhost:3000/api/posts
 
 ###
+GET http://localhost:3000/api/posts/first-posts
+
+###
+GET http://localhost:3000/api/posts/posts-by-rating
+
+###
+GET http://localhost:3000/api/posts/author/Hermione
+
+###
