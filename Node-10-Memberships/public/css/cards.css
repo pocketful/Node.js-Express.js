@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 40px;
-  margin-bottom: 60px;
 }
 
 .card {
@@ -51,7 +50,6 @@
 
 .cards-sort {
   font-weight: 900;
-  /* margin-bottom: 1.5em; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +57,7 @@
 
 .cards-sort > .cards-sort_span {
   cursor: pointer;
-  padding: 40px;
+  padding: 30px;
 }
 
 .cardUs__fullname {
@@ -76,14 +74,14 @@
 /* media queries --------------------------------------------------- */
 
 @media screen and (max-width: 800px) {
-  .cards-section {
+  .cards {
     grid-template-columns: 1fr 1fr;
     gap: 20px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .cards-section {
+  .cards {
     grid-template-columns: 1fr;
   }
 }

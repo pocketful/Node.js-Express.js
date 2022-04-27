@@ -168,7 +168,7 @@ textarea:focus {
   #formSer > label {
     grid-column: 1;
     text-align: initial;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.3rem;
   }
 
   #formSer > input,
@@ -181,5 +181,8 @@ textarea:focus {
   #formSer > .price__input_wrapper,
   .btns__form_wrapper {
     grid-column: 1;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
   }
 }

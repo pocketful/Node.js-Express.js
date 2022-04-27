@@ -58,7 +58,8 @@ async function getUsers(order) {
     console.log('error');
   }
 }
-getUsers();
+getUsers('asc');
+// getUsers();
 
 // SORT
 let sortOrder = 'ASC';

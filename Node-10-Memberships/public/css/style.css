@@ -41,14 +41,18 @@ nav {
   gap: 15px;
 }
 
+.intro-users {
+  padding-bottom: 0;
+}
+
 .text__title {
   color: var(--dark1);
   font-size: 2rem;
   font-weight: 400;
-  margin-bottom: 0.3em;
 }
 
 .text__subtitle {
+  margin-top: 0.3em;
   margin-bottom: 0.3em;
   font-size: 0.9rem;
 }
@@ -64,14 +68,15 @@ nav {
 /* footer ---------------------------------------------------------- */
 
 footer {
-  height: 50px;
-  position: absolute;
-  bottom: 0;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   font-weight: 500;
-  padding-left: 20px;
-  padding-right: 20px;
   text-align: center;
+  /* position: absolute; */
+  /* bottom: 0; */
 }
 
 /* feedback ---------------------------------------------------------- */
@@ -91,9 +96,13 @@ footer {
 
 @media screen and (max-width: 800px) {
   .intro-section {
+    /* padding: 1.5em 0; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    text-align: center;
+  }
+  .addtext__title {
     text-align: center;
   }
 }

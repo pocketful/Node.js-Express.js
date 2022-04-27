@@ -35,11 +35,20 @@ async function addService(name, price, description) {
     console.log('response ===', resp);
     const data = await resp.json();
     console.log('data ===', data);
+    // if (resp.status === 201) {
+    //   // if (data.acknowledged) {
+    //   formEl.reset();
+    //   console.log('suc');
+    //   showFeedback('success');
+    //   setTimeout(() => (window.location.href = 'index.html'), 3000);
+    // } else {
+    //   showFeedback('error');
+    // }
     if (data.acknowledged) {
       formEl.reset();
       console.log('suc');
       showFeedback('success');
-      setTimeout(() => window.location.href = 'index.html', 3000);
+      setTimeout(() => (window.location.href = 'index.html'), 2500);
     } else {
       showFeedback('error');
     }
@@ -47,15 +56,6 @@ async function addService(name, price, description) {
     console.log('error ===', error);
     console.log('error');
   }
-  // if (data.acknowledged) {
-  //   formEl.reset();
-  //   console.log('suc');
-  //   showFeedback('success');
-  // } else {
-  //   console.log('data ===', data);
-  //   // console.log(error);
-  //   // showFeedback('error');
-  // }
 }
 
 formEl.addEventListener('submit', (event) => {

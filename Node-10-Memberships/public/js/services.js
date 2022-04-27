@@ -65,16 +65,15 @@ async function deleteService(id) {
     console.log('resp', resp);
     // fetch does not pass the code to catch block if status is error
     if (!resp.ok) throw new Error('Something is wrong in deleting the service');
-    // moved to BE:
     const deleteResult = await resp.json();
     console.log('deleteResult', deleteResult);
-    if (deleteResult.deletedCount === 1) {
+    // if (deleteResult.deletedCount === 1) {
+    if (deleteResult.success) {
       getServices();
     } else {
       alert(deleteResult.err);
     }
-    // getServices();
   } catch (error) {
-    console.log('error ===', error);
+    console.log('error ===', error); // same as deleteResult.err
   }
 }

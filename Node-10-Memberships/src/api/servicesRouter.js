@@ -53,9 +53,21 @@ servicesRouter.post('/services', async (req, res) => {
   try {
     await dbClient.connect();
     console.log('connection opened');
-    const newPostObj = req.body;
+    const newServiceObj = req.body;
     const resource = dbClient.db(dbName).collection(collName);
-    const insertResult = await resource.insertOne(newPostObj);
+    const insertResult = await resource.insertOne(newServiceObj);
+    // if (insertResult.insertedId) {
+    //   console.log('insertResult ===', insertResult);
+    //   // res.status(201);
+    //   // when response with status only then use sendStatus
+    //   res.sendStatus(201);
+    //   return;
+    // }
+    // throw new Error('something went wrong while trying to add new service');
+    // } catch (error) {
+    //   console.error('error in add service', error); // error is from throw new Error
+    //   console.log('error.message', error.message);
+    //   res.status(500).json('something went wrong');
     console.log('insertResult ===', insertResult);
     res.json(insertResult);
   } catch (error) {
@@ -93,6 +105,7 @@ servicesRouter.delete('/services/:id', async (req, res) => {
           _id: mongoObjId,
         },
       },
+      // {$group: {_id: "$product", total: { $sum: "$total"} } },
     ];
     const resource = dbClient.db(dbName).collection(collName);
     const aggregatedArr = await resource.aggregate(agg).toArray();
@@ -116,18 +129,18 @@ servicesRouter.delete('/services/:id', async (req, res) => {
     // const serviceByIdObj = await resource.findOne(serviceId);
     const deleteResult = await resource.deleteOne(serviceId);
     console.log('deleteResult ===', deleteResult);
-    // if (deleteResult.deletedCount === 1) {
-    //   console.log('del 1');
-    //   res.status(200).res.json({ success: true }); // res.status(200) auto
-    //   return;
-    // }
-    // if (deleteResult.deletedCount === 0) {
-    //   console.log('del 0');
-    //   res.status(400).json({ err: 'nothing was deleted' });
-    //   return;
-    // }
-    // res.status(500).json('something went wrong');
-    res.json(deleteResult);
+    if (deleteResult.deletedCount === 1) {
+      // console.log('del 1');
+      res.status(200).json({ success: true }); // res.status(200) auto
+      return;
+    }
+    if (deleteResult.deletedCount === 0) {
+      // console.log('del 0');
+      res.status(400).json({ err: 'nothing was deleted' });
+      return;
+    }
+    res.status(500).json('something went wrong');
+    // res.json(deleteResult);
   } catch (error) {
     console.log('del catch');
     console.error('error in delete a service', error);

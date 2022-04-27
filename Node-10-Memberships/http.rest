@@ -36,12 +36,3 @@ Content-Type: application/json
 "email": "rcunninghamg@amazon.co.jp",
 "service_id": "6261022ee72b2935ba29c683"
 }
-
-### JOINED ----------------------------------------------
-GET http://localhost:3000/api/usersMemberships/
-
-###
-GET http://localhost:3000/api/usersMemberships/asc
-
-###
-GET http://localhost:3000/api/usersMemberships/desc

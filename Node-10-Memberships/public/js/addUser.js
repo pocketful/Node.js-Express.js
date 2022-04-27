@@ -38,7 +38,6 @@ async function addUser(name, surname, email, serviceIdStr) {
     console.log('data ===', data);
     if (data.acknowledged) {
       formEl.reset();
-      console.log('suc');
       showFeedback('success');
       setTimeout(() => (window.location.href = 'users.html'), 3000);
     } else {
