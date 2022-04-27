@@ -70,8 +70,11 @@ postsRouter.get('/posts/author/:author', async (req, res) => {
     conn = await mysql.createConnection(dbConfig);
     console.log('connection opened');
     const { author } = req.params;
-    const sql = `SELECT * FROM posts WHERE author = '${author}'`;
-    const [rows] = await conn.query(sql);
+    // const sql = `SELECT * FROM posts WHERE author = '${author}'`;
+    // const [rows] = await conn.query(sql);
+    // Be aware of SQL injection
+    const sql = 'SELECT * FROM posts WHERE author = ?';
+    const [rows] = await conn.execute(sql, [author]);
     // console.log('rows ===', rows);
     res.json(rows);
   } catch (error) {
@@ -90,8 +93,11 @@ postsRouter.get('/posts/author/:author?', async (req, res) => {
     conn = await mysql.createConnection(dbConfig);
     console.log('connection opened');
     const { author } = req.params;
-    const sql = author ? `SELECT * FROM posts WHERE author = '${author}'` : 'SELECT * FROM posts';
-    const [rows] = await conn.query(sql);
+    // const sql = author ? `SELECT * FROM posts WHERE author = '${author}'` : 'SELECT * FROM posts';
+    // const [rows] = await conn.query(sql);
+    // Be aware of SQL injection
+    const sql = author ? 'SELECT * FROM posts WHERE author = ?' : 'SELECT * FROM posts';
+    const [rows] = author ? await conn.execute(sql, [author]) : await conn.query(sql);
     // console.log('rows ===', rows);
     res.json(rows);
   } catch (error) {
