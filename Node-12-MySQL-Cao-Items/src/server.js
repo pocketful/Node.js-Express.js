@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const { PORT } = require('./config');
-const postsRouter = require('./routes/postsRouter');
+const itemsRouter = require('./routes/itemsRouter');
 
 const app = express();
 
@@ -16,11 +16,11 @@ app.get('/', async (req, res) => {
 });
 
 // Routes
-app.use('/api', postsRouter);
+app.use('/api', itemsRouter);
 
 // When no route works, do this route, it's the last one
 app.all('*', (req, res) => {
-  res.status(404).json({ error: 'Route not found' });
+  res.status(404).json({ Error: 'Route not found' });
 });
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
