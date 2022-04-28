@@ -7,21 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Posts</title>
     <!-- <link rel="stylesheet" href="./css/style.css" /> -->
-    <!-- <script src="js/services.js" defer></script> -->
+    <script src="js/main.js" defer></script>
 </head>
 
 <body>
     <h1>Posts</h1>
-    <script>
-        async function getPosts() {
-            const resp = await fetch('http://localhost:3000/api/posts');
-            console.log('resp ===', resp);
-            const postsArr = await resp.json();
-            console.log('postsArr ===', postsArr);
-        }
-        getPosts();
-    </script>
 
+    <ol id="post-list"></ol>
+    <button id="del20">Delete 20</button>
 </body>
 
 </html>

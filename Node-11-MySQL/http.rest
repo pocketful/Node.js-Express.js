@@ -8,6 +8,9 @@ GET http://localhost:3000/api/posts/first-posts
 GET http://localhost:3000/api/posts/posts-by-rating
 
 ###
+GET http://localhost:3000/api/posts/posts-by-rating?order=ASC&limit=5
+
+###
 GET http://localhost:3000/api/posts/author/Hermione
 
 ###
@@ -21,3 +24,4 @@ Content-Type: application/json
   "rating": 4
 }
 ###
+DELETE http://localhost:3000/api/posts/19
