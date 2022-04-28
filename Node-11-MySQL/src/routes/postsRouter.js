@@ -42,13 +42,31 @@ postsRouter.get('/posts/first-posts', async (req, res) => {
   }
 });
 
-postsRouter.get('/posts/posts-by-rating', async (req, res) => {
+// http://localhost:3000/api/posts/posts-by-rating?order=ASC&limit=5
+postsRouter.get('/posts/posts-by-rating/', async (req, res) => {
   try {
     const conn = await mysql.createConnection(dbConfig);
     console.log('connection opened');
-    const sql = 'SELECT * FROM `posts` ORDER BY rating DESC';
+    console.log('req.query ===', req.query); // { order: 'ASC', limit: '5' }
+    console.log('req.params ===', req.query.order); // ASC
+    // console.log('req.params ===', req.query.limit); // 5
+    const { order } = req.query;
+    // const { limit } = req.query;
+
+    // const safeOrder = mysql.escape(order); // no need for execute after this
+    // const ascOrDesc = safeOrder === 'ASC' ? 'ASC' : 'DESC';
+    // console.log('order ===', order); // ASC
+    // console.log('safeOrder ===', safeOrder); // 'ASC'
+    // console.log('safeOrder === ASC', safeOrder === 'ASC'); // ASC false ?
+
+    const sql = `SELECT * FROM posts ORDER BY rating ${order === 'ASC' ? 'ASC' : 'DESC'}`;
+    console.log('sql ===', sql);
     const [rows] = await conn.query(sql);
-    console.log('rows ===', rows);
+
+    // const sql = 'SELECT * FROM posts ORDER BY rating DESC';
+    // const [rows] = await conn.query(sql);
+    // console.log('rows ===', rows);
+
     await conn.end();
     console.log('connection ended');
     res.json(rows);
@@ -96,8 +114,8 @@ postsRouter.get('/posts/author/:author?', async (req, res) => {
     console.log('connection ended');
     res.json(rows);
   } catch (error) {
-    console.error('error in getting posts from DB', error);
-    res.status(500).json('something went wrong');
+    console.error('Error in getting posts from DB', error);
+    res.status(500).json('Something went wrong');
   }
 });
 
@@ -128,13 +146,18 @@ postsRouter.post('/posts', async (req, res) => {
 
     if (insertResult.affectedRows === 1) {
       console.log(insertResult);
-      res.status(201).json(insertResult);
+      res.status(201).json({ success: true }); // 201 Created
       return;
     }
-    throw new Error('affected row not 1');
+    if (insertResult.affectedRows === 0) {
+      console.log(insertResult);
+      res.status(400).json({ success: false, error: "Post wasn't created" }); // 400 Bad Request
+      return;
+    }
+    throw new Error('Unable to create new post');
   } catch (error) {
-    console.error('error in creating new post', error);
-    res.sendStatus(500);
+    console.error(error);
+    res.status(500).json('Unable to create new post'); // 500 Internal Server Error
   } finally {
     await conn?.end(); // if (conn) await conn.end();
     console.log('connection ended');
