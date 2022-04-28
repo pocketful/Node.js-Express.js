@@ -18,8 +18,8 @@ postsRouter.get('/posts', async (req, res) => {
     res.json(rows);
     // res.json(result[0]);
   } catch (error) {
-    console.error('error in getting posts from DB', error);
-    res.status(500).json('something went wrong');
+    console.error('Unable to get posts from DB', error);
+    res.status(500).json('Something went wrong');
     // } finally {
     //   await conn?.end();
     //   // if (conn) await conn.end();
@@ -32,13 +32,13 @@ postsRouter.get('/posts/first-posts', async (req, res) => {
     console.log('connection opened');
     const sql = 'SELECT * FROM `posts` LIMIT 2';
     const [rows] = await conn.query(sql);
-    console.log('rows ===', rows);
+    // console.log('rows ===', rows);
     await conn.end();
     console.log('connection ended');
     res.json(rows);
   } catch (error) {
-    console.error('error in getting posts from DB', error);
-    res.status(500).json('something went wrong');
+    console.error('Unable to get posts from DB', error);
+    res.status(500).json('Something went wrong');
   }
 });
 
@@ -49,30 +49,24 @@ postsRouter.get('/posts/posts-by-rating/', async (req, res) => {
     console.log('connection opened');
     console.log('req.query ===', req.query); // { order: 'ASC', limit: '5' }
     console.log('req.params ===', req.query.order); // ASC
-    // console.log('req.params ===', req.query.limit); // 5
     const { order } = req.query;
-    // const { limit } = req.query;
 
     // const safeOrder = mysql.escape(order); // no need for execute after this
     // const ascOrDesc = safeOrder === 'ASC' ? 'ASC' : 'DESC';
+    // console.log('sql ===', sql);
     // console.log('order ===', order); // ASC
     // console.log('safeOrder ===', safeOrder); // 'ASC'
     // console.log('safeOrder === ASC', safeOrder === 'ASC'); // ASC false ?
 
     const sql = `SELECT * FROM posts ORDER BY rating ${order === 'ASC' ? 'ASC' : 'DESC'}`;
-    console.log('sql ===', sql);
     const [rows] = await conn.query(sql);
-
-    // const sql = 'SELECT * FROM posts ORDER BY rating DESC';
-    // const [rows] = await conn.query(sql);
-    // console.log('rows ===', rows);
 
     await conn.end();
     console.log('connection ended');
     res.json(rows);
   } catch (error) {
-    console.error('error in getting posts from DB', error);
-    res.status(500).json('something went wrong');
+    console.error('Unable to get posts from DB', error);
+    res.status(500).json('Something went wrong');
   }
 });
 
@@ -92,8 +86,8 @@ postsRouter.get('/posts/author/:author', async (req, res) => {
     console.log('connection ended');
     res.json(rows);
   } catch (error) {
-    console.error('error in getting posts from DB', error);
-    res.status(500).json('something went wrong');
+    console.error('Unable to get posts from DB', error);
+    res.status(500).json('Something went wrong');
   }
 });
 
@@ -158,6 +152,36 @@ postsRouter.post('/posts', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json('Unable to create new post'); // 500 Internal Server Error
+  } finally {
+    await conn?.end(); // if (conn) await conn.end();
+    console.log('connection ended');
+  }
+});
+
+/* DELETE --------------------------------------------------------------------------------- */
+postsRouter.delete('/posts/:postId', async (req, res) => {
+  let conn;
+  try {
+    conn = await mysql.createConnection(dbConfig);
+    console.log('connection opened');
+    const { postId } = req.params;
+    const sql = 'DELETE FROM posts WHERE id = ?';
+    const [deleteResult] = await conn.execute(sql, [postId]);
+    if (deleteResult.affectedRows === 1) {
+      console.log(deleteResult);
+      res.status(200).json({ success: true }); // 200 OK
+      return;
+    }
+    if (deleteResult.affectedRows === 0) {
+      console.log(deleteResult);
+      res.status(400).json({ success: false, error: "Post wasn't found" }); // 400 Bad Request
+      return;
+    }
+    throw new Error('Unable to delete a post'); // to catch block
+  } catch (error) {
+    console.error(error);
+    res.status(500).json('Unable to delete a post');
+    // res.sendStatus(500); // 500 Internal Server Error
   } finally {
     await conn?.end(); // if (conn) await conn.end();
     console.log('connection ended');
