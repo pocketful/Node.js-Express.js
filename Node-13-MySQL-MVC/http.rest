@@ -1,0 +1,27 @@
+###
+GET http://localhost:3000/api/posts
+
+###
+GET http://localhost:3000/api/posts/first-posts
+
+###
+GET http://localhost:3000/api/posts/posts-by-rating
+
+###
+GET http://localhost:3000/api/posts/posts-by-rating?order=ASC&limit=5
+
+###
+GET http://localhost:3000/api/posts/author/Hermione
+
+###
+POST http://localhost:3000/api/posts/
+Content-Type: application/json
+
+{
+  "author": "Petunia",
+  "title": "Post 17",
+  "body": "Body of post 17",
+  "rating": 4
+}
+###
+DELETE http://localhost:3000/api/posts/19
