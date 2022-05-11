@@ -9,7 +9,7 @@ async function addUserToDb(email, password) {
     console.log('connection opened');
     const sql = 'INSERT INTO users (email, password) VALUES (?, ?)';
     const [result] = await conn.execute(sql, [email, password]);
-    console.log('result ===', result);
+    // console.log('result ===', result);
     // console.log("when error this won't run");
     return result;
   } catch (error) {
