@@ -2,8 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
-
-const PORT = 3000;
+const { PORT } = require('./config');
+const { addUserToDb } = require('./models/userModel');
 
 const app = express();
 
@@ -68,7 +68,7 @@ app.get('/users', (req, res) => {
 });
 
 // app.post('/register', showBody, (req, res) => { // if with showBody
-app.post('/register', (req, res) => {
+app.post('/register', async (req, res) => {
   const { email, password } = req.body;
   // longer way
   // const salt = bcrypt.genSaltSync(10); // default 10
@@ -76,12 +76,21 @@ app.post('/register', (req, res) => {
   // console.log('salt ===', salt);
   const hashedPass = bcrypt.hashSync(password, 10);
   console.log('hashedPass ===', hashedPass);
+
   const newUser = {
     email,
     password: hashedPass,
   };
-  users.push(newUser);
-  res.status(201).json(newUser);
+
+  const insertResult = await addUserToDb(newUser.email, newUser.password);
+  console.log('insertResult ===', insertResult);
+
+  if (!insertResult) {
+    res.status(500).json('something went wrong');
+    return;
+  }
+  res.status(201).json('user created');
+  // users.push(newUser);
   console.log('users ===', users);
 });
 
