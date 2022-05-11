@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const bcrypt = require('bcryptjs');
 
 const PORT = 3000;
 
@@ -59,9 +60,15 @@ app.get('/users', (req, res) => {
 // app.post('/register', showBody, (req, res) => { // if with showBody
 app.post('/register', (req, res) => {
   const { email, password } = req.body;
+  // longer way
+  // const salt = bcrypt.genSaltSync(10); // default 10
+  // const hashedPass = bcrypt.hashSync(password, salt);
+  // console.log('salt ===', salt);
+  const hashedPass = bcrypt.hashSync(password, 10);
+  console.log('hashedPass ===', hashedPass);
   const newUser = {
     email,
-    password,
+    password: hashedPass,
   };
   users.push(newUser);
   res.status(201).json(newUser);
