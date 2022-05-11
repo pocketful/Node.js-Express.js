@@ -45,8 +45,18 @@ app.post('/login', (req, res) => {
     res.status(400).json({ error: 'Email or password not found (test:email)' });
     return;
   }
-  // if exists then check if passwords match
-  if (foundUser.password !== passwordReceived) {
+
+  // when pass not encrypted:
+  // if email exists then check if passwords match
+  // if (foundUser.password !== passwordReceived) {
+  //   res.status(400).json({ error: 'Email or password not found (test:pass)' });
+  //   return;
+  // }
+
+  // if email exists then check if passwords match
+  // load hash from your password DB
+  // bcrypt.compareSync('pass input', 'saved hashed pass'); // true false
+  if (!bcrypt.compareSync(passwordReceived, foundUser.password)) {
     res.status(400).json({ error: 'Email or password not found (test:pass)' });
     return;
   }
