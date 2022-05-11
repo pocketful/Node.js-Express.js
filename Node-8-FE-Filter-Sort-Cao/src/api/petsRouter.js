@@ -69,7 +69,7 @@ petsRouter.get('/pets/sort-age/:sortOrder', async (req, res) => {
 
 /* Cao:
 petsRouter.get('/pets/:types/:sortOrder?' // ? - optional parameter
-sort({ age: req.params.sortOrder?.toLowerCase() === 'dsc' ? -1 : 1 }).toArray();
+sort({ age: req.params.sortOrder?.toLowerCase() === 'desc' ? -1 : 1 }).toArray();
 find({ type: { $in: req.params.types?.split(',') } });
 */
 // GET by types, sort
