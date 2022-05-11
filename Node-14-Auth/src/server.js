@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const { PORT } = require('./config');
-const { addUserToDb } = require('./models/userModel');
+const { addUserToDb, findUserByEmail } = require('./models/userModel');
 
 const app = express();
 
@@ -17,7 +17,6 @@ const users = [
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());
-app.use(showBody);
 
 // Middleware helper showBody
 function showBody(req, res, next) {
@@ -26,6 +25,8 @@ function showBody(req, res, next) {
   }
   next();
 }
+
+app.use(showBody);
 
 // app.post('*', (req, res, next) => {
 //   console.log('req.body ===', req.body);
@@ -36,11 +37,14 @@ app.get('/', (req, res) => {
   res.json('ok');
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   const emailReceived = req.body.email;
   const passwordReceived = req.body.password;
   // check if email exists
-  const foundUser = users.find((userObj) => userObj.email === emailReceived);
+  const foundUser = await findUserByEmail(emailReceived);
+  console.log('foundUser ===', foundUser);
+  // const foundUser = users.find((userObj) => userObj.email === emailReceived); // with temp array db
+
   if (!foundUser) {
     res.status(400).json({ error: 'Email or password not found (test:email)' });
     return;
