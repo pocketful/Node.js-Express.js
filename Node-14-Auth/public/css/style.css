@@ -1,0 +1,31 @@
+.page-container {
+  max-width: 1000px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.text__title {
+  text-align: center;
+  color: darkcyan;
+  background-color: lightcyan;
+  border-radius: 4px;
+  padding: 2%;
+}
+
+.feedback {
+  color: red;
+}
+
+@media screen and (max-width: 460px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+}

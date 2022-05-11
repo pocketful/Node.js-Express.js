@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <title>Users</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+    <div class="page-container">
+        <h1 class="text__title">Users</h1>
+
+        <main class="container">
+            <section class="form-login">
+                <h2 class="login-title">Login</h2>
+                <form id="formLogin" autocomplete="off">
+                    <div class="fLogin__email fLogin">
+                        <label for="email">Email<span class="req-star"> *</span></label>
+                        <input type="text" id="email" name="email" placeholder="Email" value="petunia@email.com">
+                    </div>
+                    <div class="fLogin__password fLogin">
+                        <label for="password">Your password<span class="req-star"> *</span></label>
+                        <input type="text" id="password" name="password" placeholder="Password" value="123456">
+                    </div>
+                    <button class="btn btn-add" type="submit">Login</button>
+                </form>
+                <div class="feedback" id="feedback-login"></div>
+            </section>
+
+            <section class="form-register">
+                <h2 class="register-title">Register</h2>
+                <form id="formRegister" autocomplete="off">
+                    <div class="fRegister__email fRegister">
+                        <label for="email">Email<span class="req-star"> *</span></label>
+                        <input type="text" id="email" name="email" placeholder="Email" value="petunia@email.com">
+                    </div>
+                    <div class="fRegister__password fRegister">
+                        <label for="password">Your password<span class="req-star"> *</span></label>
+                        <input type="text" id="password" name="password" placeholder="Password" value="123456">
+                    </div>
+                    <button class="btn btn-add" type="submit">Register</button>
+                </form>
+                <div class="feedback" id="feedback-register"></div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
