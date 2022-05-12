@@ -1,11 +1,12 @@
 const express = require('express');
 const findUserByEmail = require('../controller/loginController');
+const { validateUser } = require('../middlewares');
 // const bcrypt = require('bcryptjs');
 // const findUserByEmailDB = require('../models/loginModel');
 
 const loginRouter = express.Router();
 
-loginRouter.post('/login', findUserByEmail);
+loginRouter.post('/login', validateUser, findUserByEmail);
 
 // loginRouter.post('/login', async (req, res) => {
 //   const emailReceived = req.body.email;

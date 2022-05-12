@@ -2,7 +2,7 @@ const BASE_URL = 'http://localhost:3000/api';
 const { formLogin } = document.forms;
 const { formRegister } = document.forms;
 
-function feedback(output, message) {
+function feedback(output, message, form) {
   const dest = document.getElementById(output);
   dest.innerHTML = '';
   // if (output === 'password2') {
@@ -16,7 +16,9 @@ function feedback(output, message) {
   }
   if (Array.isArray(message)) {
     message.forEach((errObj) => {
-      document.getElementById(errObj.path).nextElementSibling.textContent = errObj.message;
+      // document.getElementById(errObj.path).nextElementSibling.textContent = errObj.message;
+      const input = document.querySelector(`#${form} > * > #${errObj.path}`); // #formLogin > * > #email
+      input.nextElementSibling.textContent = errObj.message;
       // dest.innerHTML += `* ${errObj.message}<br>`;
     });
   }
@@ -36,10 +38,10 @@ async function registerUser(newRegisterObj) {
     const data = await resp.json();
     console.log('data ===', data);
     if (resp.ok) {
-      feedback('feedback-register', data.message);
+      feedback('feedback-register', data.message, 'formRegister');
       formRegister.reset();
     } else {
-      feedback('feedback-register', data.message);
+      feedback('feedback-register', data.message, 'formRegister');
     }
   } catch (error) {
     console.log('error ===', error);
@@ -59,18 +61,18 @@ async function loginUser(newLoginObj) {
   const data = await resp.json();
   console.log('data ===', data);
   if (resp.ok) {
-    feedback('feedback-login', data.message);
+    feedback('feedback-login', data.message, 'formLogin');
     formLogin.reset();
   } else {
-    feedback('feedback-login', data.message);
+    feedback('feedback-login', data.message, 'formLogin');
   }
 }
 
 formLogin.addEventListener('submit', (event) => {
   event.preventDefault();
   const newLoginObj = {
-    email: formLogin.emailLog.value.trim(),
-    password: formLogin.passwordLog.value.trim(),
+    email: formLogin.email.value.trim(),
+    password: formLogin.password.value.trim(),
   };
   loginUser(newLoginObj);
 });
