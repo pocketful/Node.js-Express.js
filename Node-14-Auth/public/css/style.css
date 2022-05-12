@@ -12,10 +12,14 @@
 
 .text__title {
   text-align: center;
-  color: darkcyan;
-  background-color: lightcyan;
+  color: steelblue;
+  background-color: whitesmoke;
   border-radius: 4px;
   padding: 2%;
+}
+
+.req-star {
+  color: red;
 }
 
 .feedback {

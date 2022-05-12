@@ -1,9 +1,9 @@
 const bcrypt = require('bcryptjs');
-const addUserToDB = require('../models/registerModel');
 const Joi = require('joi');
+const addUserToDB = require('../models/registerModel');
 
+// eslint-disable-next-line consistent-return
 async function addUser(req, res) {
-  console.log('addUser controller ran');
   // const { email, password } = req.body;
   let userData = req.body;
 
@@ -18,19 +18,18 @@ async function addUser(req, res) {
     userData = await userSchema.validateAsync(userData);
   } catch (err) {
     console.log(err);
-    return res.status(400).json('Incorrect data passed');
+    return res.status(400).json({ success: false, message: 'Incorrect data passed' });
   }
-  console.log('userData ===', userData);
 
   try {
     const hashedPass = bcrypt.hashSync(userData.password, 10);
     console.log('hashedPass ===', hashedPass);
-    const insertResult = await addUserToDB(userData.email, userData.password);
+    const insertResult = await addUserToDB(userData.email, hashedPass);
     console.log('insertResult ===', insertResult);
-    res.status(201).json('user created');
+    res.status(201).json({ success: true, message: 'New user successfully created' });
   } catch (err) {
     console.log('err controller', err);
-    return res.status(500).json('something went wrong');
+    return res.status(500).json({ success: false, message: 'Something went wrong' });
   }
 }
 

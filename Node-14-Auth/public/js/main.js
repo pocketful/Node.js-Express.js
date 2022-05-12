@@ -8,70 +8,70 @@ function feedback(output, message) {
   dest.textContent = message;
 }
 
-async function registerUser(email, password) {
-  const newPostObj = {
-    email,
-    password,
-  };
-  console.log('newPostObj ===', newPostObj);
+async function registerUser(newRegisterObj) {
+  console.log('newRegisterObj ===', newRegisterObj);
   try {
     const resp = await fetch(`${BASE_URL}/register`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify(newPostObj),
+      body: JSON.stringify(newRegisterObj),
     });
     console.log('response ===', resp);
     const data = await resp.json();
     console.log('data ===', data);
     if (resp.ok) {
-      feedback('feedback-register', data);
+      feedback('feedback-register', data.message);
       formRegister.reset();
     } else {
-      feedback('feedback-register', data);
+      feedback('feedback-register', data.message);
     }
   } catch (error) {
     console.log('error ===', error);
   }
 }
 
-async function loginUser(email, password) {
-  const newPostObj = {
-    email,
-    password,
-  };
-  console.log('newPostObj ===', newPostObj);
+async function loginUser(newLoginObj) {
+  console.log('newLoginObj ===', newLoginObj);
   const resp = await fetch(`${BASE_URL}/login`, {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
     },
-    body: JSON.stringify(newPostObj),
+    body: JSON.stringify(newLoginObj),
   });
   console.log('resp ===', resp);
   const data = await resp.json();
   console.log('data ===', data);
   if (resp.ok) {
-    feedback('feedback-login', data);
+    feedback('feedback-login', data.message);
     formLogin.reset();
   } else {
-    feedback('feedback-login', data.error);
+    feedback('feedback-login', data.message);
   }
 }
 
 formLogin.addEventListener('submit', (event) => {
   event.preventDefault();
-  const emailVal = formLogin.email.value.trim();
-  const passwordVal = formLogin.password.value.trim();
-  console.log(emailVal, passwordVal);
-  loginUser(emailVal, passwordVal);
+  const newLoginObj = {
+    email: formLogin.email.value.trim(),
+    password: formLogin.password.value.trim(),
+  };
+  loginUser(newLoginObj);
 });
 
 formRegister.addEventListener('submit', (event) => {
   event.preventDefault();
-  const emailVal = formRegister.email.value.trim();
-  const passwordVal = formRegister.password.value.trim();
-  console.log(emailVal, passwordVal);
-  registerUser(emailVal, passwordVal);
+  const password = formRegister.password.value.trim();
+  const password2 = formRegister.password2.value.trim();
+  if (password === password2) {
+    const newRegisterObj = {
+      email: formRegister.email.value.trim(),
+      password,
+    };
+    registerUser(newRegisterObj);
+  } else {
+    feedback('feedback-register', "Passwords does't match");
+  }
 });

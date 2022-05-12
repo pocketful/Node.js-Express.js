@@ -2,7 +2,6 @@ const mysql = require('mysql2/promise');
 const { dbConfig } = require('../config');
 
 async function addUserToDB(email, password) {
-  console.log('addUserToDb model ran');
   let conn;
   try {
     conn = await mysql.createConnection(dbConfig);
@@ -11,7 +10,7 @@ async function addUserToDB(email, password) {
     // const [result] = await conn.execute(`INSERT INTO users (email, password) VALUES (${mysql.escape(email)}, ${mysql.escape(password)})`);));
     // const [result] = await conn.execute(`INSERT INTO users (email, password) VALUES (${mysql.escape(email)}, '${password}')`);
     const [result] = await conn.execute(sql, [email, password]);
-    console.log('result ===', result);
+    // console.log('result ===', result);
     // console.log("when error this won't run");
     return result;
   } catch (error) {

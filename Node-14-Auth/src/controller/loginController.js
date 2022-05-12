@@ -8,17 +8,17 @@ async function findUserByEmail(req, res) {
   const foundUser = await findUserByEmailDB(emailReceived);
   console.log('foundUser ===', foundUser);
   if (!foundUser) {
-    res.status(400).json({ error: 'Email or password not found (test:email)' });
+    res.status(400).json({ success: false, message: 'Email or password not found' });
     return;
   }
   // if email exists then check if passwords match
   // load hash from your password DB
   // bcrypt.compareSync('pass input', 'saved hashed pass'); // true false
   if (!bcrypt.compareSync(passwordReceived, foundUser.password)) {
-    res.status(400).json({ error: 'Email or password not found (test:pass)' });
+    res.status(400).json({ success: false, message: 'Email or password not found' });
     return;
   }
-  res.json('login success');
+  res.json({ success: true, message: 'Login success' });
 }
 
 module.exports = findUserByEmail;
