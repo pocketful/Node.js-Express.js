@@ -4,6 +4,7 @@ const cors = require('cors');
 const { PORT } = require('./config');
 const registerRouter = require('./routes/registerRouter');
 const loginRouter = require('./routes/loginRouter');
+const literatureRouter = require('./routes/literatureRouter');
 // const bcrypt = require('bcryptjs');
 // const { addUserToDb, findUserByEmail } = require('./models/userModel');
 
@@ -74,6 +75,7 @@ app.get('/', (req, res) => {
 
 app.use('/api', registerRouter);
 app.use('/api', loginRouter);
+app.use('/api', literatureRouter);
 
 // // app.post('/register', showBody, (req, res) => { // if with showBody
 // app.post('/register', async (req, res) => {
