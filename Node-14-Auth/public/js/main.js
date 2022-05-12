@@ -5,12 +5,19 @@ const { formRegister } = document.forms;
 function feedback(output, message) {
   const dest = document.getElementById(output);
   dest.innerHTML = '';
+  // if (output === 'password2') {
+  //   dest.nextElementSibling.textContent = '';
+  //   dest.nextElementSibling.textContent = message;
+  // } else {
+  //   dest.innerHTML = '';
+  // }
   if (typeof message === 'string') {
     dest.textContent = message;
   }
   if (Array.isArray(message)) {
     message.forEach((errObj) => {
-      dest.innerHTML += `* ${errObj.message}<br>`;
+      document.getElementById(errObj.path).nextElementSibling.textContent = errObj.message;
+      // dest.innerHTML += `* ${errObj.message}<br>`;
     });
   }
 }
@@ -62,23 +69,23 @@ async function loginUser(newLoginObj) {
 formLogin.addEventListener('submit', (event) => {
   event.preventDefault();
   const newLoginObj = {
-    email: formLogin.email.value.trim(),
-    password: formLogin.password.value.trim(),
+    email: formLogin.emailLog.value.trim(),
+    password: formLogin.passwordLog.value.trim(),
   };
   loginUser(newLoginObj);
 });
 
 formRegister.addEventListener('submit', (event) => {
   event.preventDefault();
-  const password = formRegister.password.value.trim();
-  const password2 = formRegister.password2.value.trim();
-  if (password === password2) {
-    const newRegisterObj = {
-      email: formRegister.email.value.trim(),
-      password,
-    };
+  const newRegisterObj = {
+    email: formRegister.email.value.trim(),
+    password: formRegister.password.value.trim(),
+    password2: formRegister.password2.value.trim(),
+  };
+  if (newRegisterObj.password === newRegisterObj.password2) {
     registerUser(newRegisterObj);
   } else {
-    feedback('feedback-register', "Passwords does't match");
+    // feedback('password2', "Passwords does't match.");
+    document.getElementById('password2').nextElementSibling.textContent = "Passwords does't match";
   }
 });

@@ -12,20 +12,23 @@
 </head>
 
 <body>
+    <h1 class="text__title">Users</h1>
+    
     <div class="page-container">
-        <h1 class="text__title">Users</h1>
 
         <main class="container">
             <section class="form-login">
                 <h2 class="login-title">Login</h2>
                 <form id="formLogin" autocomplete="off">
                     <div class="fLogin__email fLogin">
-                        <label for="email">Email<span class="req-star"> *</span></label>
-                        <input type="text" id="email" name="email" placeholder="Email" value="petunia@email.com">
+                        <label for="emailLog">Email<span class="req-star"> *</span></label>
+                        <input type="text" id="emailLog" name="emailLog" placeholder="Email" value="petunia@email.com">
+                        <span class="fLog__emailLog-err err"></span>
                     </div>
                     <div class="fLogin__password fLogin">
-                        <label for="password">Your password<span class="req-star"> *</span></label>
-                        <input type="password" id="password" name="password" placeholder="Password" value="123456">
+                        <label for="passwordLog">Your password<span class="req-star"> *</span></label>
+                        <input type="password" id="passwordLog" name="passwordLog" placeholder="Password" value="123456">
+                        <span class="fLog__passwordLog-err err"></span>
                     </div>
                     <button class="btn btn-add" type="submit">Login</button>
                 </form>
@@ -38,14 +41,17 @@
                     <div class="fRegister__email fRegister">
                         <label for="email">Email<span class="req-star"> *</span></label>
                         <input type="text" id="email" name="email" placeholder="Email" value="petunia@email.com">
+                        <span class="fReg__email-err err"></span>
                     </div>
                     <div class="fRegister__password fRegister">
                         <label for="password">Enter password<span class="req-star"> *</span></label>
-                        <input type="password" id="password" name="password" placeholder="Password" value="123456">
+                        <input type="password" id="password" name="password" placeholder="Password" value="1231456">
+                        <span class="fReg__password-err err"></span> 
                     </div>
                     <div class="fRegister__password fRegister">
                         <label for="password2">Confirm password<span class="req-star"> *</span></label>
                         <input type="password" id="password2" name="password2" placeholder="Password" value="123456">
+                        <span class="fReg__password2-err err"></span>  
                     </div>
                     <button class="btn btn-add" type="submit">Register</button>
                 </form>

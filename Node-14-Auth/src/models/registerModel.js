@@ -5,7 +5,6 @@ async function addUserToDB(email, password) {
   let conn;
   try {
     conn = await mysql.createConnection(dbConfig);
-    console.log('connection opened');
     const sql = 'INSERT INTO users (email, password) VALUES (?, ?)';
     // const [result] = await conn.execute(`INSERT INTO users (email, password) VALUES (${mysql.escape(email)}, ${mysql.escape(password)})`);));
     // const [result] = await conn.execute(`INSERT INTO users (email, password) VALUES (${mysql.escape(email)}, '${password}')`);
@@ -14,7 +13,7 @@ async function addUserToDB(email, password) {
     // console.log("when error this won't run");
     return result;
   } catch (error) {
-    console.log('error addUserToDb model', error);
+    console.log('error in model:', error);
     throw error;
   } finally {
     conn?.end();

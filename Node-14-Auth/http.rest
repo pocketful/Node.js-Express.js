@@ -9,8 +9,9 @@ POST http://localhost:3000/api/register
 Content-Type: application/json
 
 {
-  "email": "petunia6@email.com",
-  "password": "123456"
+  "email": "petunia@email.com",
+  "password": "123456",
+  "password2": "123456"
 }
 ###
 
@@ -18,7 +19,7 @@ POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
-  "email": "petunia6@email.com",
+  "email": "petunia2@email.com",
   "password": "123456"
 }
 ###
