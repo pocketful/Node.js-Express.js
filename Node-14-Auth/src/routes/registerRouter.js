@@ -1,11 +1,12 @@
 const express = require('express');
 const addUser = require('../controller/registerController');
+const { validateUser } = require('../middlewares');
 // const bcrypt = require('bcryptjs');
 // const addUserToDB = require('../models/registerModel');
 
 const registerRouter = express.Router();
 
-registerRouter.post('/register', addUser);
+registerRouter.post('/register', validateUser, addUser);
 
 // registerRouter.post('/register', async (req, res) => {
 //   const { email, password } = req.body;

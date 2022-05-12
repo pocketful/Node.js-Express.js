@@ -5,7 +5,14 @@ const { formRegister } = document.forms;
 function feedback(output, message) {
   const dest = document.getElementById(output);
   dest.innerHTML = '';
-  dest.textContent = message;
+  if (typeof message === 'string') {
+    dest.textContent = message;
+  }
+  if (Array.isArray(message)) {
+    message.forEach((errObj) => {
+      dest.innerHTML += `* ${errObj.message}<br>`;
+    });
+  }
 }
 
 async function registerUser(newRegisterObj) {

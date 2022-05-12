@@ -10,25 +10,24 @@ const loginRouter = require('./routes/loginRouter');
 const app = express();
 
 // temp db
-const users = [
-  { id: 1, email: 'hermione@email.com', password: '123456' },
-  { id: 2, email: 'harry@email.com', password: '654321' },
-];
+// const users = [
+//   { id: 1, email: 'hermione@email.com', password: '123456' },
+//   { id: 2, email: 'harry@email.com', password: '654321' },
+// ];
 
 // Middleware
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());
 
-// Middleware helper showBody
-function showBody(req, res, next) {
-  if (req.method === 'POST') {
-    console.log('req.body ===', req.body);
-  }
-  next();
-}
-
-app.use(showBody);
+// // Middleware helper showBody
+// function showBody(req, res, next) {
+//   if (req.method === 'POST') {
+//     console.log('req.body ===', req.body);
+//   }
+//   next();
+// }
+// app.use(showBody);
 
 // app.post('*', (req, res, next) => {
 //   console.log('req.body ===', req.body);
@@ -69,9 +68,9 @@ app.get('/', (req, res) => {
 //   res.json('login success');
 // });
 
-app.get('/users', (req, res) => {
-  res.json(users);
-});
+// app.get('/users', (req, res) => {
+//   res.json(users);
+// });
 
 app.use('/api', registerRouter);
 app.use('/api', loginRouter);

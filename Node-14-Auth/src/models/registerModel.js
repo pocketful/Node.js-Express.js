@@ -15,7 +15,6 @@ async function addUserToDB(email, password) {
     return result;
   } catch (error) {
     console.log('error addUserToDb model', error);
-    // return false;
     throw error;
   } finally {
     conn?.end();
