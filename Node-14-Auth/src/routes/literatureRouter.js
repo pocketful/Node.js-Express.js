@@ -1,5 +1,7 @@
 const express = require('express');
-const { getBooks, getBooksWithAuthors, addBook, getAuthorsBooksCount } = require('../controller/literatureController');
+const {
+  getBooks, getBooksWithAuthors, addBook, getAuthorsBooksCount,
+} = require('../controller/literatureController');
 
 const literatureRouter = express.Router();
 

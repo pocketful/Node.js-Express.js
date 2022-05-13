@@ -1,5 +1,7 @@
 /* eslint-disable consistent-return */
-const { getBooksFromDb, getBooksWithAuthorsFromDb, addBookToDb, getAuthorsBooksCountFromDb } = require('../models/literatureModel');
+const {
+  getBooksFromDb, getBooksWithAuthorsFromDb, addBookToDb, getAuthorsBooksCountFromDb,
+} = require('../models/literatureModel');
 
 async function getBooks(req, res) {
   try {
