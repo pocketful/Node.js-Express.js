@@ -1,6 +1,6 @@
-const { getBooksFromDb, getBooksWithAuthorsFromDb, addBookToDb } = require('../models/literatureModel');
+/* eslint-disable consistent-return */
+const { getBooksFromDb, getBooksWithAuthorsFromDb, addBookToDb, getAuthorsBooksCountFromDb } = require('../models/literatureModel');
 
-// eslint-disable-next-line consistent-return
 async function getBooks(req, res) {
   try {
     const getResult = await getBooksFromDb();
@@ -12,7 +12,6 @@ async function getBooks(req, res) {
   }
 }
 
-// eslint-disable-next-line consistent-return
 async function getBooksWithAuthors(req, res) {
   try {
     const getResult = await getBooksWithAuthorsFromDb();
@@ -23,7 +22,16 @@ async function getBooksWithAuthors(req, res) {
   }
 }
 
-// eslint-disable-next-line consistent-return
+async function getAuthorsBooksCount(req, res) {
+  try {
+    const getResult = await getAuthorsBooksCountFromDb();
+    res.json(getResult);
+  } catch (err) {
+    console.log('Unable to get authors with books count:', err);
+    return res.status(500).json({ success: false, message: 'Something went wrong.' });
+  }
+}
+
 async function addBook(req, res) {
   try {
     const insertResult = await addBookToDb(req.body);
@@ -42,4 +50,5 @@ module.exports = {
   getBooks,
   getBooksWithAuthors,
   addBook,
+  getAuthorsBooksCount,
 };

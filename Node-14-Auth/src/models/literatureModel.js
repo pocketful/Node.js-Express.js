@@ -43,6 +43,14 @@ async function getBooksWithAuthorsFromDb() {
   return getArrayFromDb(sql);
 }
 
+async function getAuthorsBooksCountFromDb() {
+  const sql = `SELECT authors.name, authors.surname, COUNT(books.id) AS 'books_count' FROM authors 
+    LEFT JOIN books 
+    ON books.author_id = authors.id 
+    GROUP BY authors.id`;
+  return getArrayFromDb(sql);
+}
+
 async function addBookToDb(newBookObj) {
   const { title, year, author_id } = newBookObj;
   //   const sql = `INSERT INTO books (title, year, author_id) VALUES ("Philosopher's Stone", 1997, 5)`;
@@ -54,4 +62,5 @@ module.exports = {
   getBooksFromDb,
   getBooksWithAuthorsFromDb,
   addBookToDb,
+  getAuthorsBooksCountFromDb,
 };
