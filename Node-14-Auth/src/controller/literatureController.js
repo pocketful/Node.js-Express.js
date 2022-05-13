@@ -1,12 +1,9 @@
-const { getBooksFromDb, getBooksWithAuthorsFromDb } = require('../models/literatureModel');
+const { getBooksFromDb, getBooksWithAuthorsFromDb, addBookToDb } = require('../models/literatureModel');
 
 // eslint-disable-next-line consistent-return
 async function getBooks(req, res) {
   try {
     const getResult = await getBooksFromDb();
-    // console.log('getResult ===', getResult);
-    // res.status(200).json({ success: true, message: 'Your result.' });
-    // res.status(200).json(getResult);
     res.json(getResult);
   } catch (err) {
     console.log('Unable to get books:', err);
@@ -22,7 +19,21 @@ async function getBooksWithAuthors(req, res) {
     res.json(getResult);
   } catch (err) {
     console.log('Unable to get books with authors:', err);
-    // console.log('Error:', err.stack);
+    return res.status(500).json({ success: false, message: 'Something went wrong.' });
+  }
+}
+
+// eslint-disable-next-line consistent-return
+async function addBook(req, res) {
+  try {
+    const insertResult = await addBookToDb(req.body);
+    console.log('insertResult:', insertResult);
+    res.status(201).json({ success: true, message: 'New book added successfully.' });
+  } catch (err) {
+    console.log('err adding new book:', err);
+    if (err.errno === 1054) {
+      return res.status(400).json({ success: false, message: 'Bad request.' });
+    }
     return res.status(500).json({ success: false, message: 'Something went wrong.' });
   }
 }
@@ -30,4 +41,5 @@ async function getBooksWithAuthors(req, res) {
 module.exports = {
   getBooks,
   getBooksWithAuthors,
+  addBook,
 };
