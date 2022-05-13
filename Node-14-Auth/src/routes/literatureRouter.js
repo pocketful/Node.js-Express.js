@@ -1,9 +1,10 @@
 const express = require('express');
-const getBooks = require('../controller/literatureController');
+const { getBooks, getBooksWithAuthors } = require('../controller/literatureController');
 
 const literatureRouter = express.Router();
 
 literatureRouter.get('/books', getBooks);
+literatureRouter.get('/books-authors', getBooksWithAuthors);
 
 // literatureRouter.get('/authors', async (req, res) => {
 //   let conn;
