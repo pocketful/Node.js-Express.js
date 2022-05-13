@@ -3,14 +3,18 @@ const { formLogin } = document.forms;
 const { formRegister } = document.forms;
 
 function feedback(output, message, form) {
+  // eslint-disable-next-line no-return-assign
+  document.querySelectorAll('.err').forEach((err) => (err.textContent = ''));
   const dest = document.getElementById(output);
-  dest.innerHTML = '';
+  // dest.innerHTML = '';
+
   // if (output === 'password2') {
   //   dest.nextElementSibling.textContent = '';
   //   dest.nextElementSibling.textContent = message;
   // } else {
   //   dest.innerHTML = '';
   // }
+
   if (typeof message === 'string') {
     dest.textContent = message;
   }
@@ -18,6 +22,7 @@ function feedback(output, message, form) {
     message.forEach((errObj) => {
       // document.getElementById(errObj.path).nextElementSibling.textContent = errObj.message;
       const input = document.querySelector(`#${form} > * > #${errObj.path}`); // #formLogin > * > #email
+      // input.nextElementSibling.innerHTML = '';
       input.nextElementSibling.textContent = errObj.message;
       // dest.innerHTML += `* ${errObj.message}<br>`;
     });
@@ -34,7 +39,7 @@ async function registerUser(newRegisterObj) {
       },
       body: JSON.stringify(newRegisterObj),
     });
-    console.log('response ===', resp);
+    // console.log('response ===', resp);
     const data = await resp.json();
     console.log('data ===', data);
     if (resp.ok) {
@@ -57,12 +62,16 @@ async function loginUser(newLoginObj) {
     },
     body: JSON.stringify(newLoginObj),
   });
-  console.log('resp ===', resp);
+  // console.log('resp ===', resp);
   const data = await resp.json();
   console.log('data ===', data);
   if (resp.ok) {
+    // save token to localStorage
+    localStorage.setItem('userToken', data.token);
+
     feedback('feedback-login', data.message, 'formLogin');
     formLogin.reset();
+    // window.location.href = 'index.html';
   } else {
     feedback('feedback-login', data.message, 'formLogin');
   }
@@ -87,7 +96,9 @@ formRegister.addEventListener('submit', (event) => {
   if (newRegisterObj.password === newRegisterObj.password2) {
     registerUser(newRegisterObj);
   } else {
+    document.querySelector('.password2-err').textContent = "Passwords does't match";
     // feedback('password2', "Passwords does't match.");
-    document.getElementById('password2').nextElementSibling.textContent = "Passwords does't match";
+    // const password2err = document.getElementById('password2').nextElementSibling;
+    // password2err.textContent = "Passwords does't match";
   }
 });
