@@ -1,6 +1,6 @@
-import { BASE_URL } from './modules/fetch.js';
+import { getFetch } from './modules/fetch.js';
 
-console.log('books');
+const booksListEl = document.getElementById('books-list');
 
 // books only for registered users
 const token = localStorage.getItem('userToken');
@@ -11,9 +11,19 @@ if (!token) {
   window.location.replace('index.html');
 }
 
-async function getBooks() {
-  const resp = await fetch(`${BASE_URL}/books`);
-  const data = await resp.json();
-  console.log('data ===', data);
+function renderBooks(arr, dest) {
+  dest.innerHTML = '';
+  arr.forEach((bookObj) => {
+    const liEl = document.createElement('li');
+    liEl.textContent = `${bookObj.title} - ${bookObj.year}`;
+    dest.append(liEl);
+  });
 }
-getBooks();
+
+async function getBooks(userToken) {
+  const booksArr = await getFetch('books', userToken);
+  console.log('booksArr ===', booksArr);
+  renderBooks(booksArr, booksListEl);
+}
+getBooks(token);
+// render books to html
