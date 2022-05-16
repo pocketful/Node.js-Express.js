@@ -1,4 +1,6 @@
 const Joi = require('joi');
+const jwt = require('jsonwebtoken');
+const { privateKey } = require('./config');
 
 // Middleware helper showBody
 function showBody(req, res, next) {
@@ -25,7 +27,29 @@ async function validateUser(req, res, next) {
   }
 }
 
+// Token validation
+async function validateToken(req, res, next) {
+  console.log('req.headers.authorization ===', req.headers.authorization);
+  const tokenFromHeader = req.headers.authorization?.split(' ')[1];
+  console.log('tokenFromHeader ===', tokenFromHeader);
+  // token doesn't exist
+  if (!tokenFromHeader) {
+    console.log('No token');
+    return res.status(401).json({ success: false, message: 'No token' }); // 401 Unauthorized
+  }
+  // token exist
+  try {
+    const tokenPayload = await jwt.verify(tokenFromHeader, privateKey);
+    console.log('tokenPayload ===', tokenPayload);
+    next();
+  } catch (err) {
+    console.log('validateToken err:', err);
+    res.status(403).json({ success: false, message: 'No token' }); // 403 Forbidden
+  }
+}
+
 module.exports = {
   showBody,
   validateUser,
+  validateToken,
 };

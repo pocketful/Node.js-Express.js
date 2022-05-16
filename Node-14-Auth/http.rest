@@ -24,10 +24,9 @@ Content-Type: application/json
 }
 ###
 
-
-
 GET http://localhost:3000/api/books
-###
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MjY5MDQ2OCwiZXhwIjoxNjUyNjk0MDY4fQ.npDR_R6hqwMNALAXhbDKJ7y1HsLlaPcM-61gNwMUznw
+### Network > Fetxh/XHR > Books > Request Headers > Authorization
 
 POST http://localhost:3000/api/books
 Content-Type: application/json

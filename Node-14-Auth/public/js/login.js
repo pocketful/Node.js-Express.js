@@ -15,6 +15,7 @@ async function loginUser(newLoginObj) {
   // console.log('resp ===', resp);
   const data = await resp.json();
   console.log('data ===', data);
+  // res.json({ success: true, token, message: 'Login success.' });
   if (resp.ok) {
     // save token to localStorage
     localStorage.setItem('userToken', data.token);
@@ -22,9 +23,9 @@ async function loginUser(newLoginObj) {
     feedback('feedback-login', data.message);
     formLogin.reset();
 
-    // sukuria narsykles puslapiu istorijoje nauja irasa nunaviguodamas
+    // sukuria narsykles puslapiu istorijoje nauja irasa nunaviguodamas:
     // window.location.href = 'books.html';
-    // nunaviguoja, padaro kad negaletume gryzti atgal psl su back
+    // nunaviguoja, padaro kad negaletume grizti atgal i psl su back
     window.location.replace('books.html');
   } else {
     feedback('feedback-login', data.message);

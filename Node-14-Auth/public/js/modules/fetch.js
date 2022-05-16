@@ -11,9 +11,9 @@ export async function getFetch(endpoint, token) {
     // console.log('response ===', resp);
     const data = await resp.json();
     console.log('data ===', data);
-    return data;
+    return data; // return resp.json();
   } catch (error) {
-    console.log('error ===', error);
+    console.log('error getFetch ===', error);
   }
 }
 

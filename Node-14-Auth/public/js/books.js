@@ -12,11 +12,13 @@ if (!token) {
 }
 
 function renderBooks(arr, dest) {
-  dest.innerHTML = '';
+  // const booksListEl = document.getElementById('books-list'); - not pure function
+  const outputEl = dest;
+  outputEl.innerHTML = '';
   arr.forEach((bookObj) => {
     const liEl = document.createElement('li');
-    liEl.textContent = `${bookObj.title} - ${bookObj.year}`;
-    dest.append(liEl);
+    liEl.textContent = `${bookObj.title} (${bookObj.year})`;
+    outputEl.append(liEl);
   });
 }
 

@@ -1,8 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { privateKey } = require('../config');
 const findUserByEmailDB = require('../models/loginModel');
-
-const privateKey = 'secret123';
 
 async function findUserByEmail(req, res) {
   const emailReceived = req.body.email;
@@ -21,7 +20,8 @@ async function findUserByEmail(req, res) {
     res.status(400).json({ success: false, message: 'Email or password not found.' });
     return;
   }
-  // generate jwt token
+  // jwt token
+  // const payload = { userId: foundUser.id };
   const token = jwt.sign({ userId: foundUser.id }, privateKey, { expiresIn: '1h' });
   res.json({ success: true, token, message: 'Login success.' });
 }

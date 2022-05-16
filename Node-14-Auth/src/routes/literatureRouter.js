@@ -2,10 +2,11 @@ const express = require('express');
 const {
   getBooks, getBooksWithAuthors, addBook, getAuthorsBooksCount,
 } = require('../controller/literatureController');
+const { validateToken } = require('../middlewares');
 
 const literatureRouter = express.Router();
 
-literatureRouter.get('/books', getBooks);
+literatureRouter.get('/books', validateToken, getBooks);
 literatureRouter.get('/books-authors', getBooksWithAuthors);
 literatureRouter.get('/authors-count', getAuthorsBooksCount);
 literatureRouter.post('/books', addBook);
