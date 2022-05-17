@@ -1,15 +1,15 @@
-const bcrypt = require('bcryptjs');
 const { registerUserDb } = require('../models/registerModel');
+const { hashPassword } = require('../utils/helpers');
 
 async function registerUser(req, res) {
   const { email, password } = req.body;
   try {
-    const hashedPass = bcrypt.hashSync(password);
+    const hashedPass = hashPassword(password);
     const insertResult = await registerUserDb(email, hashedPass);
     console.log('insertResult:', insertResult);
     return res.status(201).json({ success: true, message: 'New user successfully created.' });
   } catch (err) {
-    console.log('err adding new user:', err);
+    console.log('error in register controller:', err);
     if (err.errno === 1054) {
       return res.status(400).json({ success: false, message: 'Bad request.' });
     }
@@ -22,6 +22,4 @@ async function registerUser(req, res) {
   }
 }
 
-module.exports = {
-  registerUser,
-};
+module.exports = registerUser;

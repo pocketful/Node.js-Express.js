@@ -1,15 +1,15 @@
 const mysql = require('mysql2/promise');
 const { dbConfig } = require('../config');
 
-async function getArticlesDb() {
+async function loginUserDb(email) {
   let conn;
   try {
     conn = await mysql.createConnection(dbConfig);
-    const sql = 'SELECT * FROM articles';
-    const [articles] = await conn.execute(sql, []);
-    return articles;
+    const sql = 'SELECT * FROM users WHERE email = ?';
+    const [foundUserArr] = await conn.execute(sql, [email]);
+    return foundUserArr[0];
   } catch (err) {
-    console.log('error in articles model:', err);
+    console.log('error in login model:', err);
     throw err;
   } finally {
     conn?.end();
@@ -17,5 +17,5 @@ async function getArticlesDb() {
 }
 
 module.exports = {
-  getArticlesDb,
+  loginUserDb,
 };
