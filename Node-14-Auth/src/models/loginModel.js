@@ -8,12 +8,10 @@ async function findUserByEmailDB(email) {
     const sql = 'SELECT * FROM users WHERE email = ?';
     const [result] = await conn.execute(sql, [email]);
     // const [result] = await conn.execute(`SELECT * FROM users WHERE email = ${mysql.escape(email)}`);
-    // console.log("when error this won't run");
     return result[0];
-  } catch (error) {
-    console.log('error in model:', error);
-    return false;
-    // throw error;
+  } catch (err) {
+    console.log('error in login model:', err);
+    throw err;
   } finally {
     conn?.end();
   }

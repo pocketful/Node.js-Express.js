@@ -8,9 +8,9 @@ async function getArrayFromDb(sql) {
     conn = await mysql.createConnection(dbConfig);
     const [result] = await conn.execute(sql, []);
     return result;
-  } catch (error) {
-    console.log('error in model:', error);
-    throw error;
+  } catch (err) {
+    console.log('error in literature model:', err);
+    throw err;
   } finally {
     conn?.end();
   }
@@ -22,9 +22,9 @@ async function executeDb(sql, dataToDbArr) {
     conn = await mysql.createConnection(dbConfig);
     const [result] = await conn.execute(sql, dataToDbArr);
     return result;
-  } catch (error) {
-    console.log('error in model:', error);
-    throw error;
+  } catch (err) {
+    console.log('error in literature model:', err);
+    throw err;
   } finally {
     conn?.end();
   }
@@ -53,7 +53,7 @@ async function getAuthorsBooksCountFromDb() {
 
 async function addBookToDb(newBookObj) {
   const { title, year, author_id } = newBookObj;
-  //   const sql = `INSERT INTO books (title, year, author_id) VALUES ("Philosopher's Stone", 1997, 5)`;
+  // const sql = `INSERT INTO books (title, year, author_id) VALUES ("Philosopher's Stone", 1997, 5)`;
   const sql = 'INSERT INTO books (title, year, author_id) VALUES (?, ?, ?)';
   return executeDb(sql, [title, year, author_id]);
 }

@@ -12,9 +12,9 @@ async function addUserToDB(email, password) {
     // console.log('result ===', result);
     // console.log("when error this won't run");
     return result;
-  } catch (error) {
-    console.log('error in model:', error);
-    throw error;
+  } catch (err) {
+    console.log('error in register model:', err);
+    throw err;
   } finally {
     conn?.end();
   }
