@@ -9,7 +9,7 @@ async function getArticlesDb() {
     const [articles] = await conn.execute(sql, []);
     return articles;
   } catch (error) {
-    console.log('error in model:', error);
+    console.log('error in articles model:', error);
     throw error;
   } finally {
     conn?.end();

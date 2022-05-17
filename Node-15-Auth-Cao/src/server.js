@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const { PORT } = require('./config');
 const articlesRouter = require('./routes/articlesRouter');
+const registerRouter = require('./routes/registerRouter');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.get('/', async (req, res) => {
 
 // Routes
 app.use('/api', articlesRouter);
+app.use('/api', registerRouter);
 
 app.all('*', (req, res) => {
   res.status(404).json({ err: 'route not found' });

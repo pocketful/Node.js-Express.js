@@ -5,7 +5,7 @@ async function getArticles(req, res) {
     const articles = await getArticlesDb();
     return res.json(articles);
   } catch (err) {
-    console.log('Unable to get articles:', err);
+    console.log('unable to get articles:', err);
     return res.status(500).json({ success: false, message: 'Something went wrong.' });
   }
 }
