@@ -1,4 +1,4 @@
-import feedback from './modules/feedback.js';
+import { feedback } from './modules/feedback.js';
 import { BASE_URL } from './modules/fetch.js';
 
 const { formLogin } = document.forms;
@@ -15,12 +15,12 @@ async function loginUser(newLoginObj) {
   // console.log('resp ===', resp);
   const data = await resp.json();
   console.log('data ===', data);
-  // res.json({ success: true, token, message: 'Login success.' });
+  // res.json({ success: true, message: 'Login success.', token });
   if (resp.ok) {
     // save token to localStorage
     localStorage.setItem('userToken', data.token);
 
-    feedback('feedback-login', data.message);
+    feedback('feedbackLog', data.message);
     formLogin.reset();
 
     // creates in browsers page history new entry
@@ -28,7 +28,7 @@ async function loginUser(newLoginObj) {
     // makes sure we can’t go back to the page with the back button
     window.location.replace('books.html');
   } else {
-    feedback('feedback-login', data.message);
+    feedback('feedbackLog', data.message);
   }
 }
 

@@ -1,4 +1,4 @@
-import feedback from './modules/feedback.js';
+import { feedback, clearFeedback, passwordFeedback } from './modules/feedback.js';
 import { BASE_URL } from './modules/fetch.js';
 
 const { formRegister } = document.forms;
@@ -16,12 +16,8 @@ async function registerUser(newRegisterObj) {
     // console.log('response ===', resp);
     const data = await resp.json();
     console.log('data ===', data);
-    if (resp.ok) {
-      feedback('feedback-register', data.message);
-      formRegister.reset();
-    } else {
-      feedback('feedback-register', data.message);
-    }
+    if (resp.ok) formRegister.reset();
+    feedback('feedbackReg', data.message);
   } catch (error) {
     console.log('error ===', error);
   }
@@ -34,12 +30,10 @@ formRegister.addEventListener('submit', (event) => {
     password: formRegister.password.value.trim(),
     password2: formRegister.password2.value.trim(),
   };
+  clearFeedback('feedbackReg');
   if (newRegisterObj.password === newRegisterObj.password2) {
     registerUser(newRegisterObj);
   } else {
-    document.querySelector('.password2-err').textContent = "Passwords does't match";
-    // feedback('password2', "Passwords does't match.");
-    // const password2err = document.getElementById('password2').nextElementSibling;
-    // password2err.textContent = "Passwords does't match";
+    passwordFeedback();
   }
 });

@@ -23,15 +23,11 @@
   color: red;
 }
 
-.err {
+.err, .err-common {
   color: red;
   font-size: 0.9rem;
   display: block;
   margin-bottom: 20px;
-}
-
-.feedback {
-  color: red;
 }
 
 @media screen and (max-width: 460px) {
