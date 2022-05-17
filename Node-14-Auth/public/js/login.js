@@ -23,9 +23,9 @@ async function loginUser(newLoginObj) {
     feedback('feedback-login', data.message);
     formLogin.reset();
 
-    // sukuria narsykles puslapiu istorijoje nauja irasa nunaviguodamas:
+    // creates in browsers page history new entry
     // window.location.href = 'books.html';
-    // nunaviguoja, padaro kad negaletume grizti atgal i psl su back
+    // makes sure we can’t go back to the page with the back button
     window.location.replace('books.html');
   } else {
     feedback('feedback-login', data.message);

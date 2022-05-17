@@ -40,7 +40,11 @@ async function validateToken(req, res, next) {
   // token exist
   try {
     const tokenPayload = await jwt.verify(tokenFromHeader, privateKey);
-    console.log('tokenPayload ===', tokenPayload);
+    console.log('tokenPayload ===', tokenPayload); // { userId: 3, iat: 1652724058, exp: 1652727658 }
+    // pass userId as req to the next function
+    const { userId } = tokenPayload;
+    req.userId = userId;
+    // if we try to pass something in next() as argument it will go to errors handling. if there's no error fn then it will just go to default fn
     next();
   } catch (err) {
     console.log('validateToken err:', err);

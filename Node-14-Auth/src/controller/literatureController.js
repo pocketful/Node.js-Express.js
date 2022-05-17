@@ -1,9 +1,16 @@
 /* eslint-disable consistent-return */
 const {
-  getBooksFromDb, getBooksWithAuthorsFromDb, addBookToDb, getAuthorsBooksCountFromDb,
+  getBooksFromDb,
+  getBooksWithAuthorsFromDb,
+  addBookToDb,
+  getAuthorsBooksCountFromDb,
 } = require('../models/literatureModel');
 
 async function getBooks(req, res) {
+  if (req.userId) {
+    // get only logged in user books
+    console.log(`Get only userId: ${req.userId} books`);
+  }
   try {
     const getResult = await getBooksFromDb();
     res.json(getResult);
