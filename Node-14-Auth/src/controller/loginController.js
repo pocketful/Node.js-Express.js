@@ -18,7 +18,7 @@ async function findUserByEmail(req, res) {
     // }
 
     // if email exists then check if passwords match
-    // load hash from your password DB
+    // load hashed password from your DB
     // bcrypt.compareSync('pass input', 'saved hashed pass'); // true false
 
     if (!bcrypt.compareSync(passwordReceived, foundUser.password)) throw new Error(400);
@@ -27,7 +27,7 @@ async function findUserByEmail(req, res) {
     //   // return res.status(400).json({ success: false, message: 'Wrong email or password.' });
     // }
 
-    // jwt token
+    // signing jwt token
     // const payload = { userId: foundUser.id };
     const token = jwt.sign({ userId: foundUser.id }, privateKey, { expiresIn: '1h' });
 
