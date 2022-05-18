@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <title>Users</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="js/register.js" type="module" defer></script>
+</head>
+
+<body>
+    <h1 class="text__title">Users</h1>
+
+    <div class="page-container">
+        <main class="container">
+            <section class="form-register">
+                <h2 class="register-title">Register</h2>
+                <form id="formRegister" autocomplete="off">
+                    <div class="fRegister__email fRegister">
+                        <label for="email">Email<span class="req-star"> *</span></label>
+                        <input type="text" id="email" name="email" placeholder="Email" value="petunia@email.com">
+                        <span class="email-err err"></span>
+                    </div>
+                    <div class="fRegister__password fRegister">
+                        <label for="password">Enter password<span class="req-star"> *</span></label>
+                        <input type="password" id="password" name="password" placeholder="Password" value="123456">
+                        <span class="password-err err"></span>
+                    </div>
+                    <div class="fRegister__password fRegister">
+                        <label for="password2">Confirm password<span class="req-star"> *</span></label>
+                        <input type="password" id="password2" name="password2" placeholder="Password" value="123456">
+                        <span class="password2-err err"></span>
+                    </div>
+                    <button class="btn btn-add" type="submit">Register</button>
+                </form>
+                <div class="err-common" id="feedbackReg"></div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

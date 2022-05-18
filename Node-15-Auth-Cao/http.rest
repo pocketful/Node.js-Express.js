@@ -1,13 +1,14 @@
 ### Articles ---------------------------------
 GET http://localhost:3000/api/articles
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjY5LCJpYXQiOjE2NTI4MDgwNjIsImV4cCI6MTY1MjgxMTY2Mn0.UPkuUCT5khcZq7vBBCJW01AuEzCg_9z1yKRhlvYBii0
+### Network > Fetxh/XHR > Books > Request Headers > Authorization
 
 ### Register ---------------------------------
 POST http://localhost:3000/api/register
 Content-Type: application/json
 
 {
-  "email": "hermione2@email.com",
+  "email": "hermione3@email.com",
   "password": "123456",
   "password2": "123456"
 }
@@ -18,7 +19,7 @@ POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
-  "email": "hermione2@email.com",
+  "email": "hermione3@email.com",
   "password": "123456"
 }
 
