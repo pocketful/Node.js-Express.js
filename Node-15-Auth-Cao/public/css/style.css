@@ -1,0 +1,37 @@
+.page-container {
+  max-width: 1000px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 30px;
+}
+
+.text__title {
+  text-align: center;
+  color: steelblue;
+  background-color: whitesmoke;
+  border-radius: 4px;
+  padding: 2%;
+}
+
+.req-star {
+  color: red;
+}
+
+.err, .err-common {
+  color: red;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 460px) {
+  .container {
+    flex-direction: column;
+  }
+}
