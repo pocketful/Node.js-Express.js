@@ -12,7 +12,14 @@ async function validateUser(req, res, next) {
     next();
   } catch (err) {
     console.log('err in validateUser middleware:', err);
-    res.status(400).json({ success: false, message: err.details }); // no need for return with next
+    console.log('errDetails ===', err.details);
+    const details = err.details.map((errObj) => ({
+      message: errObj.message,
+      field: errObj.path[0],
+    }));
+    console.log('details ===', details);
+    res.status(400).json({ success: false, details }); // no need for return with next
+    // res.status(400).json({ success: false, message: err.details }); // no need for return with next
   }
 }
 

@@ -19,11 +19,11 @@ async function registerUser(newRegisterObj) {
     if (data.success) {
       formRegister.reset();
       console.log('registered successfully');
-      feedback('feedbackReg', data.message);
+      feedback('feedbackReg', data.details);
       // eslint-disable-next-line no-return-assign
-      setTimeout(() => (window.location.href = 'login.html'), 2500);
+      // setTimeout(() => (window.location.href = 'login.html'), 2000);
     }
-    feedback('feedbackReg', data.message);
+    feedback('feedbackReg', data.details);
   } catch (err) {
     console.log('error ===', err);
   }

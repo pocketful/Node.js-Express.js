@@ -1,14 +1,15 @@
 function clearErrSpans() {
   document.querySelectorAll('.err').forEach((errEl) => {
     const error = errEl;
-    error.innerHTML = '';
-    error.previousElementSibling.style.border = 'none';
+    error.textContent = '';
+    // error.previousElementSibling.style.border = 'none';
+    error.previousElementSibling.classList.remove('err-input');
   });
 }
 
 function clearErrCommon(output) {
   const errorCommon = document.getElementById(output);
-  errorCommon.innerHTML = '';
+  errorCommon.textContent = '';
   return errorCommon;
 }
 
@@ -22,8 +23,12 @@ export function feedback(output, message) {
 
   if (Array.isArray(message)) {
     message.forEach((errObj) => {
-      document.getElementById(errObj.path).style.border = '2px solid red';
-      document.getElementById(errObj.path).nextElementSibling.textContent = errObj.message;
+      const errEl = document.getElementById(errObj.field);
+      // const errEl = formEl.elements[errObj.field];
+      errEl.classList.add('err-input');
+      errEl.nextElementSibling.textContent = errObj.message;
+      // errEl.style.border = '2px solid red';
+      // errEl.nextElementSibling.textContent = errObj.message;
       // const input = document.querySelector(`#${form} > * > #${errObj.path}`); // #formLogin > * > #email
     });
   }
@@ -48,4 +53,3 @@ export function passwordFeedback() {
   passInpEl.nextElementSibling.textContent = "Passwords does't match";
   pass2InpEl.nextElementSibling.textContent = "Passwords does't match";
 }
-

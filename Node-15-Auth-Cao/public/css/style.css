@@ -23,11 +23,16 @@
   color: red;
 }
 
-.err, .err-common {
+.err,
+.err-common {
   color: red;
   font-size: 0.9rem;
   display: block;
   margin-bottom: 20px;
+}
+
+.err-input {
+  border: 2px solid red;
 }
 
 @media screen and (max-width: 460px) {
