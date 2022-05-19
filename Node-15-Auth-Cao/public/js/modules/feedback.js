@@ -1,28 +1,37 @@
-function clearErrSpans() {
+let errorsFeArr = [];
+
+export function clearFeErrsArr() {
+  errorsFeArr = [];
+}
+
+export function clearErrsSpans() {
+  // clearErrsArr();
   document.querySelectorAll('.err').forEach((errEl) => {
     const error = errEl;
     error.textContent = '';
-    // error.previousElementSibling.style.border = 'none';
     error.previousElementSibling.classList.remove('err-input');
+    // error.previousElementSibling.style.border = 'none';
   });
 }
 
 function clearErrCommon(output) {
-  const errorCommon = document.getElementById(output);
-  errorCommon.textContent = '';
-  return errorCommon;
+  const commonErr = document.getElementById(output);
+  commonErr.textContent = '';
+  return commonErr;
 }
 
-export function feedback(output, message) {
-  clearErrSpans();
-  const errorCommon = clearErrCommon(output);
+export function feedback(output, errors = errorsFeArr) {
+  console.log('Errors ===', errors);
 
-  if (typeof message === 'string') {
-    errorCommon.textContent = message;
+  clearErrsSpans();
+  const commonErr = clearErrCommon(output);
+
+  if (typeof errors === 'string') {
+    commonErr.textContent = errors;
   }
 
-  if (Array.isArray(message)) {
-    message.forEach((errObj) => {
+  if (Array.isArray(errors)) {
+    errors.forEach((errObj) => {
       const errEl = document.getElementById(errObj.field);
       // const errEl = formEl.elements[errObj.field];
       errEl.classList.add('err-input');
@@ -31,6 +40,62 @@ export function feedback(output, message) {
       // errEl.nextElementSibling.textContent = errObj.message;
       // const input = document.querySelector(`#${form} > * > #${errObj.path}`); // #formLogin > * > #email
     });
+  }
+}
+
+/* Front End ----------------------------------------------------------------------- */
+/* BE errors:
+data.message === [
+  { message: '"email" is not allowed to be empty', field: 'email' },
+  { message: '"password" length must be at least 3 characters long', field: 'password' }
+] */
+
+function addErrToErrsArr(message, field) {
+  errorsFeArr.push({ message, field });
+}
+
+export function checkInput(valueToCheck, field, rulesArr) {
+  // forEach, map won't stop - will show all the rules. we need to terminate after the first rule. return only terminate one cycle
+  // rulesArr.forEach(rule => );
+  // for loop is good, for in is newer. with return it will terminate all loop
+  // eslint-disable-next-line no-restricted-syntax
+  for (const rule of rulesArr) {
+    // console.log('valueToCheck===', valueToCheck);
+    // console.log('field===', field);
+    // console.log('rule===', rule);
+    if (rule === 'required') {
+      if (valueToCheck === '') {
+        addErrToErrsArr(`${field} is not allowed to be empty`, field);
+        return;
+      }
+    }
+    if (rule.split('-')[0] === 'minLength') {
+      const length = rule.split('-')[1];
+      if (valueToCheck.length < length) {
+        addErrToErrsArr(`${field} length must be at least ${length} characters long`, field);
+        return;
+      }
+    }
+    if (rule.split('-')[0] === 'maxLength') {
+      const length = rule.split('-')[1];
+      if (valueToCheck.length > length) {
+        addErrToErrsArr(
+          `${field} length must be less than or equal to ${length} characters long`,
+          field,
+        );
+        return;
+      }
+    }
+    if (rule === 'email') {
+      if (!valueToCheck.includes('@')) {
+        addErrToErrsArr(`${field} must be a valid email`, field);
+        return;
+      }
+      if (!valueToCheck.split('@')[1].includes('.')) {
+        addErrToErrsArr(`${field} must be a valid email`, field);
+        return;
+      }
+    }
   }
 }
 
