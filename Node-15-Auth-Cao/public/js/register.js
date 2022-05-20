@@ -40,12 +40,9 @@ formRegister.addEventListener('submit', (event) => {
   clearErrors();
   checkInput(newRegObj.email, 'email', ['required', 'minLength-3', 'email']);
   checkInput(newRegObj.password, 'password', ['required', 'minLength-3', 'maxLength-10']);
-  checkInput(newRegObj.password2, 'password2', [
-    'required',
-    'minLength-3',
-    'maxLength-10',
-    { match: newRegObj.password, field: 'password' },
-  ]);
+  checkInput(newRegObj.password2, 'password2', ['required', 'minLength-3', 'maxLength-10', `ref-password-${newRegObj.password}`]);
+  // checkInput(newRegObj.password2, 'password2', ['required', 'minLength-3', 'maxLength-10',
+  // { match: newRegObj.password, field: 'password' }]);
 
   // if there are errors in FE
   if (errorsFeArr.length) {

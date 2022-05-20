@@ -88,9 +88,9 @@ function checkEmail(value, field) {
   return false;
 }
 
-function checkMatch(value, field, rule) {
-  if (value !== rule.match) {
-    addErrToErrsArr("passwords does't match", rule.field);
+function checkRef(value, field, valueR, fieldR) {
+  if (value !== valueR) {
+    addErrToErrsArr("passwords does't match", fieldR);
     addErrToErrsArr("passwords does't match", field);
     return true;
   }
@@ -103,64 +103,69 @@ export function checkInput(valueToCheck, field, rulesArr) {
   // for loop is good, for in is newer. with return it will terminate all loop
   // eslint-disable-next-line no-restricted-syntax
   for (const rule of rulesArr) {
-    // String ---------------------------------------
-    if (typeof rule === 'string') {
-      if (rule === 'required') {
-        if (checkRequired(valueToCheck, field)) {
-          return;
-        }
-        // if (valueToCheck === '') {
-        //   addErrToErrsArr(`${field} is not allowed to be empty`, field);
-        //   return;
-        // }
+    if (rule === 'required') {
+      if (checkRequired(valueToCheck, field)) {
+        return;
       }
-      if (rule.split('-')[0] === 'minLength') {
-        const min = rule.split('-')[1];
-        if (checkMinLength(valueToCheck, min, field)) {
-          return;
-        }
-        // if (valueToCheck.length < length) {
-        //   addErrToErrsArr(`${field} length must be at least ${length} characters long`, field);
-        //   return;
-        // }
+      // if (valueToCheck === '') {
+      //   addErrToErrsArr(`${field} is not allowed to be empty`, field);
+      //   return;
+      // }
+    }
+    if (rule.split('-')[0] === 'minLength') {
+      const min = rule.split('-')[1];
+      if (checkMinLength(valueToCheck, min, field)) {
+        return;
       }
-      if (rule.split('-')[0] === 'maxLength') {
-        const max = rule.split('-')[1];
-        if (checkMaxLength(valueToCheck, max, field)) {
-          return;
-        }
-        // if (valueToCheck.length > length) {
-        //   addErrToErrsArr(`${field} length must be less than or equal to ${length} characters long`, field);
-        //   return;
-        // }
+      // if (valueToCheck.length < length) {
+      //   addErrToErrsArr(`${field} length must be at least ${length} characters long`, field);
+      //   return;
+      // }
+    }
+    if (rule.split('-')[0] === 'maxLength') {
+      const max = rule.split('-')[1];
+      if (checkMaxLength(valueToCheck, max, field)) {
+        return;
       }
-      if (rule === 'email') {
-        if (checkEmail(valueToCheck, field)) {
-          return;
-        }
-        // if (!valueToCheck.includes('@')) {
-        //   addErrToErrsArr(`${field} must be a valid email`, field);
-        //   return;
-        // }
-        // if (!valueToCheck.split('@')[1].includes('.')) {
-        //   addErrToErrsArr(`${field} must be a valid email`, field);
-        //   return;
-        // }
+      // if (valueToCheck.length > length) {
+      //   addErrToErrsArr(`${field} length must be less than or equal to ${length} characters long`, field);
+      //   return;
+      // }
+    }
+    if (rule === 'email') {
+      if (checkEmail(valueToCheck, field)) {
+        return;
       }
+      // if (!valueToCheck.includes('@')) {
+      //   addErrToErrsArr(`${field} must be a valid email`, field);
+      //   return;
+      // }
+      // if (!valueToCheck.split('@')[1].includes('.')) {
+      //   addErrToErrsArr(`${field} must be a valid email`, field);
+      //   return;
+      // }
+    }
+    if (rule.split('-')[0] === 'ref') {
+      const fieldRef = rule.split('-')[1];
+      const valueRef = rule.split('-')[2];
+      if (checkRef(valueToCheck, field, valueRef, fieldRef)) {
+        return;
+      }
+      // if (valueToCheck !== valueRef) {
+      //   addErrToErrsArr("passwords does't match", fieldRef);
+      //   addErrToErrsArr("passwords does't match", field);
+      //   return;
+      // }
     }
 
-    // Object ---------------------------------------
-    if (typeof rule === 'object') {
-      if (rule.match) {
-        if (checkMatch(valueToCheck, field, rule)) {
-          return;
-        }
-        // if (valueToCheck !== rule.match) {
-        //   addErrToErrsArr("passwords does't match", rule.field);
-        //   addErrToErrsArr("passwords does't match", field);
-        //   return;
-        // }
-      }
-    }
+    // if (typeof rule === 'object') {
+    //   if (rule.match) {
+    //     // if (valueToCheck !== rule.match) {
+    //     //   addErrToErrsArr("passwords does't match", rule.field);
+    //     //   addErrToErrsArr("passwords does't match", field);
+    //     //   return;
+    //     // }
+    //   }
+    // }
   }
 }
