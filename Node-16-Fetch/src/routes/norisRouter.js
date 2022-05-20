@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios').default;
 
 const norisRouter = express.Router();
 
@@ -14,6 +15,19 @@ norisRouter.get('/joke', async (req, res) => {
       icon_url: 'https://assets.chucknorris.host/img/avatar/chuck-norris.png',
     };
     res.json(jokeObj);
+  } catch (err) {
+    console.log('err:', err);
+  }
+});
+
+norisRouter.get('/joke-axios', async (req, res) => {
+  try {
+    const { data } = await axios.get('https://api.chucknorris.io/jokes/random');
+    console.log(data.value);
+    res.json(data);
+    // const response = await axios.get('https://api.chucknorris.io/jokes/random');
+    // console.log(response.data.value);
+    // res.json(response.data);
   } catch (err) {
     console.log('err:', err);
   }

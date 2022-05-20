@@ -1,6 +1,9 @@
 GET http://localhost:3000/api/joke
 
 ###
+GET http://localhost:3000/api/joke-axios
+
+###
 GET http://localhost:3000/api/joke-categories
 
 ###
