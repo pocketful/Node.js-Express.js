@@ -1,4 +1,5 @@
-import { feedback, clearFeedback, passwordFeedback } from './modules/feedback.js';
+// eslint-disable-next-line object-curly-newline
+import { checkInput, clearErrors, errorsFeArr, handleErrors } from './modules/feedback.js';
 import { BASE_URL } from './modules/fetch.js';
 
 const { formRegister } = document.forms;
@@ -19,11 +20,11 @@ async function registerUser(newRegisterObj) {
     if (data.success) {
       formRegister.reset();
       console.log('registered successfully');
-      feedback('feedbackReg', data.message);
+      handleErrors(data.message);
       // eslint-disable-next-line no-return-assign
-      // setTimeout(() => (window.location.href = 'login.html'), 2000);
+      setTimeout(() => (window.location.href = 'login.html'), 2000);
     }
-    feedback('feedbackReg', data.message);
+    handleErrors(data.message);
   } catch (err) {
     console.log('error ===', err);
   }
@@ -31,15 +32,25 @@ async function registerUser(newRegisterObj) {
 
 formRegister.addEventListener('submit', (event) => {
   event.preventDefault();
-  const newRegisterObj = {
+  const newRegObj = {
     email: formRegister.email.value.trim(),
     password: formRegister.password.value.trim(),
     password2: formRegister.password2.value.trim(),
   };
-  clearFeedback('feedbackReg');
-  if (newRegisterObj.password === newRegisterObj.password2) {
-    registerUser(newRegisterObj);
-  } else {
-    passwordFeedback();
+  clearErrors();
+  checkInput(newRegObj.email, 'email', ['required', 'minLength-3', 'email']);
+  checkInput(newRegObj.password, 'password', ['required', 'minLength-3', 'maxLength-10']);
+  checkInput(newRegObj.password2, 'password2', [
+    'required',
+    'minLength-3',
+    'maxLength-10',
+    { match: newRegObj.password, field: 'password' },
+  ]);
+
+  // if there are errors in FE
+  if (errorsFeArr.length) {
+    handleErrors(); // handleErrors(errorsArr);
+    return;
   }
+  registerUser(newRegObj);
 });

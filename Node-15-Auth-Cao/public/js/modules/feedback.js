@@ -1,33 +1,29 @@
-let errorsFeArr = [];
+// eslint-disable-next-line import/no-mutable-exports
+export let errorsFeArr = [];
 
 export function clearFeErrsArr() {
   errorsFeArr = [];
 }
 
-export function clearErrsSpans() {
-  // clearErrsArr();
-  document.querySelectorAll('.err').forEach((errEl) => {
-    const error = errEl;
+const errSpanEls = document.querySelectorAll('.err');
+const errCommonEl = document.querySelector('.err-common');
+
+export function clearErrors() {
+  clearFeErrsArr();
+  errCommonEl.textContent = '';
+  errSpanEls.forEach((errSpanEl) => {
+    const error = errSpanEl;
     error.textContent = '';
     error.previousElementSibling.classList.remove('err-input');
     // error.previousElementSibling.style.border = 'none';
   });
 }
 
-function clearErrCommon(output) {
-  const commonErr = document.getElementById(output);
-  commonErr.textContent = '';
-  return commonErr;
-}
-
-export function feedback(output, errors = errorsFeArr) {
+export function handleErrors(errors = errorsFeArr) {
   console.log('Errors ===', errors);
 
-  clearErrsSpans();
-  const commonErr = clearErrCommon(output);
-
   if (typeof errors === 'string') {
-    commonErr.textContent = errors;
+    errCommonEl.textContent = errors;
   }
 
   if (Array.isArray(errors)) {
@@ -43,7 +39,6 @@ export function feedback(output, errors = errorsFeArr) {
   }
 }
 
-/* Front End ----------------------------------------------------------------------- */
 /* BE errors:
 data.message === [
   { message: '"email" is not allowed to be empty', field: 'email' },
@@ -54,67 +49,118 @@ function addErrToErrsArr(message, field) {
   errorsFeArr.push({ message, field });
 }
 
+function checkRequired(value, field) {
+  if (value === '') {
+    addErrToErrsArr(`${field} is not allowed to be empty`, field);
+    return true;
+  }
+  return false;
+}
+
+function checkMinLength(value, minLength, field) {
+  if (value.length < minLength) {
+    addErrToErrsArr(`${field} length must be at least ${minLength} characters long`, field);
+    return true;
+  }
+  return false;
+}
+
+function checkMaxLength(value, maxLength, field) {
+  if (value.length > maxLength) {
+    addErrToErrsArr(
+      `${field} length must be less than or equal to ${maxLength} characters long`,
+      field,
+    );
+    return true;
+  }
+  return false;
+}
+
+function checkEmail(value, field) {
+  if (!value.includes('@')) {
+    addErrToErrsArr(`${field} must be a valid email`, field);
+    return true;
+  }
+  if (!value.split('@')[1].includes('.')) {
+    addErrToErrsArr(`${field} must be a valid email`, field);
+    return true;
+  }
+  return false;
+}
+
+function checkMatch(value, field, rule) {
+  if (value !== rule.match) {
+    addErrToErrsArr("passwords does't match", rule.field);
+    addErrToErrsArr("passwords does't match", field);
+    return true;
+  }
+  return false;
+}
+
 export function checkInput(valueToCheck, field, rulesArr) {
   // forEach, map won't stop - will show all the rules. we need to terminate after the first rule. return only terminate one cycle
   // rulesArr.forEach(rule => );
   // for loop is good, for in is newer. with return it will terminate all loop
   // eslint-disable-next-line no-restricted-syntax
   for (const rule of rulesArr) {
-    // console.log('valueToCheck===', valueToCheck);
-    // console.log('field===', field);
-    // console.log('rule===', rule);
-    if (rule === 'required') {
-      if (valueToCheck === '') {
-        addErrToErrsArr(`${field} is not allowed to be empty`, field);
-        return;
+    // String ---------------------------------------
+    if (typeof rule === 'string') {
+      if (rule === 'required') {
+        if (checkRequired(valueToCheck, field)) {
+          return;
+        }
+        // if (valueToCheck === '') {
+        //   addErrToErrsArr(`${field} is not allowed to be empty`, field);
+        //   return;
+        // }
+      }
+      if (rule.split('-')[0] === 'minLength') {
+        const min = rule.split('-')[1];
+        if (checkMinLength(valueToCheck, min, field)) {
+          return;
+        }
+        // if (valueToCheck.length < length) {
+        //   addErrToErrsArr(`${field} length must be at least ${length} characters long`, field);
+        //   return;
+        // }
+      }
+      if (rule.split('-')[0] === 'maxLength') {
+        const max = rule.split('-')[1];
+        if (checkMaxLength(valueToCheck, max, field)) {
+          return;
+        }
+        // if (valueToCheck.length > length) {
+        //   addErrToErrsArr(`${field} length must be less than or equal to ${length} characters long`, field);
+        //   return;
+        // }
+      }
+      if (rule === 'email') {
+        if (checkEmail(valueToCheck, field)) {
+          return;
+        }
+        // if (!valueToCheck.includes('@')) {
+        //   addErrToErrsArr(`${field} must be a valid email`, field);
+        //   return;
+        // }
+        // if (!valueToCheck.split('@')[1].includes('.')) {
+        //   addErrToErrsArr(`${field} must be a valid email`, field);
+        //   return;
+        // }
       }
     }
-    if (rule.split('-')[0] === 'minLength') {
-      const length = rule.split('-')[1];
-      if (valueToCheck.length < length) {
-        addErrToErrsArr(`${field} length must be at least ${length} characters long`, field);
-        return;
-      }
-    }
-    if (rule.split('-')[0] === 'maxLength') {
-      const length = rule.split('-')[1];
-      if (valueToCheck.length > length) {
-        addErrToErrsArr(
-          `${field} length must be less than or equal to ${length} characters long`,
-          field,
-        );
-        return;
-      }
-    }
-    if (rule === 'email') {
-      if (!valueToCheck.includes('@')) {
-        addErrToErrsArr(`${field} must be a valid email`, field);
-        return;
-      }
-      if (!valueToCheck.split('@')[1].includes('.')) {
-        addErrToErrsArr(`${field} must be a valid email`, field);
-        return;
+
+    // Object ---------------------------------------
+    if (typeof rule === 'object') {
+      if (rule.match) {
+        if (checkMatch(valueToCheck, field, rule)) {
+          return;
+        }
+        // if (valueToCheck !== rule.match) {
+        //   addErrToErrsArr("passwords does't match", rule.field);
+        //   addErrToErrsArr("passwords does't match", field);
+        //   return;
+        // }
       }
     }
   }
-}
-
-/* passwords --------------------------------------------------------------------- */
-const passInpEl = document.getElementById('password');
-const pass2InpEl = document.getElementById('password2');
-
-export function clearFeedback(output) {
-  // clearErrSpans();
-  clearErrCommon(output);
-  passInpEl.style.border = 'none';
-  pass2InpEl.style.border = 'none';
-  passInpEl.nextElementSibling.textContent = '';
-  pass2InpEl.nextElementSibling.textContent = '';
-}
-
-export function passwordFeedback() {
-  passInpEl.style.border = '2px solid red';
-  pass2InpEl.style.border = '2px solid red';
-  passInpEl.nextElementSibling.textContent = "Passwords does't match";
-  pass2InpEl.nextElementSibling.textContent = "Passwords does't match";
 }

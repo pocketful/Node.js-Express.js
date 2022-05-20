@@ -1,4 +1,5 @@
-import { checkInput, clearFeErrsArr, feedback } from './modules/feedback.js';
+// eslint-disable-next-line object-curly-newline
+import { checkInput, clearErrors, errorsFeArr, handleErrors } from './modules/feedback.js';
 import { BASE_URL } from './modules/fetch.js';
 
 const { formLogin } = document.forms;
@@ -21,13 +22,13 @@ async function loginUser(newLoginObj) {
       // { success: true, message: 'Login success.', token: '' }
       // save token to localStorage
       localStorage.setItem('userToken', data.token);
-      feedback('feedbackLog', data.message);
+      handleErrors(data.message);
       formLogin.reset();
       // eslint-disable-next-line no-return-assign
-      // setTimeout(() => (window.location.href = 'index.html'), 2000);
+      setTimeout(() => (window.location.href = 'index.html'), 2000);
     } else {
       // { success: false, message: [{ message: '', field: '' }] }
-      feedback('feedbackLog', data.message);
+      handleErrors(data.message);
     }
   } catch (err) {
     console.log('error ===', err);
@@ -40,17 +41,22 @@ formLogin.addEventListener('submit', (event) => {
     email: formLogin.email.value.trim(),
     password: formLogin.password.value.trim(),
   };
-  clearFeErrsArr();
+  clearErrors();
   checkInput(newLoginObj.email, 'email', ['required', 'minLength-3', 'email']);
   checkInput(newLoginObj.password, 'password', ['required', 'minLength-3', 'maxLength-10']);
 
-  feedback('feedbackLog'); // feedback('feedbackLog', errorsArr);
+  // if there are errors in FE
+  if (errorsFeArr.length) {
+    handleErrors(); // handleErrors('feedbackLog', errorsArr);
+    return;
+  }
+  loginUser(newLoginObj);
 
   // errors handling v1
   // if (checkInputObj(newLoginObj)) {
-  //   const errorsArr = [];
+  //   const errorsFeArr = [];
   //   console.log('checkInputObj');
-  //   feedback('feedbackLog', errorsArr);
+  //   handleErrors('feedbackLog', errorsFeArr);
   // }
   // function checkInputObj(loginObj) {
   //   for (const key in loginObj) {
@@ -60,6 +66,4 @@ formLogin.addEventListener('submit', (event) => {
   //     if (value === '') return true;
   //   }
   // }
-
-  loginUser(newLoginObj); // TEMP OFF
 });
