@@ -3,6 +3,8 @@ import { checkInput, clearErrors, errorsFeArr, handleErrors } from './modules/fe
 import { BASE_URL } from './modules/fetch.js';
 
 const { formLogin } = document.forms;
+// const formLogin = document.getElementById('formLogin');
+const passEl = formLogin.elements.password; // name or id email
 
 async function loginUser(newLoginObj) {
   console.log('newLoginObj ===', newLoginObj);
@@ -34,6 +36,23 @@ async function loginUser(newLoginObj) {
     console.log('error ===', err);
   }
 }
+
+passEl.addEventListener('blur', (event) => {
+  // clearErrors();
+  const el = event.currentTarget;
+  checkInput(el.value, el.name, ['required', 'minLength-3', 'maxLength-10']);
+  handleErrors();
+});
+
+passEl.addEventListener('input', (event) => {
+  clearErrors();
+  // const el = event.currentTarget;
+  // if (el.value.length > 3) {
+  //   clearErrors();
+  //   checkInput(el.value, el.name, ['required', 'minLength-3', 'email']);
+  //   handleErrors();
+  // }
+});
 
 formLogin.addEventListener('submit', (event) => {
   event.preventDefault();
