@@ -12,24 +12,30 @@ norisRouter.get('/joke', async (req, res) => {
     const data = await response.json();
     const jokeObj = {
       joke: data.value,
-      icon_url: 'https://assets.chucknorris.host/img/avatar/chuck-norris.png',
+      icon_url: data.icon_url,
     };
-    res.json(jokeObj);
+    return res.json(jokeObj);
   } catch (err) {
     console.log('err:', err);
+    return res.status(500).json({ success: false, message: 'Something went wrong.' });
   }
 });
 
 norisRouter.get('/joke-axios', async (req, res) => {
   try {
     const { data } = await axios.get('https://api.chucknorris.io/jokes/random');
-    console.log(data.value);
-    res.json(data);
+    const jokeObj = {
+      joke: data.value,
+      icon_url: data.icon_url,
+    };
+    console.log(jokeObj);
+    return res.json(jokeObj);
     // const response = await axios.get('https://api.chucknorris.io/jokes/random');
     // console.log(response.data.value);
     // res.json(response.data);
   } catch (err) {
     console.log('err:', err);
+    return res.status(500).json({ success: false, message: 'Something went wrong.' });
   }
 });
 
