@@ -19,4 +19,14 @@ norisRouter.get('/joke', async (req, res) => {
   }
 });
 
+norisRouter.get('/joke-categories', async (req, res) => {
+  try {
+    const response = await fetch('https://api.chucknorris.io/jokes/categories');
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    console.log('err:', err);
+  }
+});
+
 module.exports = norisRouter;
