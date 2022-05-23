@@ -22,14 +22,23 @@ const mainInfo = {
 };
 
 app.get('/', (req, res) => {
-  res.render('index', mainInfo);
+  const tech = ['HTML', 'CSS', 'JS'];
+  const data = {
+    tech,
+    title: 'Home page',
+  };
+  res.render('index', data);
+  // res.render('index', mainInfo);
   // const pathToIndex = path.join(__dirname, 'views', 'index.html');
   // console.log(__dirname);
   // res.sendFile(pathToIndex);
 });
 
 app.get('/about', (req, res) => {
-  res.render('about');
+  const data = {
+    title: 'About page',
+  };
+  res.render('about', data);
   // const pathToIndex = path.join(__dirname, 'views', 'about.html');
   // console.log(__dirname);
   // res.sendFile(pathToIndex);
