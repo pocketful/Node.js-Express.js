@@ -1,15 +1,17 @@
 <%- include('partials/head') %>
 <%- include('partials/header') %>
 <!-- This is normal html comment, user can see it while inspecting page -->
-<%# This is comment and it is safely hidden in back end %> 
-<h1>SSR works</h1>
-<% const username="Hermionne" %>
-<p>How many is 3 * 10 = <%= 3 * 10 %> </p>
-<p>Online: <%= username %> </p>
-<img src="img/image.png" alt=" some image">
-<ul>
-    <% tech.forEach(element => { %>
-        <li> <%= element %> </li>
-    <% }); %>
-</ul>
+<%# This is comment and it is safely hidden in back end %>
+<main>
+    <h1>SSR works</h1>
+    <% const username="Hermionne" %>
+    <p>How many is 3 * 10 = <%= 3 * 10 %> </p>
+    <p>Online: <%= username %> </p>
+    <img src="img/image.png" alt=" some image">
+    <ul>
+        <% tech.forEach(element => { %>
+            <li> <%= element %> </li>
+        <% }); %>
+    </ul>
+</main>
 <%- include('partials/footer') %>

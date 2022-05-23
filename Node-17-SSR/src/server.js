@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const { PORT } = require('./config');
+const users = require('./db');
 
 const app = express();
 
@@ -50,9 +51,13 @@ app.get('/contacts', (req, res) => {
     titles: 'Contacts page',
   };
   res.render('contacts', locals);
-  // const pathToIndex = path.join(__dirname, 'views', 'about.html');
-  // console.log(__dirname);
-  // res.sendFile(pathToIndex);
+});
+
+app.get('/users', (req, res) => {
+  const locals = {
+    users,
+  };
+  res.render('users', locals);
 });
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
