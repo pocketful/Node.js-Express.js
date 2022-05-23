@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>SRR</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="/" class="nav-link">Home</a>
+            <a href="/about" class="nav-link">About</a>
+        </nav>
+    </header>
+    <!-- this is normas html comment -->
+    <%# This is comment and it is safely hidden in back end %> 
+    <h1>SSR works <%= title %> </h1>
+    <% const username="Hermionne" %>
+    <p>How many is 3 * 10 = <%= 3 * 10 %> </p>
+    <p>Online: <%= username %> </p>
+    <img src="img/image.png" alt=" some image">
+</body>
+
+</html>
