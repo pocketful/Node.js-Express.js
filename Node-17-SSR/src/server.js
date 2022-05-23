@@ -16,6 +16,7 @@ app.use(express.static(staticDir));
 // Middleware
 app.use(morgan('dev'));
 
+// eslint-disable-next-line no-unused-vars
 const mainInfo = {
   title: 'SSR',
   date: '2022',
@@ -39,6 +40,16 @@ app.get('/about', (req, res) => {
     title: 'About page',
   };
   res.render('about', data);
+  // const pathToIndex = path.join(__dirname, 'views', 'about.html');
+  // console.log(__dirname);
+  // res.sendFile(pathToIndex);
+});
+
+app.get('/contacts', (req, res) => {
+  const locals = {
+    titles: 'Contacts page',
+  };
+  res.render('contacts', locals);
   // const pathToIndex = path.join(__dirname, 'views', 'about.html');
   // console.log(__dirname);
   // res.sendFile(pathToIndex);
