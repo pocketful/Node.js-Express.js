@@ -1,7 +1,7 @@
 const express = require('express');
 const mysql = require('mysql2/promise');
 const { dbConfig } = require('../config');
-const users = require('../db');
+const users = require('../db/db');
 
 const pageRoutes = express.Router();
 

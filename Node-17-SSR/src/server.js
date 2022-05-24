@@ -3,11 +3,13 @@ const morgan = require('morgan');
 const path = require('path');
 
 const { PORT } = require('./config');
+const bookRoutes = require('./routes/bookRoutes');
 const pageRoutes = require('./routes/pageRoutes');
 
 const app = express();
 
 app.use('/', pageRoutes);
+app.use('/', bookRoutes);
 
 // Template engine
 app.set('views', './src/views'); // views is default but without src

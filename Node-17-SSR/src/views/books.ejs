@@ -1,0 +1,17 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<main>
+    <h1>Books</h1>
+    <div class="cards">
+        <% books.forEach(book => { %>
+        <div class="card">
+            <p> Title: <%= book.title %> </p>
+            <p> Author: <%= book.author %> </p>
+            <p> Year: <%= book.year %> </p>
+            <p> Image: <%= book.image %> </p>
+            <p> Category: <%= book.category %> </p>
+        </div>
+        <% }); %>
+    </div>
+</main>
+<%- include('partials/footer') %>
