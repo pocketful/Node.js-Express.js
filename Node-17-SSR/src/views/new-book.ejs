@@ -1,0 +1,22 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<main>
+    <h1>
+        <%= locals.title && title %>
+    </h1>
+    <hr>
+    <% if (locals.feedback) { %>
+        <div class="feedback success">
+            <%= feedback %>
+        </div>
+    <% } %>
+    <h2>Add new book</h2>
+    <form action="/books/new" method="post">
+        <input type="text" name="title" value='Wuthering Heights' placeholder="Enter title">
+        <input type="text" name="author" value='Emily Bronte' placeholder="Enter author">
+        <input type="number" name="year" value='2000' placeholder="Enter year">
+        <input type="number" name="category" value="5">
+        <button id="add-book" type="submit">Create</button>
+    </form>
+</main>
+<%- include('partials/footer') %>

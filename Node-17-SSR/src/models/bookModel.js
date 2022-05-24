@@ -20,8 +20,16 @@ function getAllBooks() {
   return executeDb(sql);
 }
 
+function addNewBook(newBookObj) {
+  // eslint-disable-next-line object-curly-newline
+  const { title, author, year, category } = newBookObj;
+  const sql = 'INSERT INTO books2 (title, author, year, category) VALUES (?, ?, ?, ?)';
+  return executeDb(sql, [title, author, year, category]);
+}
+
 module.exports = {
   getAllBooks,
+  addNewBook,
 };
 
 // let conn;
