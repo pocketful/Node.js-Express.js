@@ -1,17 +1,27 @@
 <%- include('partials/head') %>
 <%- include('partials/header') %>
 <main>
-    <h1>Books</h1>
-    <div class="cards">
-        <% books.forEach(book => { %>
-        <div class="card">
-            <p> Title: <%= book.title %> </p>
-            <p> Author: <%= book.author %> </p>
-            <p> Year: <%= book.year %> </p>
-            <p> Image: <%= book.image %> </p>
-            <p> Category: <%= book.category %> </p>
+    <h1><%= locals.title && title %> </h1>
+    <hr>
+    <% if (feedback) { %>
+        <div class="feedback error">
+            <%= feedback %> 
         </div>
-        <% }); %>
+    <% } %>
+    
+    <h2>Our books</h2>
+    <div class="books">
+        <% if (books && books.length) { %>
+            <% books.forEach(el => { %>
+            <div class="book">
+                <p><%= el.title %></p>
+                <p><%= el.author %></p>
+                <p><i><%= el.year %></i></p>
+            </div>
+            <% }) %>
+        <% } else { %>
+        <p>There are no books</p>
+        <% } %>       
     </div>
 </main>
 <%- include('partials/footer') %>
