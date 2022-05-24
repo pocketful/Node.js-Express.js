@@ -1,13 +1,14 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
-const { PORT } = require('./config');
+const mysql = require('mysql2/promise');
+const { PORT, dbConfig } = require('./config');
 const users = require('./db');
 
 const app = express();
 
-// Set default view engine - /views
-app.set('views', './src/views');
+// Template engine
+app.set('views', './src/views'); // views is default but without src
 app.set('view engine', 'ejs');
 
 // Static directory
@@ -28,19 +29,22 @@ app.get('/', (req, res) => {
   const data = {
     tech,
     title: 'Home page',
+    currentPage: 'home',
   };
-  res.render('index', data);
+  res.render('index', data); // locals
   // res.render('index', mainInfo);
   // const pathToIndex = path.join(__dirname, 'views', 'index.html');
   // console.log(__dirname);
   // res.sendFile(pathToIndex);
+  // res.sendFile(__dirname + '/views/index.html'); // same, no need for path
 });
 
 app.get('/about', (req, res) => {
   const data = {
     title: 'About page',
+    currentPage: 'about',
   };
-  res.render('about', data);
+  res.render('about', data); // locals
   // const pathToIndex = path.join(__dirname, 'views', 'about.html');
   // console.log(__dirname);
   // res.sendFile(pathToIndex);
@@ -48,16 +52,40 @@ app.get('/about', (req, res) => {
 
 app.get('/contacts', (req, res) => {
   const locals = {
-    titles: 'Contacts page',
+    title: 'Contacts page',
+    currentPage: 'contacts',
   };
   res.render('contacts', locals);
 });
 
 app.get('/users', (req, res) => {
+  console.log('req.path =============', req.path); // /users
   const locals = {
+    title: 'Users page',
+    currentPage: 'users',
     users,
   };
   res.render('users', locals);
+});
+
+app.get('/posts', async (req, res) => {
+  let conn;
+  try {
+    conn = await mysql.createConnection(dbConfig);
+    const sql = 'SELECT * FROM posts';
+    const [rows] = await conn.query(sql);
+    const locals = {
+      title: 'Posts page',
+      currentPage: 'posts',
+      posts: rows,
+    };
+    res.render('posts', locals);
+  } catch (error) {
+    console.error('Unable to get posts from DB', error);
+    res.status(500).json('Something went wrong');
+  } finally {
+    await conn?.end();
+  }
 });
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

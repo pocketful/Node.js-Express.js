@@ -7,8 +7,10 @@ img {
   max-width: 100%;
 }
 
-.cards {
+.cards,
+.posts {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
@@ -16,6 +18,13 @@ img {
   background-color: LightSteelBlue;
   border-radius: 5px;
   padding: 10px;
+}
+
+.post {
+  background-color: lightgrey;
+  border-radius: 5px;
+  padding: 10px;
+  flex: 0 1 20%;
 }
 
 nav {
@@ -29,6 +38,6 @@ footer {
   text-align: center;
 }
 
-.keys {
+.nav-link.active {
   font-weight: bold;
 }

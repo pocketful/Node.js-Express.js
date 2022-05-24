@@ -1,0 +1,17 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<main>
+    <h1>Posts</h1>
+    <div class="posts">
+        <% posts.forEach(post => { %>            
+        <div class="post">
+            <p> Author: <%= post.author %> </p>
+            <p> Title: <%= post.title %> </p>
+            <p> Body: <%= post.body %> </p>
+            <p> Rating: <%= post.rating %> </p>
+            <p> Archived: <%= post.archived %> </p>
+        </div>
+        <% }); %>
+    </div>
+</main>
+<%- include('partials/footer') %>

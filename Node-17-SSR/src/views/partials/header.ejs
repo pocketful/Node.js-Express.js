@@ -1,8 +1,9 @@
 <header>
     <nav>
-        <a href="/" class="nav-link">Home</a>
-        <a href="/about" class="nav-link">About</a>
-        <a href="/contacts" class="nav-link">Contact Us</a>
-        <a href="/users" class="nav-link">Users</a>
+        <a href="/" class="nav-link <%= currentPage === 'home' && 'active' %>">Home</a>
+        <a href="/about" class="nav-link <%= currentPage === 'about' && 'active' %>">About</a>
+        <a href="/contacts" class="nav-link <%= currentPage === 'contacts' && 'active' %>">Contact Us</a>
+        <a href="/users" class="nav-link <%= currentPage === 'users' && 'active' %>">Users</a>
+        <a href="/posts" class="nav-link <%= currentPage === 'posts' && 'active' %>">Posts</a>
     </nav>
 </header>

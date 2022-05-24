@@ -1,5 +1,10 @@
 GET http://localhost:3000/
-
 ###
 GET http://localhost:3000/about
+###
+GET http://localhost:3000/contacts
+###
+GET http://localhost:3000/users
+###
+GET http://localhost:3000/posts
 
