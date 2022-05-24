@@ -1,9 +1,18 @@
+<%
+  /** 
+   * return 'active' if page is === currentPage
+   */
+  function setActiveClass(page) {
+   return currentPage === page ? 'active' : '';
+  }
+%>
 <header>
     <nav>
-        <a href="/" class="nav-link <%= currentPage === 'home' && 'active' %>">Home</a>
-        <a href="/about" class="nav-link <%= currentPage === 'about' && 'active' %>">About</a>
-        <a href="/contacts" class="nav-link <%= currentPage === 'contacts' && 'active' %>">Contact Us</a>
-        <a href="/users" class="nav-link <%= currentPage === 'users' && 'active' %>">Users</a>
-        <a href="/posts" class="nav-link <%= currentPage === 'posts' && 'active' %>">Posts</a>
+        <a href="/" class="nav-link <%= setActiveClass('home') %>">Home</a>
+        <a href="/about" class="nav-link <%= setActiveClass('about') %>">About</a>
+        <a href="/contacts" class="nav-link <%= setActiveClass('contacts') %>">Contact Us</a>
+        <a href="/users" class="nav-link <%= setActiveClass('users') %>">Users</a>
+        <a href="/posts" class="nav-link <%= setActiveClass('posts') %>">Posts</a>
+        <!-- <a href="/posts" class="nav-link <%#= currentPage === 'posts' ? 'active' : '' %>">Posts</a> -->
     </nav>
 </header>
