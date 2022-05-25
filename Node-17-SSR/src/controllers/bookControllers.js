@@ -36,7 +36,7 @@ const showBooksPage = async (req, res) => {
   //   }
 };
 
-const addBookPage = async (req, res) => {
+const showNewBookPage = async (req, res) => {
   const locals = {
     title: 'New books page',
     currentPage: 'new-book',
@@ -44,7 +44,7 @@ const addBookPage = async (req, res) => {
   res.render('new-book', locals);
 };
 
-const addBook = async (req, res) => {
+const processNewBook = async (req, res) => {
   console.log('req.body===', req.body);
   let feedback;
   try {
@@ -66,6 +66,6 @@ const addBook = async (req, res) => {
 
 module.exports = {
   showBooksPage,
-  addBookPage,
-  addBook,
+  showNewBookPage,
+  processNewBook,
 };
