@@ -4,7 +4,8 @@ import { BASE_URL } from './modules/fetch.js';
 
 const { formLogin } = document.forms;
 // const formLogin = document.getElementById('formLogin');
-const passEl = formLogin.elements.password; // name or id email
+// const passEl = formLogin.elements.password; // name or id email
+// const inputEls = document.querySelectorAll('input');
 
 async function loginUser(newLoginObj) {
   console.log('newLoginObj ===', newLoginObj);
@@ -37,22 +38,35 @@ async function loginUser(newLoginObj) {
   }
 }
 
-passEl.addEventListener('blur', (event) => {
-  // clearErrors();
-  const el = event.currentTarget;
-  checkInput(el.value, el.name, ['required', 'minLength-3', 'maxLength-10']);
-  handleErrors();
-});
+// const email = ['required', 'minLength-3', 'email'];
+// const password = ['required', 'minLength-3', 'maxLength-10'];
 
-passEl.addEventListener('input', (event) => {
-  clearErrors();
-  // const el = event.currentTarget;
-  // if (el.value.length > 3) {
-  //   clearErrors();
-  //   checkInput(el.value, el.name, ['required', 'minLength-3', 'email']);
-  //   handleErrors();
-  // }
-});
+const rules = {
+  email: ['required', 'minLength-3', 'email'],
+  password: ['required', 'minLength-3', 'maxLength-10'],
+};
+
+// inputEls.forEach((inputEl) => {
+//   inputEl.addEventListener('blur', (event) => {
+//     // clearErrors();
+//     const el = event.currentTarget;
+//     console.log('el ======', el);
+//     el.name =
+//     checkInput(el.value, el.name, el.name);
+//     // if (el.name === 'email') checkInput(el.value, el.name, email);
+//     // if (el.name === 'password') checkInput(el.value, el.name, password);
+//     handleErrors();
+//   });
+//   inputEl.addEventListener('input', () => {
+//     clearErrors();
+//     // const el = event.currentTarget;
+//     // if (el.value.length > 3) {
+//     //   clearErrors();
+//     //   checkInput(el.value, el.name, ['required', 'minLength-3', 'email']);
+//     //   handleErrors();
+//     // }
+//   });
+// });
 
 formLogin.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -61,14 +75,23 @@ formLogin.addEventListener('submit', (event) => {
     password: formLogin.password.value.trim(),
   };
   clearErrors();
-  checkInput(newLoginObj.email, 'email', ['required', 'minLength-3', 'email']);
-  checkInput(newLoginObj.password, 'password', ['required', 'minLength-3', 'maxLength-10']);
+  // checkInput(newLoginObj.email, 'email', email);
+  // checkInput(newLoginObj.password, 'password', password);
+  // checkInput(newLoginObj.email, 'email', rules.email);
+  // checkInput(newLoginObj.password, 'password', rules.password);
+
+  // apply validation rules for each field
+  Object.keys(newLoginObj).forEach(key => {
+    if (rules[key]) { // ensure there are validation rules for this field
+      checkInput(newLoginObj[key], key, rules[key]);
+    }
+  });
 
   // if there are errors in FE
   if (errorsFeArr.length) {
     handleErrors(); // handleErrors('feedbackLog', errorsArr);
     return;
-  }
+  }  
   loginUser(newLoginObj);
 
   // errors handling v1
