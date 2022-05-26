@@ -14,9 +14,10 @@ function clearErrCommon(output) {
 
 export function feedback(output, message) {
   clearErrSpans();
+  const errorCommon = clearErrCommon(output);
 
   if (typeof message === 'string') {
-    document.getElementById(output).textContent = message;
+    errorCommon.textContent = message;
   }
 
   if (Array.isArray(message)) {

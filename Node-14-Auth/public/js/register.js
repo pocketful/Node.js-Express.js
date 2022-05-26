@@ -16,7 +16,7 @@ async function registerUser(newRegisterObj) {
     // console.log('response ===', resp);
     const data = await resp.json();
     console.log('data ===', data);
-    if (resp.ok) formRegister.reset();
+    if (data.success) formRegister.reset();
     feedback('feedbackReg', data.message);
   } catch (error) {
     console.log('error ===', error);

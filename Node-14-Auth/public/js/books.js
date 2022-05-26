@@ -8,6 +8,9 @@ console.log('token ===', token);
 
 if (!token) {
   // if not registered redirect to login
+  // creates in browsers page history new entry:
+  // window.location.href = 'index.html';
+  // makes sure we can’t go back to the page with the back button:
   window.location.replace('index.html');
 }
 
@@ -23,9 +26,12 @@ function renderBooks(arr, dest) {
 }
 
 async function getBooks(userToken) {
-  const booksArr = await getFetch('books', userToken);
-  console.log('booksArr ===', booksArr);
-  renderBooks(booksArr, booksListEl);
+  try {
+    const booksArr = await getFetch('books', userToken);
+    console.log('booksArr ===', booksArr);
+    renderBooks(booksArr, booksListEl);
+  } catch (err) {
+    console.log('err in getBooks:', err);
+  }
 }
 getBooks(token);
-// render books to html

@@ -12,9 +12,10 @@ export async function getFetch(endpoint, token) {
     const data = await resp.json();
     console.log('data ===', data);
     return data; // return resp.json();
-  } catch (error) {
-    console.log('error getFetch ===', error);
+  } catch (err) {
+    console.log('error in getFetch:', err);
+    throw err;
   }
 }
 
-export async function postFetch(endpoint, data) {}
+// export async function postFetch(endpoint, data) {}

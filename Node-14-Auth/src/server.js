@@ -16,7 +16,7 @@ const app = express();
 //   { id: 2, email: 'harry@email.com', password: '654321' },
 // ];
 
-// Middleware
+// Middlewares
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());

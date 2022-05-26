@@ -32,11 +32,14 @@ async function validateToken(req, res, next) {
   console.log('req.headers.authorization ===', req.headers.authorization);
   const tokenFromHeader = req.headers.authorization?.split(' ')[1];
   console.log('tokenFromHeader ===', tokenFromHeader);
+
   // token doesn't exist
   if (!tokenFromHeader) {
     console.log('No token');
-    return res.status(401).json({ success: false, message: 'No token' }); // 401 Unauthorized
+    res.status(401).json({ success: false, message: 'No token' }); // 401 Unauthorized
+    return;
   }
+
   // token exist
   try {
     const tokenPayload = await jwt.verify(tokenFromHeader, privateKey);
