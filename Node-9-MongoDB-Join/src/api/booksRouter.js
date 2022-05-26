@@ -1,6 +1,7 @@
 const express = require('express');
 const { ObjectId } = require('mongodb');
 const { dbClient } = require('../config');
+const { getArrayDb } = require('../helper');
 
 const booksRouter = express.Router();
 const dbName = 'library';
@@ -10,36 +11,35 @@ const collName = 'books';
 // GET
 booksRouter.get('/books', async (req, res) => {
   try {
-    await dbClient.connect();
-    console.log('connection opened');
-    const resource = dbClient.db(dbName).collection(collName);
-    const booksArr = await resource.find().toArray();
-    // console.log(booksArr);
-    res.json(booksArr);
+    const booksArr = await getArrayDb('books');
+    res.json(booksArr); // auto 200 if we dont set it
   } catch (error) {
-    console.error('error in get books', error);
     res.status(500).json('something went wrong');
-  } finally {
-    await dbClient.close();
-    console.log('connection closed');
   }
 });
+// booksRouter.get('/books', async (req, res) => {
+//   const booksArr = await getArrayDb('books');
+//   if (booksArr === false) {
+//     res.status(500).json('something went wrong');
+//     return;
+//   }
+//   res.json(booksArr); // auto 200 if we dont set it
+// });
 
 // DELETE
 booksRouter.delete('/books/:bookId', async (req, res) => {
   try {
     const id = req.params.bookId;
-    console.log('connection opened');
     console.log('id', id);
     const query = { _id: ObjectId(id) };
     await dbClient.connect();
     console.log('connection opened');
     const resource = dbClient.db(dbName).collection(collName);
-    const booksArr = await resource.deleteOne(query); // deleteMany()
-    // console.log(booksArr);
-    res.json(booksArr);
+    const deleteResult = await resource.deleteOne(query); // deleteMany()
+    // console.log(deleteResult);
+    res.json(deleteResult);
   } catch (error) {
-    console.error('error in get books', error);
+    console.error('error in delete book', error);
     res.status(500).json('something went wrong');
   } finally {
     await dbClient.close();

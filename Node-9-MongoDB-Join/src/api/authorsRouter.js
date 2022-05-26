@@ -1,6 +1,7 @@
 const express = require('express');
 const { ObjectId } = require('mongodb');
 const { dbClient } = require('../config');
+const { getArrayDb } = require('../helper');
 
 const authorsRouter = express.Router();
 const dbName = 'library';
@@ -9,20 +10,12 @@ const collName = 'authors';
 // Routes
 // GET
 authorsRouter.get('/authors', async (req, res) => {
-  try {
-    await dbClient.connect();
-    console.log('connection opened');
-    const resource = dbClient.db(dbName).collection(collName);
-    const authorsArr = await resource.find().toArray();
-    // console.log(authorsArr);
-    res.json(authorsArr);
-  } catch (error) {
-    console.error('error in get authors', error);
+  const authorsArr = await getArrayDb('authors');
+  if (authorsArr === false) {
     res.status(500).json('something went wrong');
-  } finally {
-    await dbClient.close();
-    console.log('connection closed');
+    return;
   }
+  res.json(authorsArr); // auto 200 if we dont set it
 });
 
 authorsRouter.patch('/authors/:authorId', async (req, res) => {
