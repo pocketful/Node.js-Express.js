@@ -125,25 +125,20 @@ servicesRouter.delete('/services/:id', async (req, res) => {
     //     usersArr: [ [Object], [Object] ]
     //   }
     // ]
-
     // const serviceByIdObj = await resource.findOne(serviceId);
     const deleteResult = await resource.deleteOne(serviceId);
     console.log('deleteResult ===', deleteResult);
     if (deleteResult.deletedCount === 1) {
-      // console.log('del 1');
       res.status(200).json({ success: true }); // res.status(200) auto
       return;
     }
     if (deleteResult.deletedCount === 0) {
-      // console.log('del 0');
-      res.status(400).json({ err: 'nothing was deleted' });
+      res.status(400).json({ success: false, err: 'nothing was deleted' });
       return;
     }
-    res.status(500).json('something went wrong');
-    // res.json(deleteResult);
+    throw new Error('error trying delete a service'); // to catch block
   } catch (error) {
-    console.log('del catch');
-    console.error('error in delete a service', error);
+    console.error(error);
     res.status(500).json('something went wrong');
   } finally {
     await dbClient.close();
