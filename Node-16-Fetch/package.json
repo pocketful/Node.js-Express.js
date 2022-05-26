@@ -1,7 +1,7 @@
 {
-  "name": "node-16-fetch",
+  "name": "16-fetch",
   "version": "1.0.0",
-  "description": "",
+  "description": "[node fetch](https://www.npmjs.com/package/node-fetch)\r - npm install node-fetch",
   "main": "app.js",
   "scripts": {
     "start": "nodemon src/app.js"
