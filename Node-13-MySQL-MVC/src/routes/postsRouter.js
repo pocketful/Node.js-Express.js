@@ -4,6 +4,8 @@ const { dbConfig } = require('../config');
 
 const postsRouter = express.Router();
 
+// postsRouter.get('/posts', postsController.index);
+
 postsRouter.get('/posts', async (req, res) => {
   try {
     const conn = await mysql.createConnection(dbConfig);

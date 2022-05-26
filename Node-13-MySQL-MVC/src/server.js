@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const { PORT } = require('./config');
 const postsRouter = require('./routes/postsRouter');
+const catRouter = require('./routes/catRouter');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.get('/', async (req, res) => {
 
 // Routes
 app.use('/api', postsRouter);
+app.use('/api', catRouter);
 
 // When no route works, do this route, it's the last one
 app.all('*', (req, res) => {
